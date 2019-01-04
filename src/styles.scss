@@ -1,1 +1,45 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900');
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: BlanchedAlmond;
+  color: rgb(90, 38, 0);
+  font-family: 'Merriweather', serif;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+app-root {
+  height: 100%;
+}
+
+.app-container {
+  max-width: 640px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+main {
+  flex: 1;
+}
+
+p {
+  line-height: 1.5;
+}
+
+a {
+  color: rgb(90, 38, 0);
+  font-weight: 700;
+  text-decoration: underline;
+}
