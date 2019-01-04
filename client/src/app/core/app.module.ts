@@ -10,11 +10,13 @@ import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { MarkdownModule } from 'ngx-markdown';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     MaterialModule,

@@ -5,4 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: './editor-feature.component.html',
   styleUrls: ['./editor-feature.component.scss']
 })
-export class EditorFeatureComponent {}
+export class EditorFeatureComponent {
+  editorValue;
+
+  onEditorKeyUp(event) {
+    this.editorValue = event.target.value;
+  }
+}

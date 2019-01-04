@@ -1,3 +1,4 @@
+import { MarkdownModule } from 'ngx-markdown';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PostsRoutingModule } from './posts-routing.module';
@@ -8,7 +9,12 @@ import { PostComponent } from './containers/post/post.component';
 
 @NgModule({
   declarations: [PostsFeatureComponent, AllComponent, PostComponent],
-  imports: [CommonModule, PostsRoutingModule, MulpericardModule],
+  imports: [
+    CommonModule,
+    PostsRoutingModule,
+    MulpericardModule,
+    MarkdownModule.forChild()
+  ],
   exports: []
 })
 export class PostsModule {}
