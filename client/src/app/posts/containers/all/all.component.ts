@@ -1,41 +1,23 @@
 import { PostService } from './../../../core/services/post.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import * as fromRootStore from '../../../core/store/reducers';
+import * as postActions from '../../../core/store/actions/post.actions';
 
 @Component({
   selector: 'app-all',
   templateUrl: './all.component.html',
   styleUrls: ['./all.component.scss']
 })
-export class AllComponent {
-  posts$: Observable<any> = this.postService.getPosts();
+export class AllComponent implements OnInit {
+  posts$: Observable<any> = this.store.select(fromRootStore.selectPostsAll);
+  postsLoading$: Observable<any> = this.store.select(
+    fromRootStore.selectPostsLoading
+  );
 
-  constructor(private postService: PostService) {}
-
-  // posts = [
-  //   {
-  //     id: '3',
-  //     author: 'Mika Lakanen',
-  //     date: '2019-01-01 15:03',
-  //     title: 'Newest blog post',
-  //     body:
-  //       ''
-  //   },
-  //   {
-  //     id: '2',
-  //     author: 'Mika Lakanen',
-  //     date: '2019-01-01 15:03',
-  //     title: 'Second blog post',
-  //     body:
-  //       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste commodi ad rerum quaerat harum distinctio necessitatibus aut pariatur maiores accusantium facere perspiciatis consectetur, animi repudiandae, tempora, sapiente officiis inventore dignissimos'
-  //   },
-  //   {
-  //     id: '1',
-  //     author: 'Mika Lakanen',
-  //     date: '2019-01-01 15:03',
-  //     title: 'First blog post',
-  //     body:
-  //       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste commodi ad rerum quaerat harum distinctio necessitatibus aut pariatur maiores accusantium facere perspiciatis consectetur, animi repudiandae, tempora, sapiente officiis inventore dignissimos'
-  //   }
-  // ];
+  constructor(private store: Store<fromRootStore.State>) {}
+  ngOnInit() {
+    this.store.dispatch(new postActions.LoadAll());
+  }
 }

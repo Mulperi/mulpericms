@@ -1,13 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900');
 
+@import './style-variables';
+
 html {
   height: 100%;
 }
 
 body {
   margin: 0;
-  background: BlanchedAlmond;
-  color: rgb(90, 38, 0);
+  background: black;
+  color: $text;
   font-family: 'Merriweather', serif;
   width: 100%;
   height: 100%;
@@ -18,20 +20,21 @@ body {
 
 app-root {
   height: 100%;
+  width: 100%;
 }
 
-.app-container {
-  max-width: 640px;
+.feature-container {
+  background: $paper;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
   box-sizing: border-box;
 }
 
 main {
   flex: 1;
+  max-width: 640px;
 }
 
 p {

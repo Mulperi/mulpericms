@@ -13,3 +13,5 @@
     <a routerLink="/posts/{{ post.id }}">Read more</a>
   </app-mulpericard-actions>
 </app-mulpericard>
+
+<h4 *ngIf="(postsLoading$ | async)">Loading posts...</h4>

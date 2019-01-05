@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { MarkdownModule } from 'ngx-markdown';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,7 +14,8 @@ import { PostComponent } from './containers/post/post.component';
     CommonModule,
     PostsRoutingModule,
     MulpericardModule,
-    MarkdownModule.forChild()
+    MarkdownModule.forChild(),
+    SharedModule
   ],
   exports: []
 })

@@ -1,14 +1,28 @@
-EDITOR FEATURE CONTAINER
-
-<div>
-  <textarea name="" id="" cols="30" rows="10" (keyup)="onEditorKeyUp($event)">
-  # Blog Title
-  #### Meaningful subtitle for your story
-
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, facere autem. Modi magnam tempore voluptas alias corporis officiis nihil iusto libero! Sequi optio fugit, consequuntur esse deleniti maxime rem nihil?
-</textarea
-  >
-</div>
-<div class="preview">
-  <markdown ngPreserveWhitespaces [data]="editorValue"></markdown>
+<app-toolbar></app-toolbar>
+<div class="feature-container">
+  <main>
+    <div>
+      <h1>Editor</h1>
+      <p>Use markdown syntax to write your blog in the editor below.</p>
+      <p>
+        <a
+          href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet"
+          target="_blank"
+          >Markdown Cheatsheet</a
+        >
+      </p>
+      <textarea (keyup)="onEditorKeyUp($event)" #markdownEditor>
+            # Blog Title
+            #### Meaningful subtitle for your story
+          
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, facere autem. Modi magnam tempore voluptas alias corporis officiis nihil iusto libero! Sequi optio fugit, consequuntur esse deleniti maxime rem nihil?
+          </textarea
+      >
+      <button>Save post</button>
+    </div>
+    <h1>Preview</h1>
+    <div class="preview">
+      <markdown ngPreserveWhitespaces [data]="editorValue"></markdown>
+    </div>
+  </main>
 </div>

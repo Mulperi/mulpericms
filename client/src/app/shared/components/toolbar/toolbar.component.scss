@@ -1,0 +1,28 @@
+@import '../../../../styles/style-variables';
+
+header {
+  background: black;
+  color: white;
+  padding: 0 1rem;
+  a {
+    color: white;
+  }
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+nav > section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+nav > section > div {
+  padding: 0 1rem;
+}
+
+.active {
+  color: coral;
+}
