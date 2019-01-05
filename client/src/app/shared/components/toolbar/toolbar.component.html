@@ -2,6 +2,15 @@
   <div class="logo">mulpericms</div>
   <nav>
     <a routerLink="/posts" routerLinkActive="active"><div>Blog</div></a>
-    <a routerLink="/editor" routerLinkActive="active"><div>Editor</div></a>
+    <a
+      *ngIf="authenticated; else notAuthenticated"
+      routerLink="/editor"
+      routerLinkActive="active"
+      ><div>Editor</div></a
+    >
+    <ng-template #notAuthenticated>
+      <a class="disabled"><div>Editor</div></a>
+    </ng-template>
+    <a routerLink="/login" routerLinkActive="active"><div>Login</div></a>
   </nav>
 </div>

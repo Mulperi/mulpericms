@@ -15,3 +15,4 @@
 </app-mulpericard>
 
 <h4 *ngIf="(postsLoading$ | async)">Loading posts...</h4>
+<app-spinner *ngIf="(postsLoading$ | async)"></app-spinner>
