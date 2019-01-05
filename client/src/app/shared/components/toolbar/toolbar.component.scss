@@ -1,28 +1,35 @@
 @import '../../../../styles/style-variables';
 
-header {
+.toolbar-container {
   background: black;
   color: white;
-  padding: 0 1rem;
-  a {
-    color: white;
-  }
-}
-nav {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+  z-index: 10;
   display: flex;
   justify-content: space-between;
 }
 
-nav > section {
+.logo {
+  font-weight: 900;
+  font-size: 1rem;
+  letter-spacing: 3px;
+}
+
+div:not(.toolbar-container) {
+  padding: 1rem;
+}
+
+nav {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-nav > section > div {
-  padding: 0 1rem;
+a {
+  color: white;
+  text-decoration: none;
 }
 
-.active {
-  color: coral;
+.active > div {
+  border-top: 4px solid white;
 }

@@ -8,7 +8,7 @@ html {
 
 body {
   margin: 0;
-  background: black;
+  background: $paper;
   color: $text;
   font-family: 'Merriweather', serif;
   width: 100%;
@@ -24,12 +24,12 @@ app-root {
 }
 
 .feature-container {
-  background: $paper;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+  padding: 1rem;
 }
 
 main {
