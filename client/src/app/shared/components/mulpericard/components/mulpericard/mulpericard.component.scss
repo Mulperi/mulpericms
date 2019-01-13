@@ -1,13 +1,11 @@
 .mulpericard-container {
+  background: rgba(255,255,255,0.8);
   padding: 1rem;
-  margin-bottom: 2rem;
+  margin: 1rem 0;
   border-radius: 2px;
-  border: 1px solid rgba(255,255,255,0);
-  background: rgba(255,255,255,0.4);
   transition: all 0.5s;
 }
 
 .mulpericard-container:hover {
-  background: rgba(255,255,255,0.45);
   transition: all 0.5s;
 }

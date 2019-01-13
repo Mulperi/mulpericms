@@ -2,11 +2,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
-import { AppComponent } from './app.component';
+import { AppComponent } from './containers/app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './app-routing.module';
 
 import { MarkdownModule } from 'ngx-markdown';
@@ -21,6 +20,10 @@ import { reducers, metaReducers } from './store/reducers/index';
 import { EffectsModule } from '@ngrx/effects';
 
 import { effects } from './store/effects/index';
+import { SharedModule } from '../shared/shared.module';
+
+import { ChangePasswordComponent } from './containers/changepassword/changepassword.component';
+import { LoginComponent } from './containers/login/login.component';
 
 @NgModule({
   imports: [
@@ -29,7 +32,7 @@ import { effects } from './store/effects/index';
     HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    MaterialModule,
+    SharedModule,
     MarkdownModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot(effects),
@@ -39,7 +42,7 @@ import { effects } from './store/effects/index';
     }),
     StoreRouterConnectingModule.forRoot({})
   ],
-  declarations: [AppComponent],
+  declarations: [AppComponent, LoginComponent, ChangePasswordComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

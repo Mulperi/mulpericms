@@ -20,3 +20,8 @@ You need to have `mulpericms-posts` table in your DynamoDB with primary key `id`
 # Note:
 Only fetching all posts work at the moment.
 
+#### Cognito notes
+ "When creating the App, the generate client secret box must be unchecked because the JavaScript SDK doesn't support apps that have a client secret."
+
+#### tsconfig.app.json notes
+add compileroption -> "types": ["node"]

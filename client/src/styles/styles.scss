@@ -1,21 +1,21 @@
-@import url('https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900');
-
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:100,400,700');
 @import './style-variables';
 
+* {
+  box-sizing: border-box;
+}
+
 html {
+  font-family: 'IBM Plex Mono', monospace;
   height: 100%;
+  line-height: 1.5;
 }
 
 body {
   margin: 0;
-  background: $paper;
-  color: $text;
-  font-family: 'Merriweather', serif;
-  width: 100%;
+  background: $grey-light;
+  color: $grey-dark;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 app-root {
@@ -23,22 +23,16 @@ app-root {
   width: 100%;
 }
 
-.feature-container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-  padding: 1rem;
-}
-
 main {
+  margin: auto;
+  height: 100%;
+  padding: 1rem;
   flex: 1;
   max-width: 640px;
 }
 
-p {
-  line-height: 1.5;
+app-footer {
+  width: 100%;
 }
 
 a {

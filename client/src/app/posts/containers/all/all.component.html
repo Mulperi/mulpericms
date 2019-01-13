@@ -1,4 +1,9 @@
-<app-mulpericard *ngFor="let post of (posts$ | async)">
+<app-mulpericard
+  *ngFor="
+    let post of (posts
+      | slice: page * itemsPerPage:page * itemsPerPage + itemsPerPage)
+  "
+>
   <app-mulpericard-title> {{ post.title }} </app-mulpericard-title>
 
   <app-mulpericard-subtitle>
@@ -9,10 +14,18 @@
     <markdown> {{ post.body }} </markdown>
   </app-mulpericard-body>
 
-  <app-mulpericard-actions>
+  <!-- <app-mulpericard-actions>
     <a routerLink="/posts/{{ post.id }}">Read more</a>
-  </app-mulpericard-actions>
+  </app-mulpericard-actions> -->
 </app-mulpericard>
+
+<div class="controls-container">
+  <button [disabled]="page == 0" (click)="onPreviousClick()">
+    Previous page
+  </button>
+  <div class="text-center">Page {{ page + 1 }} of {{ getPages() }}</div>
+  <button [disabled]="isLastPage()" (click)="onNextClick()">Next page</button>
+</div>
 
 <h4 *ngIf="(postsLoading$ | async)">Loading posts...</h4>
 <app-spinner *ngIf="(postsLoading$ | async)"></app-spinner>

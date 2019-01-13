@@ -1,14 +1,15 @@
 import * as Post from '../actions/post.actions';
-import { PostVO } from '../../../models/post-vo.model';
 
 export interface State {
-  posts: PostVO[];
+  posts: any[];
   loading: boolean;
+  saving: boolean;
 }
 
 export const initialState: State = {
   posts: [],
-  loading: false
+  loading: false,
+  saving: false
 };
 
 export function reducer(
@@ -27,6 +28,19 @@ export function reducer(
         ...state,
         loading: false,
         posts: action.payload
+      };
+    }
+    case Post.ActionTypes.SavePost: {
+      return {
+        ...state,
+        saving: true
+      };
+    }
+
+    case Post.ActionTypes.SavePostSuccess: {
+      return {
+        ...state,
+        saving: false
       };
     }
 

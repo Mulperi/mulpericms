@@ -1,4 +1,7 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import * as fromStore from '../../../core/store';
+import * as postAction from '../../../core/store/actions/post.actions';
 
 @Component({
   selector: 'app-editor-feature',
@@ -14,6 +17,12 @@ export class EditorFeatureComponent implements OnInit {
   onEditorKeyUp(event) {
     this.editorValue = event.target.value;
   }
+
+  onSave() {
+    this.store.dispatch(new postAction.SavePost(this.editorValue));
+  }
+
+  constructor(private store: Store<fromStore.State>) {}
 
   ngOnInit() {
     this.editorValue = this.markdownEditor.nativeElement.value;

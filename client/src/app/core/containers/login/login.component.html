@@ -1,0 +1,33 @@
+<app-header title="Login"></app-header>
+
+<section class="error" *ngIf="(error$ | async) as error">
+  <p>{{ error }}</p>
+</section>
+
+<section class="form-container">
+  <table>
+    <tr>
+      <td><label for="username">Username</label></td>
+      <td>
+        <input type="text" name="username" id="username" #usernameField />
+      </td>
+    </tr>
+    <tr>
+      <td><label for="password">Password</label></td>
+      <td>
+        <input type="text" name="password" id="password" #passwordField />
+      </td>
+    </tr>
+  </table>
+</section>
+
+<div>
+  <button (click)="onClickLogin(usernameField.value, passwordField.value)">
+    Login
+  </button>
+</div>
+
+<section *ngIf="(authenticating$ | async)">
+  <h4>Authenticating...</h4>
+  <app-spinner></app-spinner>
+</section>

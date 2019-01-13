@@ -1,7 +1,6 @@
 import app from './app';
 import posts from './routers/posts';
 
-app.use(require('cors')());
 app.use('/posts', posts);
 
 app.listen(app.get('port'), () => {

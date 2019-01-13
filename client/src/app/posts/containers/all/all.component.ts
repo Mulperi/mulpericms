@@ -1,9 +1,8 @@
-import { PostService } from './../../../core/services/post.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import * as fromRootStore from '../../../core/store/reducers';
-import * as postActions from '../../../core/store/actions/post.actions';
+import * as fromStore from '../../../core/store/reducers';
+import * as fromPosts from '../../../core/store/selectors/post.selectors';
 
 @Component({
   selector: 'app-all',
@@ -11,13 +10,34 @@ import * as postActions from '../../../core/store/actions/post.actions';
   styleUrls: ['./all.component.scss']
 })
 export class AllComponent implements OnInit {
-  posts$: Observable<any> = this.store.select(fromRootStore.selectPostsAll);
+  posts: any[];
   postsLoading$: Observable<any> = this.store.select(
-    fromRootStore.selectPostsLoading
+    fromPosts.selectPostsLoading
   );
 
-  constructor(private store: Store<fromRootStore.State>) {}
+  itemsPerPage = 4;
+  page = 0;
+
+  constructor(private store: Store<fromStore.State>) {}
   ngOnInit() {
-    this.store.dispatch(new postActions.LoadAll());
+    this.store
+      .select(fromPosts.selectPostsAll)
+      .subscribe(posts => (this.posts = posts));
+  }
+
+  onPreviousClick() {
+    this.page--;
+  }
+
+  onNextClick() {
+    this.page++;
+  }
+
+  isLastPage() {
+    return this.page >= this.posts.length / this.itemsPerPage - 1;
+  }
+
+  getPages() {
+    return Math.ceil(this.posts.length / this.itemsPerPage);
   }
 }

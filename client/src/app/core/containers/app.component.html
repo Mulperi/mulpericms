@@ -1,0 +1,5 @@
+<app-toolbar></app-toolbar>
+<app-snackbar *ngIf="(showSnackbar$ | async)" class="snackbar">
+  {{ snackbarMessage$ | async }}
+</app-snackbar>
+<main><router-outlet></router-outlet></main>

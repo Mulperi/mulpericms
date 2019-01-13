@@ -1,9 +1,6 @@
 @import '../../../../styles/style-variables';
 
 .toolbar-container {
-  background: black;
-  color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 1);
   z-index: 10;
   display: flex;
   justify-content: space-between;
@@ -21,6 +18,7 @@
 
 div:not(.toolbar-container) {
   padding: 1rem;
+  box-sizing: border-box;
 }
 
 nav {
@@ -30,10 +28,15 @@ nav {
 }
 
 a {
-  color: white;
+  // color: white;
+  color: $grey-dark;
   text-decoration: none;
 }
 
 .active > div {
-  border-top: 4px solid white;
+  border-top: 10px solid $grey-dark;
+}
+
+.disabled {
+  color: rgb(220, 220, 220);
 }

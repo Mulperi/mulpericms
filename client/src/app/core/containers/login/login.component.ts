@@ -1,0 +1,25 @@
+import { Store } from '@ngrx/store';
+import { Component, OnInit } from '@angular/core';
+import * as fromStore from '../../store';
+import * as fromAuth from '../../store/selectors/auth.selectors';
+import * as authAction from '../../store/actions/auth.actions';
+import { Observable } from 'rxjs';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
+})
+export class LoginComponent implements OnInit {
+  authenticating$: Observable<boolean> = this.store.select(
+    fromAuth.selectAuthenticating
+  );
+  error$: Observable<any> = this.store.select(fromAuth.selectAuthError);
+
+  constructor(private store: Store<fromStore.State>) {}
+  ngOnInit() {}
+
+  onClickLogin(username: string, password: string) {
+    this.store.dispatch(new authAction.Login({ username, password }));
+  }
+}

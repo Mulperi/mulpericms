@@ -1,20 +1,50 @@
-import { PostVO } from '../../../models/post-vo.model';
+import { CognitoService } from './../../services/cognito.service';
 import { PostService } from '../../services/post.service';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, concatMap } from 'rxjs/operators';
+import { map, concatMap, switchMap, catchError } from 'rxjs/operators';
 import { Action } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import * as postActions from '../actions/post.actions';
+import * as postAction from '../actions/post.actions';
+import * as uiAction from '../actions/ui.actions';
+import { Router } from '@angular/router';
+import { of } from 'zen-observable';
 
 @Injectable()
 export class PostEffects {
   @Effect()
   loadAll$: Observable<Action> = this.actions$.pipe(
-    ofType(postActions.ActionTypes.LoadAll),
-    concatMap((x: any) => this.postService.getPosts()),
-    map((posts: PostVO[]) => new postActions.LoadAllSuccess(posts))
+    ofType(postAction.ActionTypes.LoadAll),
+    concatMap((action: postAction.LoadAll) => this.postService.getPosts()),
+    map((posts: any) => new postAction.LoadAllSuccess(posts))
   );
 
-  constructor(private actions$: Actions, private postService: PostService) {}
+  @Effect()
+  savePost$: Observable<Action> = this.actions$.pipe(
+    ofType(postAction.ActionTypes.SavePost),
+    switchMap((action: any) =>
+      this.postService.savePost(action.payload).pipe(
+        map((result: any) => {
+          return new postAction.SavePostSuccess(result);
+        }),
+        catchError(error => of(new postAction.SavePostFailed(error)))
+      )
+    )
+  );
+
+  @Effect()
+  savePostSuccess$: Observable<any> = this.actions$.pipe(
+    ofType(postAction.ActionTypes.SavePostSuccess),
+    map((action: any) => {
+      this.router.navigate(['/']);
+      return new uiAction.SnackbarShow('Saved succesfully!');
+    })
+  );
+
+  constructor(
+    private router: Router,
+    private actions$: Actions,
+    private postService: PostService,
+    private cognitoService: CognitoService
+  ) {}
 }
