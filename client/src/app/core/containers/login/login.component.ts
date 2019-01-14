@@ -14,6 +14,11 @@ export class LoginComponent implements OnInit {
   authenticating$: Observable<boolean> = this.store.select(
     fromAuth.selectAuthenticating
   );
+  authenticated$: Observable<boolean> = this.store.select(
+    fromAuth.selectAuthenticated
+  );
+  username$: Observable<string> = this.store.select(fromAuth.selectUsername);
+
   error$: Observable<any> = this.store.select(fromAuth.selectAuthError);
 
   constructor(private store: Store<fromStore.State>) {}

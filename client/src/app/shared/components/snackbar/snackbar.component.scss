@@ -1,3 +1,5 @@
+@import '../../../../styles/style-variables';
+
 :host {
   text-align: center;
   position: fixed;
@@ -15,13 +17,13 @@
 }
 
 .warn {
-  color: lightpink;
+  color: $snackbar-warn;
 }
 
 .success {
-  color: palegreen;
+  color: $snackbar-success;
 }
 
 .neutral {
-  color: powderblue;
+  color: $snackbar-neutral;
 }
