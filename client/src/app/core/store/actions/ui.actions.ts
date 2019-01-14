@@ -6,7 +6,7 @@ export enum ActionTypes {
 }
 export class SnackbarShow implements Action {
   readonly type = ActionTypes.SnackbarShow;
-  constructor(public payload: string) {}
+  constructor(public payload: { message: string; color: string }) {}
 }
 export class SnackbarHide implements Action {
   readonly type = ActionTypes.SnackbarHide;

@@ -13,19 +13,19 @@ html {
 
 body {
   margin: 0;
-  background: $grey-light;
+  background: $light;
   color: $grey-dark;
   height: 100%;
 }
 
 app-root {
   height: 100%;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 main {
   margin: auto;
-  height: 100%;
   padding: 1rem;
   flex: 1;
   max-width: 640px;
@@ -39,4 +39,27 @@ a {
   color: rgb(90, 38, 0);
   font-weight: 700;
   text-decoration: underline;
+}
+
+.centered {
+  display: flex;
+  justify-content: center;
+}
+
+.centered-text {
+  text-align: center;
+}
+
+button {
+  background: $grey-dark;
+  border-radius: 2px;
+  color: $light;
+  cursor: pointer;
+  margin: 1rem 0;
+  padding: 0.5rem 1rem;
+}
+
+button:disabled {
+  background: grey;
+  color: rgba(255, 255, 255, 0.4);
 }

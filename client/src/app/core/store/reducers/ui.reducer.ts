@@ -2,12 +2,12 @@ import * as Ui from '../actions/ui.actions';
 
 export interface State {
   snackbarVisible: boolean;
-  snackbarMessage: string;
+  snackbarMessage: { message: string; color: string };
 }
 
 export const initialState: State = {
   snackbarVisible: false,
-  snackbarMessage: ''
+  snackbarMessage: { message: '', color: 'neutral' }
 };
 
 export function reducer(state = initialState, action: Ui.ActionsUnion): State {
@@ -16,7 +16,10 @@ export function reducer(state = initialState, action: Ui.ActionsUnion): State {
       return {
         ...initialState,
         snackbarVisible: true,
-        snackbarMessage: action.payload
+        snackbarMessage: {
+          message: action.payload.message,
+          color: action.payload.color
+        }
       };
     }
     case Ui.ActionTypes.SnackbarHide: {

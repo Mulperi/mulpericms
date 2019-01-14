@@ -1,9 +1,12 @@
 @import '../../../../styles/style-variables';
 
 .toolbar-container {
+  background: $dark;
+  color: $light;
   z-index: 10;
   display: flex;
   justify-content: space-between;
+  box-shadow: 0 0 10px $dark;
 }
 
 .disabled {
@@ -28,13 +31,12 @@ nav {
 }
 
 a {
-  // color: white;
-  color: $grey-dark;
+  color: $light;
   text-decoration: none;
 }
 
 .active > div {
-  border-top: 10px solid $grey-dark;
+  border-top: 10px solid $light;
 }
 
 .disabled {

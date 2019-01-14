@@ -1,5 +1,11 @@
 <app-toolbar></app-toolbar>
-<app-snackbar *ngIf="(showSnackbar$ | async)" class="snackbar">
-  {{ snackbarMessage$ | async }}
+<app-snackbar
+  @fade
+  *ngIf="(showSnackbar$ | async)"
+  class="snackbar"
+  [color]="snackbarMessage.color"
+>
+  {{ snackbarMessage.message }}
 </app-snackbar>
 <main><router-outlet></router-outlet></main>
+<app-footer></app-footer>

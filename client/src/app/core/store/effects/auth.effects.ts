@@ -2,15 +2,15 @@ import { CognitoService } from './../../services/cognito.service';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, catchError, switchMap } from 'rxjs/operators';
-import { Action } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import * as authAction from '../actions/auth.actions';
+import * as uiAction from '../actions/ui.actions';
 import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthEffects {
   @Effect()
-  login$: Observable<Action> = this.actions$.pipe(
+  login$: Observable<any> = this.actions$.pipe(
     ofType(authAction.ActionTypes.Login),
     switchMap((action: authAction.Login) =>
       this.cognitoService
@@ -23,11 +23,20 @@ export class AuthEffects {
             // }
             return new authAction.LoginSuccess(user.username);
           }),
-          catchError((error: any) => {
-            console.log('CATCHERROR EFFEKTI', error);
-            return of(new authAction.LoginFailed(error));
-          })
+          catchError((error: any) => of(new authAction.LoginFailed(error)))
         )
+    )
+  );
+
+  @Effect()
+  loginFailed$: Observable<any> = this.actions$.pipe(
+    ofType(authAction.ActionTypes.LoginFailed),
+    map(
+      (action: authAction.LoginFailed) =>
+        new uiAction.SnackbarShow({
+          message: 'Login failed. Reason: ' + action.payload.message,
+          color: 'warn'
+        })
     )
   );
 

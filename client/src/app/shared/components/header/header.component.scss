@@ -1,5 +1,8 @@
+@import '../../../../styles/style-variables';
 header {
   margin: 4rem 0;
   box-sizing: border-box;
   text-align: center;
+  padding: 1rem;
+  border-radius: $border-radius-card;
 }

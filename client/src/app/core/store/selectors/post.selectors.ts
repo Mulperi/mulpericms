@@ -10,3 +10,7 @@ export const selectPostsLoading = createSelector(
   selectPosts,
   (state: State) => state.loading
 );
+export const selectPostSaving = createSelector(
+  selectPosts,
+  (state: State) => state.saving
+);

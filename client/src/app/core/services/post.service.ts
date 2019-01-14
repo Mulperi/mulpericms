@@ -26,6 +26,7 @@ export class PostService {
   }
 
   public savePost(post: string): Observable<any> {
+    // this.cognitoService.getSession().subscribe(data => console.log(data));
     return this.cognitoService.getAccessToken().pipe(
       concatMap(accessToken => {
         return this.http.post(

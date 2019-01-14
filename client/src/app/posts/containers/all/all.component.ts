@@ -15,7 +15,7 @@ export class AllComponent implements OnInit {
     fromPosts.selectPostsLoading
   );
 
-  itemsPerPage = 4;
+  itemsPerPage = 2;
   page = 0;
 
   constructor(private store: Store<fromStore.State>) {}

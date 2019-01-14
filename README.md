@@ -17,11 +17,11 @@ To run API locally, use `npm run dev`. You need `.env` file with AWS credentials
 
 You need to have `mulpericms-posts` table in your DynamoDB with primary key `id`.
 
-# Note:
-Only fetching all posts work at the moment.
-
 #### Cognito notes
  "When creating the App, the generate client secret box must be unchecked because the JavaScript SDK doesn't support apps that have a client secret."
 
 #### tsconfig.app.json notes
 add compileroption -> "types": ["node"]
+
+#### Verifying Cognito JWT
+https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html

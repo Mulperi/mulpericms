@@ -37,7 +37,10 @@ export class PostEffects {
     ofType(postAction.ActionTypes.SavePostSuccess),
     map((action: any) => {
       this.router.navigate(['/']);
-      return new uiAction.SnackbarShow('Saved succesfully!');
+      return new uiAction.SnackbarShow({
+        message: 'Saved succesfully.',
+        color: 'success'
+      });
     })
   );
 

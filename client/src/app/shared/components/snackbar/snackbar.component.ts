@@ -6,7 +6,7 @@ import { transition, animate, trigger, style } from '@angular/animations';
   templateUrl: './snackbar.component.html',
   styleUrls: ['./snackbar.component.scss'],
   animations: [
-    trigger('insertRemove', [
+    trigger('fade', [
       transition(':enter', [
         style({ opacity: 0 }),
         animate('1s', style({ opacity: 1 }))
@@ -18,4 +18,7 @@ import { transition, animate, trigger, style } from '@angular/animations';
 export class SnackbarComponent {
   @Input()
   message;
+
+  @Input()
+  color;
 }

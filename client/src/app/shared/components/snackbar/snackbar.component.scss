@@ -1,7 +1,7 @@
 :host {
   text-align: center;
   position: fixed;
-  bottom: 10%;
+  bottom: 5%;
   left: 50%;
   width: 200px;
   height: 100px;
@@ -11,6 +11,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: palegreen;
   font-weight: 900;
+}
+
+.warn {
+  color: lightpink;
+}
+
+.success {
+  color: palegreen;
+}
+
+.neutral {
+  color: powderblue;
 }

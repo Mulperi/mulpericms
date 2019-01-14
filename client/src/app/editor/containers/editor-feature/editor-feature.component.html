@@ -1,6 +1,6 @@
-<main>
-  <app-header title="Editor"></app-header>
+<app-header title="Editor"></app-header>
 
+<section *ngIf="!(saving$ | async); else saving">
   <p>
     <a
       href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet"
@@ -11,20 +11,24 @@
 
   <div class="textarea-container">
     <textarea (keyup)="onEditorKeyUp($event)" #markdownEditor>
-    # Blog Title
-    #### Meaningful subtitle for your story
-  
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, facere autem. Modi magnam tempore voluptas alias corporis officiis nihil iusto libero! Sequi optio fugit, consequuntur esse deleniti maxime rem nihil?
-  </textarea
+          # Blog Title
+          #### Meaningful subtitle for your story
+        
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, facere autem. Modi magnam tempore voluptas alias corporis officiis nihil iusto libero! Sequi optio fugit, consequuntur esse deleniti maxime rem nihil?
+        </textarea
     >
   </div>
   <div><button (click)="onSave()">Save post</button></div>
+</section>
 
-  <app-mulpericard>
-    <app-mulpericard-subtitle>PREVIEW</app-mulpericard-subtitle>
-    <app-mulpericard-body>
-      <markdown ngPreserveWhitespaces [data]="editorValue"></markdown>
-    </app-mulpericard-body>
-  </app-mulpericard>
-  <app-footer></app-footer>
-</main>
+<ng-template #saving>
+  <h4>Saving post...</h4>
+  <app-spinner></app-spinner>
+</ng-template>
+
+<app-mulpericard>
+  <app-mulpericard-subtitle>PREVIEW</app-mulpericard-subtitle>
+  <app-mulpericard-body>
+    <markdown ngPreserveWhitespaces [data]="editorValue"></markdown>
+  </app-mulpericard-body>
+</app-mulpericard>
