@@ -34,9 +34,7 @@ export function reducer(
     case Auth.ActionTypes.LoginSuccess: {
       return {
         ...initialState,
-        authenticating: false,
         authenticated: true,
-        error: null,
         username: action.payload
       };
     }
@@ -45,7 +43,6 @@ export function reducer(
       return {
         ...initialState,
         authenticating: false,
-        error: null,
         username: action.payload.username,
         requiredAttributes: action.payload.requiredAttributes,
         userAttributes: action.payload.userAttributes
@@ -68,6 +65,12 @@ export function reducer(
     }
 
     case Auth.ActionTypes.CompleteNewPassword: {
+      return {
+        ...initialState
+      };
+    }
+
+    case Auth.ActionTypes.SignOutSuccess: {
       return {
         ...initialState
       };

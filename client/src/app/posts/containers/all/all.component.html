@@ -19,7 +19,11 @@
   </app-mulpericard-actions> -->
 </app-mulpericard>
 
-<div class="controls-container">
+<div *ngIf="errorMessage" class="error-message text-container">
+  {{ errorMessage }}
+</div>
+
+<div *ngIf="getPages() > 0" class="controls-container">
   <button [disabled]="page == 0" (click)="onPreviousClick()">
     Previous page
   </button>

@@ -1,5 +1,5 @@
 import { AuthGuardService } from './services/auth-guard.service';
-import { ChangePasswordComponent } from './containers/changepassword/changepassword.component';
+import { NewPasswordComponent } from './containers/newpassword/newpassword.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './containers/login/login.component';
@@ -19,8 +19,8 @@ const routes = [
     component: LoginComponent
   },
   {
-    path: 'changepassword',
-    component: ChangePasswordComponent
+    path: 'newpassword',
+    component: NewPasswordComponent
   },
   {
     path: '',

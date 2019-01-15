@@ -19,7 +19,7 @@ export class LoadAllSuccess implements Action {
 }
 export class LoadAllFailed implements Action {
   readonly type = ActionTypes.LoadAllFailed;
-  constructor(public payload: string) {}
+  constructor(public payload: any) {}
 }
 export class SavePost implements Action {
   readonly type = ActionTypes.SavePost;

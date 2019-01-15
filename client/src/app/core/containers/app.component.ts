@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromStore from '../store';
 import * as fromUi from '../store/selectors/ui.selectors';
-import { Observable } from 'rxjs';
-import * as postActions from '../store/actions/post.actions';
+import { Observable, Subscription } from 'rxjs';
+import * as postAction from '../store/actions/post.actions';
+import * as authAction from '../store/actions/auth.actions';
 import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
@@ -29,14 +30,21 @@ export class AppComponent implements OnInit {
     color: string;
   }> = this.store.select(fromUi.selectSnackbarMessage);
 
-  snackbarMessage;
+  snackbarMessage: { message: string; color: string };
 
-  snackbarMessageSub = this.store.select(fromUi.selectSnackbarMessage);
+  snackbarMessageSub: Subscription;
 
   constructor(private store: Store<fromStore.State>) {}
 
   ngOnInit() {
-    this.store.dispatch(new postActions.LoadAll());
-    this.snackbarMessageSub.subscribe(data => (this.snackbarMessage = data));
+    this.store.dispatch(new postAction.LoadAll());
+    this.store.dispatch(new authAction.SessionCheck());
+    this.snackbarMessageSub = this.store
+      .select(fromUi.selectSnackbarMessage)
+      .subscribe(data => (this.snackbarMessage = data));
+  }
+
+  ngOnDrestroy() {
+    this.snackbarMessageSub.unsubscribe();
   }
 }

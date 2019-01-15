@@ -22,7 +22,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { effects } from './store/effects/index';
 import { SharedModule } from '../shared/shared.module';
 
-import { ChangePasswordComponent } from './containers/changepassword/changepassword.component';
+import { NewPasswordComponent } from './containers/newpassword/newpassword.component';
 import { LoginComponent } from './containers/login/login.component';
 
 @NgModule({
@@ -42,7 +42,7 @@ import { LoginComponent } from './containers/login/login.component';
     }),
     StoreRouterConnectingModule.forRoot({})
   ],
-  declarations: [AppComponent, LoginComponent, ChangePasswordComponent],
+  declarations: [AppComponent, LoginComponent, NewPasswordComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

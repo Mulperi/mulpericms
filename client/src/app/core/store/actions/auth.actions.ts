@@ -5,7 +5,10 @@ export enum ActionTypes {
   LoginSuccess = '[Auth] Login Success',
   LoginFailed = '[Auth] Login Failed',
   NewPasswordRequired = '[Auth] New Password Required',
-  CompleteNewPassword = '[Auth] Complete New Password'
+  CompleteNewPassword = '[Auth] Complete New Password',
+  SessionCheck = '[Auth] Session Check',
+  SignOut = '[Auth] Sign Out',
+  SignOutSuccess = '[Auth] Sign Out Success'
 }
 
 export class Login implements Action {
@@ -46,9 +49,24 @@ export class CompleteNewPassword implements Action {
   ) {}
 }
 
+export class SessionCheck implements Action {
+  readonly type = ActionTypes.SessionCheck;
+}
+
+export class SignOut implements Action {
+  readonly type = ActionTypes.SignOut;
+}
+
+export class SignOutSuccess implements Action {
+  readonly type = ActionTypes.SignOutSuccess;
+}
+
 export type ActionsUnion =
   | Login
   | LoginSuccess
   | LoginFailed
   | NewPasswordRequired
-  | CompleteNewPassword;
+  | CompleteNewPassword
+  | SessionCheck
+  | SignOut
+  | SignOutSuccess;

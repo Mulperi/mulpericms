@@ -1,16 +1,16 @@
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
-import * as fromStore from '../../../core/store';
-import * as fromAuth from '../../../core/store/selectors/auth.selectors';
-import * as authAction from '../../../core/store/actions/auth.actions';
+import * as fromStore from '../../store';
+import * as fromAuth from '../../store/selectors/auth.selectors';
+import * as authAction from '../../store/actions/auth.actions';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-changepassword',
-  templateUrl: './changepassword.component.html',
-  styleUrls: ['./changepassword.component.scss']
+  selector: 'app-newpassword',
+  templateUrl: './newpassword.component.html',
+  styleUrls: ['./newpassword.component.scss']
 })
-export class ChangePasswordComponent implements OnInit {
+export class NewPasswordComponent implements OnInit {
   requiredAttributes$: Observable<string[]> = this.store.select(
     fromAuth.selectAuthRequiredAttributes
   );

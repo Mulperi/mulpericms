@@ -37,7 +37,7 @@
   <p class="centered-text">
     You are succesfully authenticated, {{ username$ | async }}.
   </p>
-  <div class="centered"><button>Sign out</button></div>
+  <div class="centered"><button (click)="onClickSignOut()">Sign out</button></div>
 </ng-template>
 
 <section *ngIf="(authenticating$ | async)">

@@ -67,3 +67,12 @@ button:disabled {
 .success {
   color: $success;
 }
+
+.text-container {
+  padding: 1rem;
+}
+
+.error-message {
+  background: lightpink;
+  color: $grey-dark;
+}

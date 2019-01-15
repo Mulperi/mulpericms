@@ -1,6 +1,6 @@
 <app-header title="Editor"></app-header>
 
-<section *ngIf="!(saving$ | async); else saving">
+<section>
   <p>
     <a
       href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet"
@@ -18,12 +18,20 @@
         </textarea
     >
   </div>
-  <div><button (click)="onSave()">Save post</button></div>
+  <div>
+    <button (click)="onSave()" *ngIf="!(saving$ | async); else saving">
+      Save post
+    </button>
+  </div>
 </section>
 
 <ng-template #saving>
-  <h4>Saving post...</h4>
-  <app-spinner></app-spinner>
+  <div class="text-container centered">
+    <div>
+      <h4>Saving post...</h4>
+      <app-spinner></app-spinner>
+    </div>
+  </div>
 </ng-template>
 
 <app-mulpericard>

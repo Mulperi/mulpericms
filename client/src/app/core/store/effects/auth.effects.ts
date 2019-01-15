@@ -1,16 +1,17 @@
 import { CognitoService } from './../../services/cognito.service';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { map, catchError, switchMap } from 'rxjs/operators';
+import { map, catchError, switchMap, filter } from 'rxjs/operators';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import * as authAction from '../actions/auth.actions';
 import * as uiAction from '../actions/ui.actions';
 import { Router } from '@angular/router';
+import { Action } from '@ngrx/store';
 
 @Injectable()
 export class AuthEffects {
   @Effect()
-  login$: Observable<any> = this.actions$.pipe(
+  login$: Observable<Action> = this.actions$.pipe(
     ofType(authAction.ActionTypes.Login),
     switchMap((action: authAction.Login) =>
       this.cognitoService
@@ -29,7 +30,7 @@ export class AuthEffects {
   );
 
   @Effect()
-  loginFailed$: Observable<any> = this.actions$.pipe(
+  loginFailed$: Observable<Action> = this.actions$.pipe(
     ofType(authAction.ActionTypes.LoginFailed),
     map(
       (action: authAction.LoginFailed) =>
@@ -44,7 +45,59 @@ export class AuthEffects {
   newPasswordRequired$: Observable<void> = this.actions$.pipe(
     ofType(authAction.ActionTypes.NewPasswordRequired),
     map((action: authAction.NewPasswordRequired) => {
-      this.router.navigate(['/changepassword']);
+      this.router.navigate(['/newpassword']);
+    })
+  );
+
+  @Effect()
+  sessionCheck$: Observable<any> = this.actions$.pipe(
+    ofType(authAction.ActionTypes.SessionCheck),
+    switchMap((action: authAction.SessionCheck) => {
+      return this.cognitoService.getSession().pipe(
+        map(result => {
+          return new authAction.LoginSuccess(
+            result.getIdToken().payload['cognito:username']
+          );
+        }),
+        catchError(error => {
+          return of(new authAction.LoginFailed('No existing session.'));
+        })
+      );
+    })
+  );
+
+  @Effect()
+  signOut$: Observable<any> = this.actions$.pipe(
+    ofType(authAction.ActionTypes.SignOut),
+    switchMap((action: authAction.SignOut) =>
+      this.cognitoService.signOut().pipe(
+        map(() => {
+          return new authAction.SignOutSuccess();
+        }),
+        catchError((error: any) => of(new authAction.LoginFailed(error)))
+      )
+    )
+  );
+
+  @Effect()
+  signOutSuccess$: Observable<any> = this.actions$.pipe(
+    ofType(authAction.ActionTypes.SignOutSuccess),
+    map(() => {
+      return new uiAction.SnackbarShow({
+        message: 'You signed out. Bye bye!',
+        color: 'neutral'
+      });
+    })
+  );
+
+  @Effect()
+  loginSuccess$: Observable<any> = this.actions$.pipe(
+    ofType(authAction.ActionTypes.LoginSuccess),
+    map(() => {
+      return new uiAction.SnackbarShow({
+        message: 'Signed in. Welcome back!',
+        color: 'neutral'
+      });
     })
   );
 

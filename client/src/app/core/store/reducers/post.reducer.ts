@@ -4,12 +4,14 @@ export interface State {
   posts: any[];
   loading: boolean;
   saving: boolean;
+  errorMessage: string;
 }
 
 export const initialState: State = {
   posts: [],
   loading: false,
-  saving: false
+  saving: false,
+  errorMessage: null
 };
 
 export function reducer(
@@ -21,6 +23,13 @@ export function reducer(
       return {
         ...state,
         loading: true
+      };
+    }
+    case Post.ActionTypes.LoadAllFailed: {
+      return {
+        ...state,
+        loading: false,
+        errorMessage: action.payload
       };
     }
     case Post.ActionTypes.LoadAllSuccess: {
@@ -36,7 +45,6 @@ export function reducer(
         saving: true
       };
     }
-
     case Post.ActionTypes.SavePostSuccess: {
       return {
         ...state,

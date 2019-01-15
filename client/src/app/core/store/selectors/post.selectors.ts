@@ -14,3 +14,7 @@ export const selectPostSaving = createSelector(
   selectPosts,
   (state: State) => state.saving
 );
+export const selectPostErrorMessage = createSelector(
+  selectPosts,
+  (state: State) => state.errorMessage
+);

@@ -16,7 +16,22 @@ export class PostEffects {
   loadAll$: Observable<Action> = this.actions$.pipe(
     ofType(postAction.ActionTypes.LoadAll),
     concatMap((action: postAction.LoadAll) => this.postService.getPosts()),
-    map((posts: any) => new postAction.LoadAllSuccess(posts))
+    map((posts: any) => new postAction.LoadAllSuccess(posts)),
+    catchError(error =>
+      of(new postAction.LoadAllFailed('Could not load posts from the server.'))
+    )
+  );
+
+  @Effect()
+  loadAllFailed$: Observable<any> = this.actions$.pipe(
+    ofType(postAction.ActionTypes.LoadAllFailed),
+    map(
+      (action: any) =>
+        new uiAction.SnackbarShow({
+          message: 'Could not load posts :(',
+          color: 'warn'
+        })
+    )
   );
 
   @Effect()

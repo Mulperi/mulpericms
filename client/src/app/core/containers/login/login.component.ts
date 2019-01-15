@@ -27,4 +27,8 @@ export class LoginComponent implements OnInit {
   onClickLogin(username: string, password: string) {
     this.store.dispatch(new authAction.Login({ username, password }));
   }
+
+  onClickSignOut() {
+    this.store.dispatch(new authAction.SignOut());
+  }
 }

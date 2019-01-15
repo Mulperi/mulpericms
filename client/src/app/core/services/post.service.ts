@@ -1,8 +1,8 @@
 import { CognitoService } from './cognito.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { map, concatMap } from 'rxjs/operators';
+import { map, concatMap, catchError } from 'rxjs/operators';
 import * as moment from 'moment';
 
 @Injectable({ providedIn: 'root' })
@@ -21,7 +21,8 @@ export class PostService {
           author: post.author,
           body: post.body
         }));
-      })
+      }),
+      catchError(error => throwError(error))
     );
   }
 
