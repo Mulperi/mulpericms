@@ -50,17 +50,9 @@ export function reducer(
     }
 
     case Auth.ActionTypes.LoginFailed: {
-      let message;
-
-      if (action.payload.message) {
-        message = action.payload.message;
-      } else {
-        message = null;
-      }
-
       return {
         ...initialState,
-        error: message
+        error: action.payload
       };
     }
 

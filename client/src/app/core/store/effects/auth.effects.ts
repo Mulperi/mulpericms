@@ -35,7 +35,7 @@ export class AuthEffects {
     map(
       (action: authAction.LoginFailed) =>
         new uiAction.SnackbarShow({
-          message: 'Login failed. Reason: ' + action.payload.message,
+          message: 'Login failed. Reason: ' + action.payload,
           color: 'warn'
         })
     )
@@ -60,7 +60,7 @@ export class AuthEffects {
           );
         }),
         catchError(error => {
-          return of(new authAction.LoginFailed('No existing session.'));
+          return of(new authAction.SessionNotExist());
         })
       );
     })
@@ -96,7 +96,7 @@ export class AuthEffects {
     map(() => {
       return new uiAction.SnackbarShow({
         message: 'Signed in. Welcome back!',
-        color: 'neutral'
+        color: 'success'
       });
     })
   );

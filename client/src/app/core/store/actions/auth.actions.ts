@@ -7,6 +7,7 @@ export enum ActionTypes {
   NewPasswordRequired = '[Auth] New Password Required',
   CompleteNewPassword = '[Auth] Complete New Password',
   SessionCheck = '[Auth] Session Check',
+  SessionNotExist = '[Auth] Session Not Exist',
   SignOut = '[Auth] Sign Out',
   SignOutSuccess = '[Auth] Sign Out Success'
 }
@@ -51,6 +52,9 @@ export class CompleteNewPassword implements Action {
 
 export class SessionCheck implements Action {
   readonly type = ActionTypes.SessionCheck;
+}
+export class SessionNotExist implements Action {
+  readonly type = ActionTypes.SessionNotExist;
 }
 
 export class SignOut implements Action {
