@@ -1,0 +1,35 @@
+@import './style-variables';
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'IBM Plex Mono', monospace;
+  height: 100%;
+  line-height: 1.5;
+}
+
+body {
+  margin: 0;
+  background: $light;
+  color: $grey-dark;
+  height: 100%;
+}
+
+app-root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  margin: auto;
+  padding: 1rem;
+  flex: 1;
+  max-width: 640px;
+}
+
+app-footer {
+  width: 100%;
+}

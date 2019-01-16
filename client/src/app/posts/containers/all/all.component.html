@@ -19,9 +19,14 @@
   </app-mulpericard-actions> -->
 </app-mulpericard>
 
-<div *ngIf="errorMessage" class="error-message text-container">
-  {{ errorMessage }}
-</div>
+<app-mulpericard>
+  <app-mulpericard-subtitle>
+    <p class="warn">ERROR</p>
+  </app-mulpericard-subtitle>
+  <app-mulpericard-body *ngIf="errorMessage">
+    {{ errorMessage }}
+  </app-mulpericard-body>
+</app-mulpericard>
 
 <div *ngIf="getPages() > 0" class="controls-container">
   <button [disabled]="page == 0" (click)="onPreviousClick()">

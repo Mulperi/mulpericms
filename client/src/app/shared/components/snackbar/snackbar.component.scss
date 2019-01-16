@@ -7,9 +7,8 @@
   left: 50%;
   width: 300px;
   height: 100px;
-  background: rgba(0, 0, 0, 0.9);
   transform: translate(-50%, -50%);
-  border-radius: 10px;
+  border-radius: $border-radius-card;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -21,13 +20,16 @@ div {
 }
 
 .warn {
-  color: $snackbar-warn;
+  background: $warn-bg;
+  color: $warn-text;
 }
 
 .success {
-  color: $snackbar-success;
+  background: $success-bg;
+  color: $success-text;
 }
 
 .neutral {
-  color: $snackbar-neutral;
+  background: $primary-bg;
+  color: $primary-text;
 }

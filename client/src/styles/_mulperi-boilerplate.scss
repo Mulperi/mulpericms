@@ -1,0 +1,109 @@
+@mixin mulperi-boilerplate(
+  $primary-bg,
+  $primary-text,
+  $warn-bg,
+  $warn-text,
+  $success-bg,
+  $success-text
+) {
+  a {
+    color: rgb(90, 38, 0);
+    font-weight: 700;
+    text-decoration: underline;
+  }
+
+  .text-align-center {
+    text-align: center;
+  }
+
+  button:disabled {
+    background: grey;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  button {
+    background: none;
+    border: 0;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  button:focus {
+    outline: none;
+  }
+
+  .success {
+    background: $success-bg;
+    color: $success-text;
+  }
+
+  .primary {
+    background: $primary-bg;
+    color: $primary-text;
+  }
+
+  .primary:active {
+    background: darkblue;
+  }
+
+  .primary:disabled {
+    background: lightblue;
+  }
+
+  .warn {
+    background: $warn-bg;
+    color: $warn-text;
+  }
+
+  .warn:active {
+    background: darkred;
+  }
+
+  .warn:disabled {
+    background: lightpink;
+  }
+
+  .btn-medium {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+
+  .btn-large {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.5rem;
+  }
+
+  .flex {
+    display: flex;
+  }
+
+  .margin-top-small {
+    margin-top: 1rem;
+  }
+  .margin-top-medium {
+    margin-top: 2rem;
+  }
+
+  .justify-center {
+    justify-content: center;
+  }
+  .justify-end {
+    justify-content: flex-end;
+  }
+  .justify-space-between {
+    justify-content: space-between;
+  }
+
+  .align-center {
+    align-items: center;
+  }
+
+  .column {
+    flex-direction: column;
+  }
+
+  .wrap {
+    flex-wrap: wrap;
+  }
+}

@@ -1,43 +1,55 @@
-<app-header title="Login"></app-header>
+<app-header title="Sign in"></app-header>
 
 <section class="error centered" *ngIf="(error$ | async) as error">
   <p>{{ error }}</p>
 </section>
 
-<section
-  class="form-container"
-  *ngIf="!(authenticated$ | async); else authenticated"
->
-  <table>
-    <tr>
-      <td><label for="username">Username</label></td>
-      <td>
-        <input type="text" name="username" id="username" #usernameField />
-      </td>
-    </tr>
-    <tr>
-      <td><label for="password">Password</label></td>
-      <td>
-        <input type="text" name="password" id="password" #passwordField />
-      </td>
-    </tr>
-  </table>
-
-  <div class="centered">
-    <button (click)="onClickLogin(usernameField.value, passwordField.value)">
-      Login
+<app-mulpericard *ngIf="!(authenticated$ | async); else authenticated">
+  <app-mulpericard-body>
+    <p>Please sign in to use the editor.</p>
+    <table>
+      <tr>
+        <td><label for="username">Username</label></td>
+        <td>
+          <input type="text" name="username" id="username" #usernameField />
+        </td>
+      </tr>
+      <tr>
+        <td><label for="password">Password</label></td>
+        <td>
+          <input type="text" name="password" id="password" #passwordField />
+        </td>
+      </tr>
+    </table>
+  </app-mulpericard-body>
+  <app-mulpericard-actions>
+    <button
+      class="primary btn-medium"
+      (click)="onClickLogin(usernameField.value, passwordField.value)"
+    >
+      Sign in
     </button>
-  </div>
-</section>
+  </app-mulpericard-actions>
+</app-mulpericard>
 
 <ng-template #authenticated>
-  <p class="centered-text success">
-    <i class="material-icons">check_circle</i>
-  </p>
-  <p class="centered-text">
-    You are succesfully authenticated, {{ username$ | async }}.
-  </p>
-  <div class="centered"><button (click)="onClickSignOut()">Sign out</button></div>
+  <app-mulpericard>
+    <app-mulpericard-title>
+      <div class="flex justify-space-between align-center">
+        <div>Success</div>
+        <div><i class="material-icons">check_circle</i></div>
+      </div>
+      <!-->i class="material-icons">check_circle</i-->
+    </app-mulpericard-title>
+    <app-mulpericard-body>
+      <p>You are succesfully authenticated, {{ username$ | async }}.</p>
+    </app-mulpericard-body>
+    <app-mulpericard-actions>
+      <button class="warn btn-medium" (click)="onClickSignOut()">
+        Sign out
+      </button>
+    </app-mulpericard-actions>
+  </app-mulpericard>
 </ng-template>
 
 <section *ngIf="(authenticating$ | async)">
