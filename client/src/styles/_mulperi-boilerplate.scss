@@ -4,14 +4,9 @@
   $warn-bg,
   $warn-text,
   $success-bg,
-  $success-text
+  $success-text,
+  $border-dark
 ) {
-  a {
-    color: rgb(90, 38, 0);
-    font-weight: 700;
-    text-decoration: underline;
-  }
-
   .text-align-center {
     text-align: center;
   }
@@ -111,5 +106,11 @@
   }
   .height-100 {
     height: 100%;
+  }
+
+  input {
+    border-radius: 2px;
+    border: 1px solid $border-dark;
+    margin-left: 1rem;
   }
 }

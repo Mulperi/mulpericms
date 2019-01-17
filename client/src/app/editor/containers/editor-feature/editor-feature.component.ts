@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromStore from '../../../core/store';
 import * as fromPost from '../../../core/store/selectors/post.selectors';
+import * as fromAuth from '../../../core/store/selectors/auth.selectors';
 import * as postAction from '../../../core/store/actions/post.actions';
 import { Observable } from 'rxjs';
 
@@ -17,6 +18,9 @@ export class EditorFeatureComponent implements OnInit {
   editorValue;
 
   saving$: Observable<boolean> = this.store.select(fromPost.selectPostSaving);
+  authenticated$: Observable<boolean> = this.store.select(
+    fromAuth.selectAuthenticated
+  );
 
   onEditorKeyUp(event) {
     this.editorValue = event.target.value;

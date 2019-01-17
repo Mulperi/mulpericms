@@ -51,6 +51,12 @@ export function reducer(
         saving: false
       };
     }
+    case Post.ActionTypes.SavePostFailed: {
+      return {
+        ...state,
+        saving: false
+      };
+    }
 
     default: {
       return state;

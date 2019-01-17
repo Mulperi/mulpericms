@@ -8,8 +8,8 @@ import { LoginComponent } from './containers/login/login.component';
 const routes = [
   {
     path: 'editor',
-    loadChildren: '../editor/editor.module#EditorModule',
-    canActivate: [AuthGuardService]
+    loadChildren: '../editor/editor.module#EditorModule'
+    // canActivate: [AuthGuardService]
   },
   {
     path: 'posts',

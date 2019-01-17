@@ -1,5 +1,16 @@
 <div class="feature-container">
-  <app-header title="Editor" subtitle="Write something beautiful"></app-header>
+  <app-header
+    *ngIf="(authenticated$ | async); else signedOutHeader"
+    title="Editor"
+    subtitle="Write something beautiful"
+  ></app-header>
+
+  <ng-template #signedOutHeader>
+    <app-header
+      title="Editor (Preview)"
+      subtitle="You are not authenticated and cannot save."
+    ></app-header>
+  </ng-template>
 
   <app-mulpericard>
     <app-mulpericard-subtitle
@@ -26,7 +37,7 @@
       </div>
     </app-mulpericard-body>
     <app-mulpericard-actions>
-      <div>
+      <div *ngIf="(authenticated$ | async)">
         <button
           class="primary btn-medium"
           (click)="onSave()"

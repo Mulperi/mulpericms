@@ -59,6 +59,17 @@ export class PostEffects {
     })
   );
 
+  @Effect()
+  savePostFailed$: Observable<any> = this.actions$.pipe(
+    ofType(postAction.ActionTypes.SavePostFailed),
+    map((action: any) => {
+      return new uiAction.SnackbarShow({
+        message: 'Saving failed!',
+        color: 'warn'
+      });
+    })
+  );
+
   constructor(
     private router: Router,
     private actions$: Actions,
