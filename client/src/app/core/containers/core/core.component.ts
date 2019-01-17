@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as fromStore from '../store';
-import * as fromUi from '../store/selectors/ui.selectors';
+import * as fromStore from '../../store';
+import * as fromUi from '../../store/selectors/ui.selectors';
 import { Observable, Subscription } from 'rxjs';
-import * as postAction from '../store/actions/post.actions';
-import * as authAction from '../store/actions/auth.actions';
+import * as postAction from '../../store/actions/post.actions';
+import * as authAction from '../../store/actions/auth.actions';
 import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  selector: 'app-core',
+  templateUrl: './core.component.html',
+  styleUrls: ['./core.component.scss'],
   animations: [
     trigger('fade', [
       transition(':enter', [
@@ -21,7 +21,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
     ])
   ]
 })
-export class AppComponent implements OnInit {
+export class CoreComponent implements OnInit {
   showSnackbar$: Observable<boolean> = this.store.select(
     fromUi.selectSnackbarVisible
   );

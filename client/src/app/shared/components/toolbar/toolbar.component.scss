@@ -6,7 +6,9 @@
   z-index: 10;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   box-shadow: 0 0 10px $dark;
+  font-size: 1rem;
 }
 
 .disabled {
@@ -14,14 +16,9 @@
 }
 
 .logo {
-  font-weight: 900;
-  font-size: 1rem;
-  letter-spacing: 3px;
-}
-
-div:not(.toolbar-container) {
-  padding: 1rem;
-  box-sizing: border-box;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 100;
+  color: black;
 }
 
 nav {
@@ -35,10 +32,40 @@ a {
   text-decoration: none;
 }
 
-.active > div {
+.nav__button {
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.active .nav__button {
   border-top: 10px solid $light;
 }
 
 .disabled {
   color: rgb(220, 220, 220);
+}
+
+section.logo {
+  margin-left: 1rem;
+}
+
+.logo__row > div {
+  border: 0px solid red;
+  width: 10px;
+  height: 10px;
+  margin: 0px;
+}
+
+div.logo__row {
+  display: flex;
+}
+.logo:hover .logo__fill {
+  box-shadow: 0 0 10px aquamarine;
+  transition: 0.2s all;
+}
+
+.logo__fill {
+  background: aquamarine;
+  box-shadow: 0 0 0px aquamarine;
+  transition: 0.2s all;
 }

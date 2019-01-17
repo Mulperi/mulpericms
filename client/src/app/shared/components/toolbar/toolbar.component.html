@@ -1,11 +1,39 @@
 <div class="toolbar-container">
-  <div class="logo"></div>
+  <a routerLink="">
+    <section class="logo">
+      <div class="logo__row">
+        <div></div>
+        <div class="logo__fill"></div>
+        <div></div>
+      </div>
+      <div class="logo__row">
+        <div class="logo__fill"></div>
+        <div class="logo__fill"></div>
+        <div></div>
+      </div>
+      <div class="logo__row">
+        <div></div>
+        <div class="logo__fill"></div>
+        <div class="logo__fill"></div>
+      </div>
+      <div class="logo__row">
+        <div></div>
+        <div class="logo__fill"></div>
+        <div></div>
+      </div></section
+  ></a>
   <nav>
-    <a routerLink="/posts" routerLinkActive="active"><div>Blog</div></a>
-    <a routerLink="/editor" routerLinkActive="active"><div>Editor</div></a>
+    <a routerLink="/posts" routerLinkActive="active"
+      ><div class="nav__button">Blog</div></a
+    >
+    <a routerLink="/editor" routerLinkActive="active"
+      ><div class="nav__button">Editor</div></a
+    >
     <!-- <ng-template #notAuthenticated>
       <a class="disabled"><div>Editor</div></a>
     </ng-template> -->
-    <a routerLink="/login" routerLinkActive="active"><div>Login</div></a>
+    <a routerLink="/login" routerLinkActive="active"
+      ><div class="nav__button">Login</div></a
+    >
   </nav>
 </div>

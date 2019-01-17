@@ -1,3 +1,4 @@
+import { LandingPageComponent } from './containers/landingpage/landingpage.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { NewPasswordComponent } from './containers/newpassword/newpassword.component';
 import { NgModule } from '@angular/core';
@@ -24,7 +25,7 @@ const routes = [
   },
   {
     path: '',
-    redirectTo: 'posts',
+    component: LandingPageComponent,
     pathMatch: 'full'
   }
 
