@@ -1,18 +1,14 @@
 @import '../../../../styles/style-variables';
 
 .toolbar-container {
-  background: $dark;
-  color: $light;
+  background: $grey-darker;
+  color: $grey-lighter;
   z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 0 10px $dark;
+  box-shadow: 0 0 10px $grey-darker;
   font-size: 1rem;
-}
-
-.disabled {
-  color: grey;
 }
 
 .logo {
@@ -28,25 +24,28 @@ nav {
 }
 
 a {
-  color: $light;
+  color: $grey-dark;
   text-decoration: none;
 }
 
+a:hover {
+  color: $grey-light;
+}
+
 .nav__button {
-  padding: 1rem;
+  padding: 1.5rem;
   box-sizing: border-box;
 }
 
 .active .nav__button {
-  border-top: 10px solid $light;
-}
-
-.disabled {
-  color: rgb(220, 220, 220);
+  // border-top: 10px solid $light;
+  background: $grey-lighter;
+  color: $grey-darker;
+  box-sizing: border-box;
 }
 
 section.logo {
-  margin-left: 1rem;
+  margin-left: 2rem;
 }
 
 .logo__row > div {
@@ -60,12 +59,13 @@ div.logo__row {
   display: flex;
 }
 .logo:hover .logo__fill {
-  box-shadow: 0 0 10px aquamarine;
-  transition: 0.2s all;
+  // box-shadow: 0 0 4px $grey-dark;
+  background: $grey-light;
+  transition: 0.1s all;
 }
 
 .logo__fill {
-  background: aquamarine;
-  box-shadow: 0 0 0px aquamarine;
-  transition: 0.2s all;
+  background: $grey-dark;
+  box-shadow: 0 0 0px $grey-dark;
+  transition: 0.1s all;
 }

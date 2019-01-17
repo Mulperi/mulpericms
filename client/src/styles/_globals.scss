@@ -12,7 +12,7 @@ html {
 
 body {
   margin: 0;
-  background: $light;
+  background: $grey-light;
   color: $grey-dark;
   height: 100%;
 }
@@ -24,12 +24,17 @@ app-core {
 }
 
 main {
-  margin: auto;
-  padding: 1rem;
+  // margin: auto;
+  // padding: 1rem;
+  // max-width: 640px;
   flex: 1;
-  max-width: 640px;
 }
 
 app-footer {
-  width: 100%;
+}
+
+div.feature-container {
+  margin: auto;
+  max-width: 640px;
+  padding: 1rem;
 }

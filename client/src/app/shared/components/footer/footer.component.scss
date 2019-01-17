@@ -1,9 +1,9 @@
 @import '../../../../styles/style-variables';
 
 footer {
-  background: $dark;
-  color: $light;
-  margin-top: 2rem;
+  background: $grey-darker;
+  color: $grey-dark;
   text-align: center;
   padding: 1rem;
+  box-shadow: 0 0 10px $grey-darker;
 }
