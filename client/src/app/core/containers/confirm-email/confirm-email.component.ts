@@ -1,16 +1,16 @@
 import { Store } from '@ngrx/store';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as fromStore from '../../store';
 import * as fromAuth from '../../store/selectors/auth.selectors';
 import * as authAction from '../../store/actions/auth.actions';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-confirm-email',
   templateUrl: './confirm-email.component.html',
   styleUrls: ['./confirm-email.component.scss']
 })
-export class ConfirmEmailComponent implements OnInit {
+export class ConfirmEmailComponent implements OnInit, OnDestroy {
   username$: Observable<string> = this.store.select(fromAuth.selectUsername);
   confirmed$: Observable<boolean> = this.store.select(
     fromAuth.selectAuthEmailConfirmed
@@ -18,11 +18,21 @@ export class ConfirmEmailComponent implements OnInit {
   confirming$: Observable<boolean> = this.store.select(
     fromAuth.selectAuthEmailConfirming
   );
+  confirmationError: null | string;
+  confirmationErrorSub: Subscription;
 
   constructor(private store: Store<fromStore.State>) {}
-  ngOnInit() {}
+  ngOnInit() {
+    this.confirmationErrorSub = this.store
+      .select(fromAuth.selectAuthEmailConfirmationError)
+      .subscribe((error: null | string) => (this.confirmationError = error));
+  }
 
   onClickConfirm(username: string, code: string) {
     this.store.dispatch(new authAction.ConfirmEmail({ username, code }));
+  }
+
+  ngOnDestroy() {
+    this.confirmationErrorSub.unsubscribe();
   }
 }

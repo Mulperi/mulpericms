@@ -6,10 +6,16 @@
 
   <app-mulpericard *ngIf="(confirmed$ | async)">
     <app-mulpericard-title>Email confirmed!</app-mulpericard-title>
+    <app-mulpericard-body>
+      You can now <a routerLink="/login">Sign in</a>
+    </app-mulpericard-body>
   </app-mulpericard>
 
   <app-mulpericard *ngIf="!(confirmed$ | async)">
     <app-mulpericard-title> Email confirmation </app-mulpericard-title>
+    <app-mulpericard-subtitle *ngIf="confirmationError">
+      <p class="warn">{{ confirmationError }}</p>
+    </app-mulpericard-subtitle>
     <app-mulpericard-body>
       <table>
         <tr>

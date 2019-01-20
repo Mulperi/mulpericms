@@ -46,3 +46,7 @@ export const selectAuthEmailConfirmed = createSelector(
   selectAuth,
   (state: State) => state.confirmed
 );
+export const selectAuthEmailConfirmationError = createSelector(
+  selectAuth,
+  (state: State) => state.confirmationError
+);
