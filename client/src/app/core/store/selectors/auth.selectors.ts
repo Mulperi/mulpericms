@@ -18,9 +18,9 @@ export const selectAuthenticated = createSelector(
   selectAuth,
   (state: State) => state.authenticated
 );
-export const selectAuthError = createSelector(
+export const selectAuthSignInError = createSelector(
   selectAuth,
-  (state: State) => state.error
+  (state: State) => state.signInError
 );
 export const selectAuthRequiredAttributes = createSelector(
   selectAuth,
@@ -29,4 +29,20 @@ export const selectAuthRequiredAttributes = createSelector(
 export const selectAuthUserAttributes = createSelector(
   selectAuth,
   (state: State) => state.userAttributes
+);
+export const selectAuthSignUpError = createSelector(
+  selectAuth,
+  (state: State) => state.signUpError
+);
+export const selectAuthSigningUp = createSelector(
+  selectAuth,
+  (state: State) => state.signingUp
+);
+export const selectAuthEmailConfirming = createSelector(
+  selectAuth,
+  (state: State) => state.confirming
+);
+export const selectAuthEmailConfirmed = createSelector(
+  selectAuth,
+  (state: State) => state.confirmed
 );

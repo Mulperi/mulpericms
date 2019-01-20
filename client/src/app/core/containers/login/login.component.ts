@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   );
   username$: Observable<string> = this.store.select(fromAuth.selectUsername);
 
-  error$: Observable<any> = this.store.select(fromAuth.selectAuthError);
+  error$: Observable<any> = this.store.select(fromAuth.selectAuthSignInError);
 
   constructor(private store: Store<fromStore.State>) {}
   ngOnInit() {}

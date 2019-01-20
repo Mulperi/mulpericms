@@ -5,9 +5,15 @@ export interface State {
   username: string;
   authenticating: boolean;
   authenticated: boolean;
-  error: string;
+  signInError: string;
   requiredAttributes: string[];
   userAttributes: string[];
+  signingUp: boolean;
+  signUpSuccess: boolean;
+  signUpError: string;
+  confirming: boolean;
+  confirmationError: string;
+  confirmed: boolean;
 }
 
 export const initialState: State = {
@@ -15,9 +21,15 @@ export const initialState: State = {
   username: null,
   authenticating: false,
   authenticated: false,
-  error: null,
+  signInError: null,
   requiredAttributes: [],
-  userAttributes: []
+  userAttributes: [],
+  signingUp: false,
+  signUpSuccess: false,
+  signUpError: null,
+  confirming: false,
+  confirmationError: null,
+  confirmed: false
 };
 
 export function reducer(
@@ -52,7 +64,7 @@ export function reducer(
     case Auth.ActionTypes.LoginFailed: {
       return {
         ...initialState,
-        error: action.payload
+        signInError: action.payload
       };
     }
 
@@ -65,6 +77,47 @@ export function reducer(
     case Auth.ActionTypes.SignOutSuccess: {
       return {
         ...initialState
+      };
+    }
+
+    case Auth.ActionTypes.SignUp: {
+      return {
+        ...initialState,
+        signingUp: true
+      };
+    }
+    case Auth.ActionTypes.SignUpSuccess: {
+      return {
+        ...initialState,
+        signUpSuccess: true,
+        username: action.payload
+      };
+    }
+    case Auth.ActionTypes.SignUpFailed: {
+      return {
+        ...initialState,
+        signUpError: action.payload
+      };
+    }
+
+    case Auth.ActionTypes.ConfirmEmail: {
+      return {
+        ...initialState,
+        confirming: true
+      };
+    }
+
+    case Auth.ActionTypes.ConfirmEmailSuccess: {
+      return {
+        ...initialState,
+        confirmed: true
+      };
+    }
+
+    case Auth.ActionTypes.ConfirmEmailFailed: {
+      return {
+        ...initialState,
+        confirmationError: action.payload
       };
     }
 

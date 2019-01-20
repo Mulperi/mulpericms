@@ -1,11 +1,13 @@
 <div class="feature-container">
-  <app-header title="Profile" subtitle="Your personal information and other cool stuff"></app-header>
-
-  <section class="error centered" *ngIf="(error$ | async) as error">
-    <p>{{ error }}</p>
-  </section>
+  <app-header
+    title="Profile"
+    subtitle="Your personal information and other cool stuff"
+  ></app-header>
 
   <app-mulpericard *ngIf="!(authenticated$ | async); else authenticated">
+    <app-mulpericard-subtitle *ngIf="(error$ | async) as error">
+      <p class="warn">{{ error }}</p>
+    </app-mulpericard-subtitle>
     <app-mulpericard-body>
       <p>Please sign in to use the editor.</p>
       <table>

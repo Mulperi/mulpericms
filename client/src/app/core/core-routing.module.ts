@@ -1,3 +1,4 @@
+import { ConfirmEmailComponent } from './containers/confirm-email/confirm-email.component';
 import { LandingPageComponent } from './containers/landingpage/landingpage.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { NewPasswordComponent } from './containers/newpassword/newpassword.component';
@@ -22,6 +23,10 @@ const routes = [
   {
     path: 'newpassword',
     component: NewPasswordComponent
+  },
+  {
+    path: 'confirmemail',
+    component: ConfirmEmailComponent
   },
   {
     path: '',

@@ -24,7 +24,9 @@ export class AuthEffects {
             // }
             return new authAction.LoginSuccess(user.username);
           }),
-          catchError((error: any) => of(new authAction.LoginFailed(error)))
+          catchError((error: any) =>
+            of(new authAction.LoginFailed(error.message))
+          )
         )
     )
   );
@@ -96,6 +98,63 @@ export class AuthEffects {
     map(() => {
       return new uiAction.SnackbarShow({
         message: 'Signed in. Welcome back!',
+        color: 'success'
+      });
+    })
+  );
+
+  @Effect()
+  signUp$: Observable<Action> = this.actions$.pipe(
+    ofType(authAction.ActionTypes.SignUp),
+    switchMap((action: authAction.SignUp) => {
+      return this.cognitoService
+        .signUp(action.payload.username, action.payload.password)
+        .pipe(
+          map(result => {
+            console.log('result', result);
+            return new authAction.SignUpSuccess(result.user.username);
+          }),
+          catchError(error => {
+            console.log('error', error);
+            return of(new authAction.SignUpFailed(error.message));
+          })
+        );
+    })
+  );
+
+  @Effect({ dispatch: false })
+  signUpSuccess$: Observable<void> = this.actions$.pipe(
+    ofType(authAction.ActionTypes.SignUpSuccess),
+    map((action: authAction.SignUpSuccess) => {
+      this.router.navigate(['/confirmemail']);
+    })
+  );
+
+  @Effect()
+  confirmEmail$: Observable<Action> = this.actions$.pipe(
+    ofType(authAction.ActionTypes.ConfirmEmail),
+    switchMap((action: authAction.ConfirmEmail) => {
+      return this.cognitoService
+        .confirmEmail(action.payload.username, action.payload.code)
+        .pipe(
+          map(result => {
+            console.log('result', result);
+            return new authAction.ConfirmEmailSuccess();
+          }),
+          catchError(error => {
+            console.log('error', error);
+            return of(new authAction.ConfirmEmailFailed(error.message));
+          })
+        );
+    })
+  );
+
+  @Effect()
+  confirmEmailSuccess$: Observable<Action> = this.actions$.pipe(
+    ofType(authAction.ActionTypes.ConfirmEmailSuccess),
+    map((action: authAction.ConfirmEmailSuccess) => {
+      return new uiAction.SnackbarShow({
+        message: 'Successfully confirmed email!',
         color: 'success'
       });
     })

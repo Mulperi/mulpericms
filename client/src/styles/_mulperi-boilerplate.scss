@@ -7,6 +7,10 @@
   $success-text,
   $border-dark
 ) {
+  * {
+    box-sizing: border-box;
+  }
+
   .text-align-center {
     text-align: center;
   }
@@ -24,8 +28,10 @@
     cursor: pointer;
   }
 
+  button:hover {
+  }
+
   button:focus {
-    outline: none;
   }
 
   .success {
@@ -38,7 +44,7 @@
     color: $primary-text;
   }
 
-  .primary:active {
+  button .primary:active {
     background: darkblue;
   }
 
@@ -51,7 +57,7 @@
     color: $warn-text;
   }
 
-  .warn:active {
+  button .warn:active {
     background: darkred;
   }
 
@@ -71,6 +77,10 @@
 
   .flex {
     display: flex;
+  }
+
+  .flex-wrap {
+    flex-wrap: wrap;
   }
 
   .margin-top-small {
@@ -111,6 +121,17 @@
   input {
     border-radius: 2px;
     border: 1px solid $border-dark;
-    margin-left: 1rem;
+    font-size: 1rem;
+    margin: 0.5rem;
+    padding: 0.25rem;
+  }
+
+  input::placeholder {
+    color: lightgrey;
+  }
+
+  input:disabled {
+    color: grey;
+    border: grey;
   }
 }

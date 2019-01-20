@@ -9,6 +9,7 @@
   align-items: center;
   box-shadow: 0 0 10px $grey-darker;
   font-size: 1rem;
+  padding-left: 2rem;
 }
 
 .logo {
@@ -45,7 +46,6 @@ a:hover {
 }
 
 section.logo {
-  margin-left: 2rem;
 }
 
 .logo__row > div {

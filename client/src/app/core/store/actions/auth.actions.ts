@@ -9,7 +9,13 @@ export enum ActionTypes {
   SessionCheck = '[Auth] Session Check',
   SessionNotExist = '[Auth] Session Not Exist',
   SignOut = '[Auth] Sign Out',
-  SignOutSuccess = '[Auth] Sign Out Success'
+  SignOutSuccess = '[Auth] Sign Out Success',
+  SignUp = '[Auth] Sign Up',
+  SignUpSuccess = '[Auth] Sign Up Success',
+  SignUpFailed = '[Auth] Sign Up Failed',
+  ConfirmEmail = '[Auth] Confirm Email',
+  ConfirmEmailSuccess = '[Auth] Confirm Email Success',
+  ConfirmEmailFailed = '[Auth] Confirm Email Failed'
 }
 
 export class Login implements Action {
@@ -65,6 +71,40 @@ export class SignOutSuccess implements Action {
   readonly type = ActionTypes.SignOutSuccess;
 }
 
+export class SignUp implements Action {
+  readonly type = ActionTypes.SignUp;
+  constructor(
+    public payload: {
+      username: string;
+      password: string;
+    }
+  ) {}
+}
+export class SignUpSuccess implements Action {
+  readonly type = ActionTypes.SignUpSuccess;
+  constructor(public payload?: any) {}
+}
+
+export class SignUpFailed implements Action {
+  readonly type = ActionTypes.SignUpFailed;
+  constructor(public payload: string) {}
+}
+
+export class ConfirmEmail implements Action {
+  readonly type = ActionTypes.ConfirmEmail;
+  constructor(public payload: { username: string; code: string }) {}
+}
+
+export class ConfirmEmailSuccess implements Action {
+  readonly type = ActionTypes.ConfirmEmailSuccess;
+  constructor(public payload?: any) {}
+}
+
+export class ConfirmEmailFailed implements Action {
+  readonly type = ActionTypes.ConfirmEmailFailed;
+  constructor(public payload: string) {}
+}
+
 export type ActionsUnion =
   | Login
   | LoginSuccess
@@ -73,4 +113,10 @@ export type ActionsUnion =
   | CompleteNewPassword
   | SessionCheck
   | SignOut
-  | SignOutSuccess;
+  | SignOutSuccess
+  | SignUp
+  | SignUpSuccess
+  | SignUpFailed
+  | ConfirmEmail
+  | ConfirmEmailSuccess
+  | ConfirmEmailFailed;

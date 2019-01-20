@@ -6,11 +6,11 @@
 }
 
 .spinner-container > div {
-  background: royalblue;
+  background: $grey-dark;
   width: 20px;
   height: 20px;
   animation: stretch 0.5s infinite;
-  border: 1px solid white;
+  margin: 1px;
 }
 
 .spinner-container > div:nth-child(2) {

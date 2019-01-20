@@ -8,6 +8,21 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CognitoService {
+  public signUp(username: string, password: string): Observable<any> {
+    return from(
+      Auth.signUp({
+        username,
+        password
+      })
+    ).pipe(catchError(error => throwError(error)));
+  }
+
+  public confirmEmail(username: string, code: string) {
+    return from(Auth.confirmSignUp(username, code)).pipe(
+      catchError(error => throwError(error))
+    );
+  }
+
   public authenticate(username: string, password: string): Observable<any> {
     return from(Auth.signIn(username, password)).pipe(
       catchError(error => throwError(error))
@@ -51,27 +66,4 @@ export class CognitoService {
       catchError(error => throwError(error))
     );
   }
-
-  // public async signin(username: string, password: string) {
-  //   try {
-  //     const user = await Auth.signIn(username, password);
-  //     if (user.challengeName === 'NEW_PASSWORD_REQUIRED') {
-  //       const { requiredAttributes } = user.challengeParam;
-
-  //       const loggedUser = await Auth.completeNewPassword(
-  //         user, // Cognito User Object
-  //         'Testing12345!', // New password
-  //         {}
-  //       );
-  //     } else {
-  //       console.log('SUCCESS', user);
-  //     }
-  //   } catch (err) {
-  //     if (err.code === 'UserNotConfirmedException') {
-  //     } else if (err.code === 'PasswordResetRequiredException') {
-  //     } else {
-  //       console.log(err);
-  //     }
-  //   }
-  // }
 }
