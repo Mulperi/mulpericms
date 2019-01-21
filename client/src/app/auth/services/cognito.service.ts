@@ -17,6 +17,20 @@ export class CognitoService {
     ).pipe(catchError(error => throwError(error)));
   }
 
+  public signUpWithAttributes(
+    username: string,
+    password: string,
+    attributes: any
+  ): Observable<any> {
+    return from(
+      Auth.signUp({
+        username,
+        password,
+        attributes
+      })
+    ).pipe(catchError(error => throwError(error)));
+  }
+
   public confirmEmail(username: string, code: string) {
     return from(Auth.confirmSignUp(username, code)).pipe(
       catchError(error => throwError(error))

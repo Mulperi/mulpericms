@@ -12,7 +12,7 @@
       <p>Please sign in to use the editor.</p>
       <table>
         <tr>
-          <td><label for="username">Username</label></td>
+          <td><label for="username">Email</label></td>
           <td>
             <input type="text" name="username" id="username" #usernameField />
           </td>
@@ -20,18 +20,25 @@
         <tr>
           <td><label for="password">Password</label></td>
           <td>
-            <input type="text" name="password" id="password" #passwordField />
+            <input
+              type="password"
+              name="password"
+              id="password"
+              #passwordField
+            />
           </td>
         </tr>
       </table>
     </app-mulpericard-body>
     <app-mulpericard-actions>
       <button
+        *ngIf="!(authenticating$ | async); else authenticating"
         class="primary btn-medium"
         (click)="onClickSignIn(usernameField.value, passwordField.value)"
       >
         Sign in
       </button>
+      <ng-template #authenticating> <app-spinner></app-spinner> </ng-template>
     </app-mulpericard-actions>
   </app-mulpericard>
 
@@ -54,9 +61,4 @@
       </app-mulpericard-actions>
     </app-mulpericard>
   </ng-template>
-
-  <section *ngIf="(authenticating$ | async)">
-    <h4>Authenticating...</h4>
-    <app-spinner></app-spinner>
-  </section>
 </div>

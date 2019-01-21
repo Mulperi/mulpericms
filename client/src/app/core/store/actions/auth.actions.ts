@@ -77,6 +77,7 @@ export class SignUp implements Action {
     public payload: {
       username: string;
       password: string;
+      attributes?: any;
     }
   ) {}
 }

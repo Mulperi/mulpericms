@@ -16,6 +16,18 @@
       <app-mulpericard-body>
         <table>
           <tr>
+            <td><label for="newUsername">Username</label></td>
+            <td>
+              <input
+                type="text"
+                id="newUsername"
+                name="newUsername"
+                placeholder="coolman84"
+                #newUsernameField
+              />
+            </td>
+          </tr>
+          <tr>
             <td><label for="newUserEmail">Email</label></td>
             <td>
               <input
@@ -45,7 +57,11 @@
         <button
           class="primary"
           (click)="
-            onClickRegister(newUserEmailField.value, newUserPasswordField.value)
+            onClickRegister(
+              newUsernameField.value,
+              newUserEmailField.value,
+              newUserPasswordField.value
+            )
           "
         >
           Create user

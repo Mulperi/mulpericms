@@ -11,18 +11,17 @@ import { Action } from '@ngrx/store';
 @Injectable()
 export class AuthEffects {
   @Effect()
-  login$: Observable<Action> = this.actions$.pipe(
+  signIn$: Observable<Action> = this.actions$.pipe(
     ofType(authAction.ActionTypes.SignIn),
     switchMap((action: authAction.SignIn) =>
       this.cognitoService
         .authenticate(action.payload.username, action.payload.password)
         .pipe(
           map((user: any) => {
-            console.log(user);
-            // if (user.challengeName === 'NEW_PASSWORD_REQUIRED')) {
-
-            // }
-            return new authAction.SignInSuccess(user.username);
+            // if (user.challengeName === 'NEW_PASSWORD_REQUIRED')) {}
+            return new authAction.SignInSuccess(
+              user.signInUserSession.idToken.payload.preferred_username
+            );
           }),
           catchError((error: any) =>
             of(new authAction.SignInFailed(error.message))
@@ -32,7 +31,7 @@ export class AuthEffects {
   );
 
   @Effect()
-  loginFailed$: Observable<Action> = this.actions$.pipe(
+  signInFailed$: Observable<Action> = this.actions$.pipe(
     ofType(authAction.ActionTypes.SignInFailed),
     map(
       (action: authAction.SignInFailed) =>
@@ -58,7 +57,7 @@ export class AuthEffects {
       return this.cognitoService.getSession().pipe(
         map(result => {
           return new authAction.SignInSuccess(
-            result.getIdToken().payload.email
+            result.getIdToken().payload.preferred_username
           );
         }),
         catchError(error => {
@@ -93,7 +92,7 @@ export class AuthEffects {
   );
 
   @Effect()
-  loginSuccess$: Observable<any> = this.actions$.pipe(
+  signInSuccess$: Observable<any> = this.actions$.pipe(
     ofType(authAction.ActionTypes.SignInSuccess),
     map(() => {
       return new uiAction.SnackbarShow({
@@ -108,7 +107,11 @@ export class AuthEffects {
     ofType(authAction.ActionTypes.SignUp),
     switchMap((action: authAction.SignUp) => {
       return this.cognitoService
-        .signUp(action.payload.username, action.payload.password)
+        .signUpWithAttributes(
+          action.payload.username,
+          action.payload.password,
+          action.payload.attributes
+        )
         .pipe(
           map(result => {
             console.log('result', result);

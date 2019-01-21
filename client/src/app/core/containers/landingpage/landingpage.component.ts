@@ -24,7 +24,13 @@ export class LandingPageComponent implements OnInit {
   constructor(private store: Store<fromStore.State>) {}
   ngOnInit() {}
 
-  onClickRegister(username: string, password: string) {
-    this.store.dispatch(new authAction.SignUp({ username, password }));
+  onClickRegister(preferred_username: string, email: string, password: string) {
+    this.store.dispatch(
+      new authAction.SignUp({
+        username: email,
+        password: password,
+        attributes: { preferred_username }
+      })
+    );
   }
 }
