@@ -1,13 +1,13 @@
-import { LoginComponent } from './login/login.component';
+import { SignInComponent } from './signin/signin.component';
 import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 import { NewPasswordComponent } from './newpassword/newpassword.component';
 
 export const containers = [
   ConfirmEmailComponent,
-  LoginComponent,
+  SignInComponent,
   NewPasswordComponent
 ];
 
-export * from './login/login.component';
+export * from './signin/signin.component';
 export * from './confirm-email/confirm-email.component';
 export * from './newpassword/newpassword.component';

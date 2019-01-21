@@ -6,11 +6,11 @@ import * as authAction from '../../../core/store/actions/auth.actions';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-signin',
+  templateUrl: './signin.component.html',
+  styleUrls: ['./signin.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class SignInComponent implements OnInit {
   authenticating$: Observable<boolean> = this.store.select(
     fromAuth.selectAuthenticating
   );
@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
   constructor(private store: Store<fromStore.State>) {}
   ngOnInit() {}
 
-  onClickLogin(username: string, password: string) {
-    this.store.dispatch(new authAction.Login({ username, password }));
+  onClickSignIn(username: string, password: string) {
+    this.store.dispatch(new authAction.SignIn({ username, password }));
   }
 
   onClickSignOut() {

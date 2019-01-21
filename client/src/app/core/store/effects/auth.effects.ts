@@ -1,7 +1,7 @@
 import { CognitoService } from './../../../auth/services/cognito.service';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { map, catchError, switchMap, filter } from 'rxjs/operators';
+import { map, catchError, switchMap } from 'rxjs/operators';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import * as authAction from '../actions/auth.actions';
 import * as uiAction from '../actions/ui.actions';
@@ -12,8 +12,8 @@ import { Action } from '@ngrx/store';
 export class AuthEffects {
   @Effect()
   login$: Observable<Action> = this.actions$.pipe(
-    ofType(authAction.ActionTypes.Login),
-    switchMap((action: authAction.Login) =>
+    ofType(authAction.ActionTypes.SignIn),
+    switchMap((action: authAction.SignIn) =>
       this.cognitoService
         .authenticate(action.payload.username, action.payload.password)
         .pipe(
@@ -22,10 +22,10 @@ export class AuthEffects {
             // if (user.challengeName === 'NEW_PASSWORD_REQUIRED')) {
 
             // }
-            return new authAction.LoginSuccess(user.username);
+            return new authAction.SignInSuccess(user.username);
           }),
           catchError((error: any) =>
-            of(new authAction.LoginFailed(error.message))
+            of(new authAction.SignInFailed(error.message))
           )
         )
     )
@@ -33,11 +33,11 @@ export class AuthEffects {
 
   @Effect()
   loginFailed$: Observable<Action> = this.actions$.pipe(
-    ofType(authAction.ActionTypes.LoginFailed),
+    ofType(authAction.ActionTypes.SignInFailed),
     map(
-      (action: authAction.LoginFailed) =>
+      (action: authAction.SignInFailed) =>
         new uiAction.SnackbarShow({
-          message: 'Login failed. Reason: ' + action.payload,
+          message: 'SignIn failed. Reason: ' + action.payload,
           color: 'warn'
         })
     )
@@ -57,7 +57,9 @@ export class AuthEffects {
     switchMap((action: authAction.SessionCheck) => {
       return this.cognitoService.getSession().pipe(
         map(result => {
-          return new authAction.LoginSuccess(result.getIdToken().payload.email);
+          return new authAction.SignInSuccess(
+            result.getIdToken().payload.email
+          );
         }),
         catchError(error => {
           return of(new authAction.SessionNotExist());
@@ -74,7 +76,7 @@ export class AuthEffects {
         map(() => {
           return new authAction.SignOutSuccess();
         }),
-        catchError((error: any) => of(new authAction.LoginFailed(error)))
+        catchError((error: any) => of(new authAction.SignInFailed(error)))
       )
     )
   );
@@ -92,7 +94,7 @@ export class AuthEffects {
 
   @Effect()
   loginSuccess$: Observable<any> = this.actions$.pipe(
-    ofType(authAction.ActionTypes.LoginSuccess),
+    ofType(authAction.ActionTypes.SignInSuccess),
     map(() => {
       return new uiAction.SnackbarShow({
         message: 'Signed in. Welcome back!',
@@ -176,7 +178,7 @@ export class AuthEffects {
   //           console.log(result);
   //         }),
   //         catchError((error: any) => {
-  //           return of(new authAction.LoginFailed(error));
+  //           return of(new authAction.SignInFailed(error));
   //         })
   //       );
   //   })

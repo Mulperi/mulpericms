@@ -11,14 +11,20 @@ import { Observable } from 'rxjs';
   styleUrls: ['./landingpage.component.scss']
 })
 export class LandingPageComponent implements OnInit {
-  signUpError$ = this.store.select(fromAuth.selectAuthSignUpError);
-  signingUp$ = this.store.select(fromAuth.selectAuthSigningUp);
+  signUpError$: Observable<string> = this.store.select(
+    fromAuth.selectAuthSignUpError
+  );
+  signingUp$: Observable<boolean> = this.store.select(
+    fromAuth.selectAuthSigningUp
+  );
+  authenticated$: Observable<boolean> = this.store.select(
+    fromAuth.selectAuthenticated
+  );
 
   constructor(private store: Store<fromStore.State>) {}
   ngOnInit() {}
 
   onClickRegister(username: string, password: string) {
-    console.log(username, password);
     this.store.dispatch(new authAction.SignUp({ username, password }));
   }
 }

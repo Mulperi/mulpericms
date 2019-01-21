@@ -2,10 +2,6 @@ import { selectAuth } from './../reducers/index';
 import { createSelector } from '@ngrx/store';
 import { State } from '../reducers/auth.reducer';
 
-export const selectUser = createSelector(
-  selectAuth,
-  (state: State) => state.user
-);
 export const selectUsername = createSelector(
   selectAuth,
   (state: State) => state.username

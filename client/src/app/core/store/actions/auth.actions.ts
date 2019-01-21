@@ -1,9 +1,9 @@
 import { Action } from '@ngrx/store';
 
 export enum ActionTypes {
-  Login = '[Auth] Login ',
-  LoginSuccess = '[Auth] Login Success',
-  LoginFailed = '[Auth] Login Failed',
+  SignIn = '[Auth] Sign In ',
+  SignInSuccess = '[Auth] Sign In Success',
+  SignInFailed = '[Auth] Sign In Failed',
   NewPasswordRequired = '[Auth] New Password Required',
   CompleteNewPassword = '[Auth] Complete New Password',
   SessionCheck = '[Auth] Session Check',
@@ -18,18 +18,18 @@ export enum ActionTypes {
   ConfirmEmailFailed = '[Auth] Confirm Email Failed'
 }
 
-export class Login implements Action {
-  readonly type = ActionTypes.Login;
+export class SignIn implements Action {
+  readonly type = ActionTypes.SignIn;
   constructor(public payload: { username: string; password: string }) {}
 }
 
-export class LoginSuccess implements Action {
-  readonly type = ActionTypes.LoginSuccess;
+export class SignInSuccess implements Action {
+  readonly type = ActionTypes.SignInSuccess;
   constructor(public payload: any) {}
 }
 
-export class LoginFailed implements Action {
-  readonly type = ActionTypes.LoginFailed;
+export class SignInFailed implements Action {
+  readonly type = ActionTypes.SignInFailed;
   constructor(public payload: any) {}
 }
 
@@ -106,9 +106,9 @@ export class ConfirmEmailFailed implements Action {
 }
 
 export type ActionsUnion =
-  | Login
-  | LoginSuccess
-  | LoginFailed
+  | SignIn
+  | SignInSuccess
+  | SignInFailed
   | NewPasswordRequired
   | CompleteNewPassword
   | SessionCheck

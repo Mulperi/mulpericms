@@ -1,7 +1,6 @@
 import * as Auth from '../actions/auth.actions';
 
 export interface State {
-  user: any;
   username: string;
   authenticating: boolean;
   authenticated: boolean;
@@ -17,7 +16,6 @@ export interface State {
 }
 
 export const initialState: State = {
-  user: null,
   username: null,
   authenticating: false,
   authenticated: false,
@@ -37,13 +35,13 @@ export function reducer(
   action: Auth.ActionsUnion
 ): State {
   switch (action.type) {
-    case Auth.ActionTypes.Login: {
+    case Auth.ActionTypes.SignIn: {
       return {
         ...initialState,
         authenticating: true
       };
     }
-    case Auth.ActionTypes.LoginSuccess: {
+    case Auth.ActionTypes.SignInSuccess: {
       return {
         ...initialState,
         authenticated: true,
@@ -61,7 +59,7 @@ export function reducer(
       };
     }
 
-    case Auth.ActionTypes.LoginFailed: {
+    case Auth.ActionTypes.SignInFailed: {
       return {
         ...initialState,
         signInError: action.payload

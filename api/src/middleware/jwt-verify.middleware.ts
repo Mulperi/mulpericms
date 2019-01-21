@@ -14,8 +14,8 @@ export const jwtVerify = (
       { algorithms: ['RS256'] },
       function(err, decodedToken) {
         if (err) {
-          console.log(err);
-          next();
+          // console.log(err);
+          next(err);
         } else {
           console.log('JWT verified.', decodedToken);
             next();

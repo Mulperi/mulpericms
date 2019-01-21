@@ -16,8 +16,8 @@ const routes = [
     loadChildren: '../posts/posts.module#PostsModule'
   },
   {
-    path: 'login',
-    component: fromAuth.LoginComponent
+    path: 'signin',
+    component: fromAuth.SignInComponent
   },
   {
     path: 'newpassword',

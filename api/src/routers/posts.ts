@@ -6,14 +6,21 @@ import PostService from '../services/post.service';
 const postService = new PostService();
 const posts: express.Router = express.Router();
 
-posts.get('/', (req: express.Request, res: express.Response) => {
-  postService.getAllPosts().subscribe(
-    data => {
-      res.json(data.Items);
-    },
-    error => res.json(error)
-  );
-});
+posts.get(
+  '/',
+  (error: express.Errback, req: express.Request, res: express.Response) => {
+    if (error) {
+      console.log('ERROR HANDLER');
+    }
+
+    postService.getAllPosts().subscribe(
+      data => {
+        res.json(data.Items);
+      },
+      error => res.json(error)
+    );
+  }
+);
 
 posts.get('/:id', (req: express.Request, res: express.Response) => {
   postService.getPost(req.params.id).subscribe(
