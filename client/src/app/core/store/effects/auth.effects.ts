@@ -1,4 +1,4 @@
-import { CognitoService } from './../../services/cognito.service';
+import { CognitoService } from './../../../auth/services/cognito.service';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, catchError, switchMap, filter } from 'rxjs/operators';
@@ -57,9 +57,7 @@ export class AuthEffects {
     switchMap((action: authAction.SessionCheck) => {
       return this.cognitoService.getSession().pipe(
         map(result => {
-          return new authAction.LoginSuccess(
-            result.getIdToken().payload['cognito:username']
-          );
+          return new authAction.LoginSuccess(result.getIdToken().payload.email);
         }),
         catchError(error => {
           return of(new authAction.SessionNotExist());

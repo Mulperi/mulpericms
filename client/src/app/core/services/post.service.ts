@@ -1,4 +1,4 @@
-import { CognitoService } from './cognito.service';
+import { CognitoService } from '../../auth/services/cognito.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';

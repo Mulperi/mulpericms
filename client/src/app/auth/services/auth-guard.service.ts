@@ -5,8 +5,8 @@ import { Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { CognitoService } from './cognito.service';
 
-import * as fromStore from '../store';
-import * as uiAction from '../store/actions/ui.actions';
+import * as fromStore from '../../core/store';
+import * as uiAction from '../../core/store/actions/ui.actions';
 import { of } from 'zen-observable';
 
 @Injectable({

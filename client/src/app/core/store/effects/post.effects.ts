@@ -1,4 +1,4 @@
-import { CognitoService } from './../../services/cognito.service';
+import { CognitoService } from './../../../auth/services/cognito.service';
 import { PostService } from '../../services/post.service';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -51,7 +51,7 @@ export class PostEffects {
   savePostSuccess$: Observable<any> = this.actions$.pipe(
     ofType(postAction.ActionTypes.SavePostSuccess),
     map((action: any) => {
-      this.router.navigate(['/']);
+      this.router.navigate(['/posts']);
       return new uiAction.SnackbarShow({
         message: 'Saved succesfully.',
         color: 'success'

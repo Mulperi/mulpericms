@@ -19,23 +19,23 @@
   </app-mulpericard-actions> -->
 </app-mulpericard>
 
-<app-mulpericard>
+<app-mulpericard *ngIf="errorMessage">
   <app-mulpericard-subtitle>
     <p class="warn">ERROR</p>
   </app-mulpericard-subtitle>
-  <app-mulpericard-body *ngIf="errorMessage">
+  <app-mulpericard-body >
     {{ errorMessage }}
   </app-mulpericard-body>
 </app-mulpericard>
 
 <div *ngIf="getPages() > 0" class="controls-container">
-  <button [disabled]="page == 0" (click)="onPreviousClick()">
+  <button class="primary" [disabled]="page == 0" (click)="onPreviousClick()">
     Previous page
   </button>
   <div class="centered page-count">
     <p>Page {{ page + 1 }} of {{ getPages() }}</p>
   </div>
-  <button [disabled]="isLastPage()" (click)="onNextClick()">Next page</button>
+  <button class="primary" [disabled]="isLastPage()" (click)="onNextClick()">Next page</button>
 </div>
 
 <div *ngIf="(postsLoading$ | async)" class="centered-text">

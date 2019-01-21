@@ -1,10 +1,9 @@
-import { ConfirmEmailComponent } from './containers/confirm-email/confirm-email.component';
-import { LandingPageComponent } from './containers/landingpage/landingpage.component';
-import { AuthGuardService } from './services/auth-guard.service';
-import { NewPasswordComponent } from './containers/newpassword/newpassword.component';
+import { AuthGuardService } from '../auth/services/auth-guard.service';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { LoginComponent } from './containers/login/login.component';
+
+import * as fromAuth from '../auth/containers';
+import * as fromCore from './containers';
 
 const routes = [
   {
@@ -18,19 +17,19 @@ const routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: fromAuth.LoginComponent
   },
   {
     path: 'newpassword',
-    component: NewPasswordComponent
+    component: fromAuth.NewPasswordComponent
   },
   {
     path: 'confirmemail',
-    component: ConfirmEmailComponent
+    component: fromAuth.ConfirmEmailComponent
   },
   {
     path: '',
-    component: LandingPageComponent,
+    component: fromCore.LandingPageComponent,
     pathMatch: 'full'
   }
 

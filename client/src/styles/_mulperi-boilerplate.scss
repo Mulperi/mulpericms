@@ -44,12 +44,12 @@
     color: $primary-text;
   }
 
-  button .primary:active {
+  button.primary:active {
     background: darkblue;
   }
 
   .primary:disabled {
-    background: lightblue;
+    background: grey;
   }
 
   .warn {
@@ -57,7 +57,7 @@
     color: $warn-text;
   }
 
-  button .warn:active {
+  button.warn:active {
     background: darkred;
   }
 
