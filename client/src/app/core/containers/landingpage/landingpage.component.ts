@@ -27,9 +27,14 @@ export class LandingPageComponent implements OnInit {
   onClickRegister(preferred_username: string, email: string, password: string) {
     this.store.dispatch(
       new authAction.SignUp({
-        username: email,
+        username: preferred_username,
         password: password,
-        attributes: { preferred_username }
+        attributes: [
+          {
+            Name: 'email',
+            Value: email
+          }
+        ]
       })
     );
   }

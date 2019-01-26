@@ -1,83 +1,229 @@
 import { Injectable } from '@angular/core';
-import { from, Observable, throwError } from 'rxjs';
+import {
+  CognitoUserPool,
+  AuthenticationDetails,
+  CognitoUser,
+  CognitoUserSession,
+  CognitoUserAttribute,
+  CognitoAccessToken,
+  CognitoIdToken
+} from 'amazon-cognito-identity-js';
+import { Observable, Observer, of, throwError } from 'rxjs';
 
-import { Auth } from 'aws-amplify';
-import { catchError, map } from 'rxjs/operators';
+const POOLDATA = {
+  UserPoolId: 'eu-west-1_v4g64yNGL',
+  ClientId: '454op8pf6e2topu04182jrfbg0'
+};
 
 @Injectable({
   providedIn: 'root'
 })
 export class CognitoService {
-  public signUp(username: string, password: string): Observable<any> {
-    return from(
-      Auth.signUp({
-        username,
-        password
-      })
-    ).pipe(catchError(error => throwError(error)));
+  user: CognitoUser;
+
+  getUserPool(): CognitoUserPool {
+    return new CognitoUserPool(POOLDATA);
   }
 
-  public signUpWithAttributes(
+  /*
+    Sign Up new user
+    Example use of signUp
+    this.cognitoService.signUp('mulperi', 'Testing12345!', [
+        {
+          Name: 'email',
+          Value: 'mulperi@mydomain.com'
+        }])
+  */
+  signUp(
     username: string,
     password: string,
-    attributes: any
+    attributes: [{ Name: string; Value: string }]
   ): Observable<any> {
-    return from(
-      Auth.signUp({
+    const userPool = this.getUserPool();
+
+    const attributeList = attributes.map(
+      attribute => new CognitoUserAttribute(attribute)
+    );
+
+    return Observable.create((observer: Observer<any>) => {
+      userPool.signUp(
         username,
         password,
-        attributes
-      })
-    ).pipe(catchError(error => throwError(error)));
+        attributeList,
+        null,
+        (err, result) => {
+          if (err) {
+            return observer.error(err);
+          }
+          observer.next(result);
+        }
+      );
+    });
   }
 
-  public confirmEmail(username: string, code: string) {
-    return from(Auth.confirmSignUp(username, code)).pipe(
-      catchError(error => throwError(error))
-    );
+  confirmSignUp(username: string, code: string): Observable<any> {
+    const userData = {
+      Username: username,
+      Pool: this.getUserPool()
+    };
+    this.user = new CognitoUser(userData);
+    return Observable.create(observer => {
+      this.user.confirmRegistration(code, true, (err, result) => {
+        if (err) {
+          return observer.error(err);
+        }
+        observer.next(result);
+      });
+    });
   }
 
-  public authenticate(username: string, password: string): Observable<any> {
-    return from(Auth.signIn(username, password)).pipe(
-      catchError(error => throwError(error))
-    );
+  /*
+    Example use of authenticate (sign in)
+    this.cognitoService.authenticate('mulperi2', 'Testing12345!')
+    Possible error object codes
+    code: "UserNotConfirmedException"
+    TODO: MFA step
+  */
+
+  authenticate(
+    username: string,
+    password: string
+  ): Observable<CognitoUserSession> {
+    const userPool = this.getUserPool();
+    const authDetails = new AuthenticationDetails({
+      Username: username,
+      Password: password
+    });
+    const userData = {
+      Username: username,
+      Pool: userPool
+    };
+
+    this.user = new CognitoUser(userData);
+
+    return Observable.create((observer: Observer<any>) => {
+      this.user.authenticateUser(authDetails, {
+        onSuccess: result => {
+          observer.next(result);
+          // const accessToken = result.getAccessToken().getJwtToken();
+          // const idToken = result.idToken.jwtToken;
+          /* Use the idToken for Logins Map when Federating User Pool
+           with identity pools or when passing through an Authorization Header
+           to an API Gateway Authorizer*/
+        },
+
+        onFailure: err => observer.error(err),
+        mfaRequired: (challengeName, challengeParameters) => {
+          return observer.error('MFA :D');
+          // cognitoUser.sendMFACode(confirmationCode, {
+          //     onSuccess: result => this.onLoginSuccess(callback, result),
+          //     onFailure: err => this.onLoginError(callback, err)
+          // });
+        }
+      });
+    });
   }
 
-  public completeNewPassowrd(user: any, newPassword: string): Observable<any> {
-    return from(
-      Auth.completeNewPassword(
-        user, // Cognito User Object
-        newPassword, // New password
-        {}
-      )
-    ).pipe(catchError(error => throwError(error)));
+  /*
+    TODO:
+    Error: User is not authenticated
+    https://github.com/amazon-archives/amazon-cognito-identity-js/issues/71
+  */
+  changePassword(oldPassword: string, newPassword: string): Observable<any> {
+    return Observable.create((observer: Observer<any>) => {
+      this.user.changePassword(
+        'Testing12345!',
+        'Testing1234!',
+        (err, result) => {
+          if (err) {
+            return observer.error(err);
+          }
+          observer.next(result);
+        }
+      );
+    });
   }
 
-  public getSession() {
-    return from(Auth.currentSession()).pipe(
-      catchError(error => throwError(error))
-    );
+  /*
+    getCurrentUser returns a Cognito user object if user is signed in
+    or null-value if there is no current user
+  */
+  getCurrentUser(): Observable<CognitoUser | null> {
+    return of(this.getUserPool().getCurrentUser());
   }
 
-  public getAccessToken() {
-    return from(Auth.currentSession()).pipe(
-      map((session: any) => {
-        return session.getAccessToken();
-      }),
-      catchError(error => throwError(error))
-    );
+  getSessionValidity(): Observable<boolean> {
+    const user: CognitoUser = this.getUserPool().getCurrentUser();
+
+    if (user) {
+      return Observable.create((observer: Observer<any>) => {
+        user.getSession((err, session) => {
+          if (err) {
+            return observer.error(err);
+          }
+          observer.next(session.isValid());
+        });
+      });
+    } else {
+      return of(false);
+    }
   }
 
-  public signOut() {
-    return from(Auth.signOut()).pipe(catchError(error => throwError(error)));
+  getSession(): Observable<CognitoUserSession | null> {
+    const user: CognitoUser = this.getUserPool().getCurrentUser();
+
+    if (user) {
+      return Observable.create((observer: Observer<any>) => {
+        user.getSession((err, session) => {
+          if (err) {
+            return observer.error(err);
+          }
+          observer.next(session);
+        });
+      });
+    } else {
+      return throwError(null);
+    }
   }
 
-  public signOutGlobal() {
-    // By doing this, you are revoking all the auth tokens(id token, access token and refresh token)
-    // which means the user is signed out from all the devices
-    // Note: although the tokens are revoked, the AWS credentials will remain valid until they expire (which by default is 1 hour)
-    return from(Auth.signOut({ global: true })).pipe(
-      catchError(error => throwError(error))
-    );
+  getAccessToken(): Observable<CognitoAccessToken> {
+    const user: CognitoUser = this.getUserPool().getCurrentUser();
+
+    if (user) {
+      return Observable.create((observer: Observer<any>) => {
+        user.getSession((err, session: CognitoUserSession) => {
+          if (err) {
+            return observer.error(err);
+          }
+          observer.next(session.getAccessToken());
+        });
+      });
+    } else {
+      return throwError(null);
+    }
+  }
+
+  getIdToken(): Observable<CognitoIdToken> {
+    const user: CognitoUser = this.getUserPool().getCurrentUser();
+
+    if (user) {
+      return Observable.create((observer: Observer<any>) => {
+        user.getSession((err, session: CognitoUserSession) => {
+          if (err) {
+            return observer.error(err);
+          }
+          observer.next(session.getIdToken());
+        });
+      });
+    } else {
+      return throwError(null);
+    }
+  }
+
+  signOut(): void {
+    const user: CognitoUser = this.getUserPool().getCurrentUser();
+    if (user != null) {
+      user.signOut();
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { CognitoService } from './../../../auth/services/cognito.service';
+import { CognitoService } from '../../../auth/services/cognito.service';
 import { PostService } from '../../services/post.service';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';

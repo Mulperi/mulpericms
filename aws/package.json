@@ -1,0 +1,26 @@
+{
+  "name": "mulpericms-aws-infra",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "config": {
+    "AWSS3BUCKET": "mulpericms",
+    "AWSPROFILE": "personal",
+    "AWSREGION": "eu-west-1",
+    "AWSSTACK": "mulpericms"
+  },
+  "scripts": {
+    "list-buckets": "aws s3 ls --profile $npm_package_config_AWSPROFILE",
+    "make-bucket": "aws s3 mb s3://$npm_package_config_AWSS3BUCKET --profile $npm_package_config_AWSPROFILE --region $npm_package_config_AWSREGION",
+    "remove-bucket": "aws s3 rb s3://$npm_package_config_AWSS3BUCKET --profile $npm_package_config_AWSPROFILE --region $npm_package_config_AWSREGION",
+    "validate": "aws cloudformation validate-template --template-body file://template.yaml",
+    "package": "aws cloudformation package --template-file template.yaml --output-template-file packaged-template.yaml --s3-bucket $npm_package_config_AWSS3BUCKET --profile $npm_package_config_AWSPROFILE",
+    "deploy": "aws cloudformation deploy --template-file packaged-template.yaml --stack-name $npm_package_config_AWSSTACK --parameter-overrides StackName=$npm_package_config_AWSSTACK --profile $npm_package_config_AWSPROFILE --region $npm_package_config_AWSREGION",
+    "package-deploy": "npm run package && npm run deploy",
+    "delete-stack": "aws cloudformation delete-stack --stack-name $npm_package_config_AWSSTACK --profile $npm_package_config_AWSPROFILE --region $npm_package_config_AWSREGION",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

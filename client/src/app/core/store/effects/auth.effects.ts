@@ -1,4 +1,4 @@
-import { CognitoService } from './../../../auth/services/cognito.service';
+import { CognitoService } from '../../../auth/services/cognito.service';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, catchError, switchMap } from 'rxjs/operators';
@@ -17,10 +17,11 @@ export class AuthEffects {
       this.cognitoService
         .authenticate(action.payload.username, action.payload.password)
         .pipe(
-          map((user: any) => {
+          map((session: any) => {
+            // console.log(session);
             // if (user.challengeName === 'NEW_PASSWORD_REQUIRED')) {}
             return new authAction.SignInSuccess(
-              user.signInUserSession.idToken.payload.preferred_username
+              session.accessToken.payload.username
             );
           }),
           catchError((error: any) =>
@@ -56,11 +57,13 @@ export class AuthEffects {
     switchMap((action: authAction.SessionCheck) => {
       return this.cognitoService.getSession().pipe(
         map(result => {
+          console.log('auth effect: Session exists: ', result);
           return new authAction.SignInSuccess(
-            result.getIdToken().payload.preferred_username
+            result.getIdToken().payload['cognito:username']
           );
         }),
         catchError(error => {
+          console.log('auth effect: Session not exist');
           return of(new authAction.SessionNotExist());
         })
       );
@@ -70,14 +73,10 @@ export class AuthEffects {
   @Effect()
   signOut$: Observable<any> = this.actions$.pipe(
     ofType(authAction.ActionTypes.SignOut),
-    switchMap((action: authAction.SignOut) =>
-      this.cognitoService.signOut().pipe(
-        map(() => {
-          return new authAction.SignOutSuccess();
-        }),
-        catchError((error: any) => of(new authAction.SignInFailed(error)))
-      )
-    )
+    map((action: authAction.SignOut) => {
+      this.cognitoService.signOut();
+      return new authAction.SignOutSuccess();
+    })
   );
 
   @Effect()
@@ -107,7 +106,7 @@ export class AuthEffects {
     ofType(authAction.ActionTypes.SignUp),
     switchMap((action: authAction.SignUp) => {
       return this.cognitoService
-        .signUpWithAttributes(
+        .signUp(
           action.payload.username,
           action.payload.password,
           action.payload.attributes
@@ -138,7 +137,7 @@ export class AuthEffects {
     ofType(authAction.ActionTypes.ConfirmEmail),
     switchMap((action: authAction.ConfirmEmail) => {
       return this.cognitoService
-        .confirmEmail(action.payload.username, action.payload.code)
+        .confirmSignUp(action.payload.username, action.payload.code)
         .pipe(
           map(result => {
             console.log('result', result);

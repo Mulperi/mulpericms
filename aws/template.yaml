@@ -1,0 +1,48 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'mulperiCMS AWS infra'
+Parameters:
+  StackName:
+    Type: String
+
+Resources:
+
+  UserPool:
+    Type: AWS::Cognito::UserPool
+    Description: 'A Cognito user pool for authenticating users'
+    Properties:
+      AliasAttributes:
+        - email
+        - preferred_username
+      # UsernameAttributes:
+      Schema:
+        - Name: email
+          Mutable: false
+          Required: true
+      AutoVerifiedAttributes: 
+        - email
+      EmailVerificationMessage: 'Your confirmation code: {####}'
+      EmailVerificationSubject: 'Confirmation code'
+      UserPoolName: !Sub '${StackName}-users'
+
+  UserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    DependsOn: UserPool
+    Description: 'A Cognito app client for Angular'
+    Properties:
+      ClientName: !Sub '${StackName}-angular'
+      GenerateSecret: false
+      UserPoolId: !Ref UserPool
+
+  DynamoDBPostsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: 'id'
+          AttributeType: 'S'
+      KeySchema:
+        - AttributeName: 'id'
+          KeyType: 'HASH'
+      ProvisionedThroughput:
+        ReadCapacityUnits: '5'
+        WriteCapacityUnits: '5'
+      TableName: !Sub '${StackName}-posts'

@@ -27,15 +27,15 @@ export class PostService {
   }
 
   public savePost(post: string): Observable<any> {
-    // this.cognitoService.getSession().subscribe(data => console.log(data));
-    return this.cognitoService.getAccessToken().pipe(
-      concatMap(accessToken => {
+    return this.cognitoService.getIdToken().pipe(
+      concatMap(token => {
+        console.log(token);
         return this.http.post(
           'http://localhost:3000/posts',
           { post },
           {
             headers: {
-              Authorization: accessToken.jwtToken
+              Authorization: token.getJwtToken()
             }
           }
         );
@@ -43,10 +43,10 @@ export class PostService {
     );
   }
 
-  private createAuthorizationHeader(): HttpHeaders {
-    const headers = new HttpHeaders();
-    headers.append('Authorization', 'Basic ' + 'kakka');
-    console.log(headers);
-    return headers;
-  }
+  // private createAuthorizationHeader(): HttpHeaders {
+  //   const headers = new HttpHeaders();
+  //   headers.append('Authorization', 'Basic ' + 'kakka');
+  //   console.log(headers);
+  //   return headers;
+  // }
 }

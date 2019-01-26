@@ -36,10 +36,14 @@ AWS.config.update({
 
 /*
   Download Cognito user pool public keys for JWT verification
+
+  keys[0] for IdTokens
+  keys[1] for AccessTokens
+  (apparently)
 */
 rp(COGNITO_KEYS_URL)
   .then(res => {
-    COGNITO_JWK = JSON.parse(res).keys[1];
+    COGNITO_JWK = JSON.parse(res).keys[0];
     pem = jwkToPem(COGNITO_JWK);
   })
   .catch(err => console.log(err));
