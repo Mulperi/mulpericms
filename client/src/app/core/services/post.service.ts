@@ -13,7 +13,7 @@ export class PostService {
   ) {}
 
   public getPosts(): Observable<any> {
-    return this.http.get<any>('https://git.heroku.com/mulpericms-api.git/posts').pipe(
+    return this.http.get<any>('https://mulpericms-api.herokuapp.com/posts').pipe(
       map((array: any[]) => {
         return array.map(post => ({
           id: post.id,
@@ -31,7 +31,7 @@ export class PostService {
       concatMap(token => {
         console.log(token);
         return this.http.post(
-          'http://localhost:3000/posts',
+          'https://mulpericms-api.herokuapp.com/posts',
           { post },
           {
             headers: {

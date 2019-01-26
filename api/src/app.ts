@@ -3,6 +3,7 @@
 import * as AWS from 'aws-sdk';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
+import * as cors from 'cors';
 import * as CONSTANTS from './constants';
 
 import * as rp from 'request-promise';
@@ -15,16 +16,8 @@ const app = express();
   "Global" middlewares
 */
 app.use(bodyParser.json());
+app.use(cors());
 app.use(logger);
-
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  );
-  next();
-});
 
 /*
   AWS Configure
@@ -34,6 +27,8 @@ const COGNITO_KEYS_URL = `https://cognito-idp.${
 }.amazonaws.com/${CONSTANTS.COGNITO_USERPOOLID}/.well-known/jwks.json`;
 let COGNITO_JWK;
 export let pem;
+
+console.log(process.env.AWS_ACCESS_KEY_ID)
 
 AWS.config.update({
   region: CONSTANTS.REGION_AWS_CONFIG,
