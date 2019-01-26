@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "npx nodemon",
-    "build": "rm -rf dist && mkdir dist && tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rm -rf public && mkdir public && tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node public/index.js"
   },
   "keywords": [],
   "author": "",

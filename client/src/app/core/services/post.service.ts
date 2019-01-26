@@ -13,7 +13,7 @@ export class PostService {
   ) {}
 
   public getPosts(): Observable<any> {
-    return this.http.get<any>('http://localhost:3000/posts').pipe(
+    return this.http.get<any>('https://git.heroku.com/mulpericms-api.git/posts').pipe(
       map((array: any[]) => {
         return array.map(post => ({
           id: post.id,
