@@ -34,5 +34,8 @@
     "nodemon": "^1.18.9",
     "ts-node": "^7.0.1",
     "typescript": "^3.2.2"
+  },
+  "engines": {
+    "node": "10.x"
   }
 }
