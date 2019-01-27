@@ -28,8 +28,6 @@ const COGNITO_KEYS_URL = `https://cognito-idp.${
 let COGNITO_JWK;
 export let pem;
 
-console.log(process.env.AWS_ACCESS_KEY_ID)
-
 AWS.config.update({
   region: CONSTANTS.REGION_AWS_CONFIG,
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
