@@ -13,17 +13,19 @@ export class PostService {
   ) {}
 
   public getPosts(): Observable<any> {
-    return this.http.get<any>('https://mulpericms-api.herokuapp.com/posts').pipe(
-      map((array: any[]) => {
-        return array.map(post => ({
-          id: post.id,
-          date: moment.unix(post.date).format('YYYY-MM-DD'),
-          author: post.author,
-          body: post.body
-        }));
-      }),
-      catchError(error => throwError(error))
-    );
+    return this.http
+      .get<any>('https://mulpericms-api.herokuapp.com/posts')
+      .pipe(
+        map((array: any[]) => {
+          return array.map(post => ({
+            id: post.id,
+            date: moment.unix(post.date).format('YYYY-MM-DD, h:mm'),
+            author: post.author,
+            body: post.body
+          }));
+        }),
+        catchError(error => throwError(error))
+      );
   }
 
   public savePost(post: string): Observable<any> {

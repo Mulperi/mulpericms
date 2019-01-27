@@ -1,13 +1,12 @@
 import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { Router, CanActivate } from '@angular/router';
-import { Observable } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 // import { CognitoService } from './cognito-amplify.service';
 
 import * as fromStore from '../../core/store';
 import * as uiAction from '../../core/store/actions/ui.actions';
-import { of } from 'zen-observable';
 
 @Injectable({
   providedIn: 'root'

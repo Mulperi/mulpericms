@@ -24,7 +24,7 @@ export class AllComponent implements OnInit, OnDestroy {
   constructor(private store: Store<fromStore.State>) {}
   ngOnInit() {
     this.store
-      .select(fromPosts.selectPostsAll)
+      .select(fromPosts.selectPostsAllLatestFirst)
       .subscribe(posts => (this.posts = posts));
 
     this.errorMessageSub = this.store

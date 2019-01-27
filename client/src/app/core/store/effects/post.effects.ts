@@ -1,14 +1,13 @@
 import { CognitoService } from '../../../auth/services/cognito.service';
 import { PostService } from '../../services/post.service';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { map, concatMap, switchMap, catchError } from 'rxjs/operators';
 import { Action } from '@ngrx/store';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import * as postAction from '../actions/post.actions';
 import * as uiAction from '../actions/ui.actions';
 import { Router } from '@angular/router';
-import { of } from 'zen-observable';
 
 @Injectable()
 export class PostEffects {
