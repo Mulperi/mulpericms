@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { map, concatMap, catchError } from 'rxjs/operators';
 import * as moment from 'moment';
+import { Post } from '../../shared/models/post.model';
 
 @Injectable({ providedIn: 'root' })
 export class PostService {
@@ -12,14 +13,14 @@ export class PostService {
     private cognitoService: CognitoService
   ) {}
 
-  public getPosts(): Observable<any> {
+  public getPosts(): Observable<Post[]> {
     return this.http
-      .get<any>('https://mulpericms-api.herokuapp.com/posts')
+      .get<Post[]>('https://mulpericms-api.herokuapp.com/posts')
       .pipe(
         map((array: any[]) => {
           return array.map(post => ({
             id: post.id,
-            date: moment.unix(post.date).format('YYYY-MM-DD, h:mm'),
+            date: moment.unix(post.date).format('YYYY MM DD HH:mm'),
             author: post.author,
             body: post.body
           }));
@@ -28,12 +29,12 @@ export class PostService {
       );
   }
 
-  public savePost(post: string): Observable<any> {
+  public savePost(postBody: string): Observable<any> {
     return this.cognitoService.getIdToken().pipe(
       concatMap(token => {
         return this.http.post(
           'https://mulpericms-api.herokuapp.com/posts',
-          { post },
+          { postBody },
           {
             headers: {
               Authorization: token.getJwtToken()

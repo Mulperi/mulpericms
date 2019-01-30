@@ -9,9 +9,20 @@ export const selectPostsAll = createSelector(
 );
 export const selectPostsAllLatestFirst = createSelector(
   selectPostsAll,
-  (posts: any[]) => {
-    return _.orderBy(posts, 'date', 'desc');
-  }
+  (posts: any[]) => _.orderBy(posts, 'date', 'desc')
+);
+export const selectPostEntities = createSelector(
+  selectPosts,
+  (state: State) => state.entities
+);
+export const selectCurrentPostId = createSelector(
+  selectPosts,
+  (state: State) => state.currentPostId
+);
+export const selectCurrentPost = createSelector(
+  selectPostEntities,
+  selectCurrentPostId,
+  (postEntities, currentPostId) => postEntities[currentPostId]
 );
 export const selectPostsLoading = createSelector(
   selectPosts,

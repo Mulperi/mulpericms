@@ -1,27 +1,17 @@
-<app-mulpericard>
-  <app-mulpericard-title>I'm starting a blog</app-mulpericard-title>
-  <app-mulpericard-body>
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis praesentium
-      consequatur doloremque dignissimos magni corrupti ipsum impedit debitis,
-      modi repellendus! Laborum veniam deleniti excepturi aliquid quasi minus
-      dignissimos facere rerum. Lorem ipsum dolor sit amet consectetur
-      accusantium. Mollitia fugiat et esse molestias impedit iste aut provident.
-    </p>
-    <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Animi at cumque
-      eligendi tempora officiis officia explicabo nostrum magnam? A nesciunt
-      excepturi voluptas beatae modi quisquam quam culpa voluptatibus
-      praesentium. Ratione? Lorem ipsum dolor sit amet consectetur adipisicing
-      elit. Minima nulla, fugiat obcaecati quo corporis minus doloribus quia,
-      pariatur, enim quidem voluptas dolorem? Quam cumque asperiores ratione
-      ipsum totam sit quibusdam.
-    </p>
+<app-mulpericard *ngIf="post">
+  <app-mulpericard-subtitle>
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+      <div>
+        <h4>{{ post.author }}</h4>
+      </div>
+      <div>{{ post.date }}</div>
+    </div>
+  </app-mulpericard-subtitle>
+  <app-mulpericard-body
+    ><markdown>{{ post.body }}</markdown>
   </app-mulpericard-body>
-  <app-mulpericard-subtitle>Mika Lakanen</app-mulpericard-subtitle>
-  <app-mulpericard-subtitle>2019-01-01 14:24</app-mulpericard-subtitle>
   <app-mulpericard-actions>
-    <div class="actions">
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
       <div><a routerLink="/">Next</a></div>
       <div><a routerLink="/">Previous</a></div>
     </div>

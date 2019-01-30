@@ -6,7 +6,8 @@ export enum ActionTypes {
   LoadAllFailed = '[Posts] Load All Failed',
   SavePost = '[Posts] Save Post',
   SavePostSuccess = '[Posts] Save Post Success',
-  SavePostFailed = '[Posts] Save Post Failed'
+  SavePostFailed = '[Posts] Save Post Failed',
+  SelectPost = '[Posts] Select'
 }
 
 export class LoadAll implements Action {
@@ -33,6 +34,10 @@ export class SavePostFailed implements Action {
   readonly type = ActionTypes.SavePostFailed;
   constructor(public payload: string) {}
 }
+export class SelectPost implements Action {
+  readonly type = ActionTypes.SelectPost;
+  constructor(public payload: string) {}
+}
 
 export type ActionsUnion =
   | LoadAll
@@ -40,4 +45,5 @@ export type ActionsUnion =
   | LoadAllFailed
   | SavePost
   | SavePostSuccess
-  | SavePostFailed;
+  | SavePostFailed
+  | SelectPost;
