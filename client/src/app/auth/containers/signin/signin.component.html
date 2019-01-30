@@ -9,43 +9,77 @@
       <p class="warn">{{ error }}</p>
     </app-mulpericard-subtitle>
     <app-mulpericard-body>
-      <p>Please sign in to use the editor.</p>
-      <table>
-        <tr>
-          <td><label for="username">Email</label></td>
-          <td>
-            <input type="text" name="username" id="username" #usernameField />
-          </td>
-        </tr>
-        <tr>
-          <td><label for="password">Password</label></td>
-          <td>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              #passwordField
-            />
-          </td>
-        </tr>
-      </table>
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <h4 class="margin-bottom">Please sign in to use the editor.</h4>
+
+        <div class="margin-bottom" fxLayoutAlign="center center">
+          <table>
+            <tr>
+              <td><label for="username">Username or email</label></td>
+              <td>
+                <input
+                  type="text"
+                  name="username"
+                  id="username"
+                  placeholder="username or email"
+                  #usernameField
+                />
+              </td>
+            </tr>
+            <tr>
+              <td><label for="password">Password</label></td>
+              <td>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  placeholder="password"
+                  #passwordField
+                />
+              </td>
+            </tr>
+          </table>
+
+          <!-- <form class="signin-form">
+            <mat-form-field class="example-full-width" color="accent">
+              <input
+                matInput
+                placeholder="Username or email"
+                value=""
+                #usernameField
+              />
+            </mat-form-field>
+            <br />
+            <mat-form-field class="example-full-width" color="accent">
+              <input
+                matInput
+                type="password"
+                placeholder="Password"
+                value=""
+                #passwordField
+              />
+            </mat-form-field>
+          </form> -->
+        </div>
+
+        <button
+          mat-flat-button
+          color="accent"
+          *ngIf="!(authenticating$ | async); else authenticating"
+          (click)="onClickSignIn(usernameField.value, passwordField.value)"
+        >
+          Sign in
+        </button>
+        <ng-template #authenticating> <app-spinner></app-spinner> </ng-template>
+      </div>
     </app-mulpericard-body>
-    <app-mulpericard-actions>
-      <button
-        *ngIf="!(authenticating$ | async); else authenticating"
-        class="primary btn-medium"
-        (click)="onClickSignIn(usernameField.value, passwordField.value)"
-      >
-        Sign in
-      </button>
-      <ng-template #authenticating> <app-spinner></app-spinner> </ng-template>
-    </app-mulpericard-actions>
+    <app-mulpericard-actions> </app-mulpericard-actions>
   </app-mulpericard>
 
   <ng-template #authenticated>
     <app-mulpericard>
       <app-mulpericard-title>
-        <div class="flex justify-space-between align-center">
+        <div fxLayoutAlign="space-between center">
           <div>Authenticated</div>
           <div><i class="material-icons">check_circle</i></div>
         </div>
@@ -55,7 +89,7 @@
         <p>You are succesfully authenticated, {{ username$ | async }}.</p>
       </app-mulpericard-body>
       <app-mulpericard-actions>
-        <button class="warn btn-medium" (click)="onClickSignOut()">
+        <button mat-flat-button color="accent" (click)="onClickSignOut()">
           Sign out
         </button>
       </app-mulpericard-actions>

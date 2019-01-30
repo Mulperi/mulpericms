@@ -1,5 +1,8 @@
 <div
-  class="hero-container height-100 flex flex-wrap align-center justify-center"
+  class="hero-container"
+  fxLayoutAlign="center center"
+  fxLayout="row wrap"
+  fxLayoutGap="16px"
 >
   <section class="hero">
     <h1>mulperiCMS</h1>
@@ -10,10 +13,27 @@
       <app-mulpericard-subtitle *ngIf="(signUpError$ | async) as signUpError">
         <div class="warn">{{ signUpError }}</div>
       </app-mulpericard-subtitle>
-      <app-mulpericard-subtitle>
-        Sign up as a new user or <a routerLink="/signin">Sign in</a>
-      </app-mulpericard-subtitle>
       <app-mulpericard-body>
+        <h4>Sign up as a new user or <a routerLink="/signin">Sign in</a></h4>
+        <!-- <form class="signin-form">
+          <mat-form-field class="example-full-width" color="accent">
+            <input matInput placeholder="Username" value="" #usernameField />
+          </mat-form-field>
+          <br />
+          <mat-form-field class="example-full-width" color="accent">
+            <input matInput placeholder="Email" value="" #passwordField />
+          </mat-form-field>
+          <br />
+          <mat-form-field class="example-full-width" color="accent">
+            <input
+              matInput
+              type="password"
+              placeholder="Password"
+              value=""
+              #passwordField
+            />
+          </mat-form-field>
+        </form> -->
         <table>
           <tr>
             <td><label for="newUsername">Username</label></td>
@@ -55,7 +75,8 @@
       </app-mulpericard-body>
       <app-mulpericard-actions>
         <button
-          class="primary"
+          mat-flat-button
+          color="accent"
           (click)="
             onClickRegister(
               newUsernameField.value,

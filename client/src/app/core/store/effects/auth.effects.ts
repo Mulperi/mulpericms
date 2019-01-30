@@ -57,13 +57,13 @@ export class AuthEffects {
     switchMap((action: authAction.SessionCheck) => {
       return this.cognitoService.getSession().pipe(
         map(result => {
-          console.log('auth effect: Session exists: ', result);
+          // console.log('auth effect: Session exists: ', result);
           return new authAction.SignInSuccess(
             result.getIdToken().payload['cognito:username']
           );
         }),
         catchError(error => {
-          console.log('auth effect: Session not exist');
+          // console.log('auth effect: Session not exist');
           return of(new authAction.SessionNotExist());
         })
       );

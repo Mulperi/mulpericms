@@ -1,0 +1,45 @@
+<app-mulpericard>
+  <app-mulpericard-subtitle
+    ><div fxLayoutAlign="space-between center">
+      <div>EDITOR</div>
+      <div>
+        <a
+          href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet"
+          target="_blank"
+          ><i class="material-icons">help</i></a
+        >
+      </div>
+    </div></app-mulpericard-subtitle
+  >
+  <app-mulpericard-body>
+    <div class="textarea-container">
+      <textarea (keyup)="onEditorKeyUp($event)" #markdownEditor>
+                      # Blog Title
+                      #### Meaningful subtitle for your story
+                    
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, facere autem. Modi magnam tempore voluptas alias corporis officiis nihil iusto libero! Sequi optio fugit, consequuntur esse deleniti maxime rem nihil?
+                    </textarea
+      >
+    </div>
+  </app-mulpericard-body>
+  <app-mulpericard-actions>
+    <div *ngIf="(authenticated$ | async)">
+      <button
+        mat-flat-button
+        color="accent"
+        (click)="onSave()"
+        *ngIf="!(saving$ | async); else saving"
+      >
+        Save post
+      </button>
+    </div>
+    <ng-template #saving>
+      <div class="text-container centered">
+        <div>
+          <h4>Saving post...</h4>
+          <app-spinner></app-spinner>
+        </div>
+      </div>
+    </ng-template>
+  </app-mulpericard-actions>
+</app-mulpericard>

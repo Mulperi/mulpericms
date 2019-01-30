@@ -2,11 +2,12 @@ import { MarkdownModule } from 'ngx-markdown';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EditorRoutingModule } from './editor-routing.module';
-import { EditorFeatureComponent } from './containers/editor-feature/editor-feature.component';
 import { SharedModule } from '../shared/shared.module';
+import { containers } from './containers/index';
+import { components } from './components';
 
 @NgModule({
-  declarations: [EditorFeatureComponent],
+  declarations: [...containers, ...components],
   imports: [
     CommonModule,
     EditorRoutingModule,

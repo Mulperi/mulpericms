@@ -15,38 +15,38 @@
     text-align: center;
   }
 
-  button:disabled {
-    background: grey;
-    color: rgba(255, 255, 255, 0.4);
-  }
+  // button:disabled {
+  //   background: grey;
+  //   color: rgba(255, 255, 255, 0.4);
+  // }
 
-  button {
-    background: none;
-    border: 0;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    cursor: pointer;
-  }
+  // button {
+  //   background: none;
+  //   border: 0;
+  //   padding: 0.25rem 0.5rem;
+  //   border-radius: 4px;
+  //   cursor: pointer;
+  // }
 
-  button:hover {
-  }
+  // button:hover {
+  // }
 
-  button:focus {
-  }
+  // button:focus {
+  // }
 
   .success {
     background: $success-bg;
     color: $success-text;
   }
 
-  .primary {
-    background: $primary-bg;
-    color: $primary-text;
-  }
+  // .primary {
+  //   background: $primary-bg;
+  //   color: $primary-text;
+  // }
 
-  button.primary:active {
-    background: darkblue;
-  }
+  // button.primary:active {
+  //   background: darkblue;
+  // }
 
   .primary:disabled {
     background: grey;
@@ -57,13 +57,13 @@
     color: $warn-text;
   }
 
-  button.warn:active {
-    background: darkred;
-  }
+  // button.warn:active {
+  //   background: darkred;
+  // }
 
-  .warn:disabled {
-    background: lightpink;
-  }
+  // .warn:disabled {
+  //   background: lightpink;
+  // }
 
   .btn-medium {
     padding: 0.5rem 1rem;

@@ -48,6 +48,25 @@ Add this to polyfills.ts
 
 (window as any).global = window;
 
+### S3 bucket policy for static website
+
+From bucket properties, activate `Static website hosting` and use `index.html` as both Index and Error document.
+
+Also under Permissions, paste following JSON to the Bucket Policy:
+
+    {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Sid": "PublicReadForGetBucketObjects",
+                "Effect": "Allow",
+                "Principal": "*",
+                "Action": "s3:GetObject",
+                "Resource": "arn:aws:s3:::blog.mulperi.net/*"
+            }
+        ]
+    }
+
 # Helpful links
 
 ### Verifying Cognito JWT

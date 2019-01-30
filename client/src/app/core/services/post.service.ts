@@ -31,7 +31,6 @@ export class PostService {
   public savePost(post: string): Observable<any> {
     return this.cognitoService.getIdToken().pipe(
       concatMap(token => {
-        console.log(token);
         return this.http.post(
           'https://mulpericms-api.herokuapp.com/posts',
           { post },
