@@ -4,10 +4,15 @@
       | slice: page * itemsPerPage:page * itemsPerPage + itemsPerPage)
   "
 >
-  <app-mulpericard-title> {{ post.title }} </app-mulpericard-title>
-
-  <app-mulpericard-subtitle> {{ post.date }} </app-mulpericard-subtitle>
-  <app-mulpericard-subtitle> {{ post.author }} </app-mulpericard-subtitle>
+  <app-mulpericard-subtitle>
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+      <div>
+        <h4>{{ post.author }}</h4>
+      </div>
+      <div>{{ post.date }}</div>
+    </div>
+  </app-mulpericard-subtitle>
+  <app-mulpericard-subtitle> </app-mulpericard-subtitle>
 
   <app-mulpericard-body>
     <markdown> {{ post.body }} </markdown>
