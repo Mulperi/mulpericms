@@ -29,12 +29,12 @@ export class PostService {
       );
   }
 
-  public savePost(postBody: string): Observable<any> {
+  public savePost(post: string): Observable<any> {
     return this.cognitoService.getIdToken().pipe(
       concatMap(token => {
         return this.http.post(
           'https://mulpericms-api.herokuapp.com/posts',
-          { postBody },
+          { post },
           {
             headers: {
               Authorization: token.getJwtToken()
