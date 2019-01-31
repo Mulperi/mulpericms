@@ -11,6 +11,7 @@
     "list-buckets": "aws s3 ls --profile $npm_package_config_AWSPROFILE",
     "make-bucket": "aws s3 mb s3://$npm_package_config_AWSS3BUCKET --profile $npm_package_config_AWSPROFILE --region $npm_package_config_AWSREGION",
     "remove-bucket": "aws s3 rb s3://$npm_package_config_AWSS3BUCKET --profile $npm_package_config_AWSPROFILE --region $npm_package_config_AWSREGION",
+    "bundle-report": "webpack-bundle-analyzer dist/$npm_package_config_DISTFOLDER/stats.json",
     "deploy": "ng build --prod --output-path dist/$npm_package_config_DISTFOLDER && cd dist/$npm_package_config_DISTFOLDER && aws s3 sync . s3://$npm_package_config_AWSS3BUCKET --delete --profile $npm_package_config_AWSPROFILE",
     "ng": "ng",
     "start": "ng serve",
@@ -40,9 +41,9 @@
     "@ngrx/store-devtools": "^7.0.0",
     "amazon-cognito-identity-js": "^3.0.7",
     "core-js": "^2.5.4",
+    "date-fns": "^2.0.0-alpha.27",
     "hammerjs": "^2.0.8",
     "lodash": "^4.17.11",
-    "moment": "^2.23.0",
     "ngx-markdown": "^7.0.3",
     "rxjs": "~6.3.3",
     "zone.js": "~0.8.26"
@@ -68,6 +69,7 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "~3.1.1"
+    "typescript": "~3.1.1",
+    "webpack-bundle-analyzer": "^3.0.3"
   }
 }

@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { map, concatMap, catchError } from 'rxjs/operators';
-import * as moment from 'moment';
 import { Post } from '../../shared/models/post.model';
 
 @Injectable({ providedIn: 'root' })
@@ -20,7 +19,7 @@ export class PostService {
         map((array: any[]) => {
           return array.map(post => ({
             id: post.id,
-            date: moment.unix(post.date).format('YYYY MM DD HH:mm'),
+            date: post.date,
             author: post.author,
             body: post.body
           }));

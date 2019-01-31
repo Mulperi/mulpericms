@@ -1,7 +1,9 @@
+import { Post } from './../../../shared/models/post.model';
 import { createSelector } from '@ngrx/store';
 import { selectPosts } from '../reducers';
 import { State } from '../reducers/post.reducer';
-import * as _ from 'lodash';
+import orderBy from 'lodash/orderBy';
+import { format, fromUnixTime } from 'date-fns';
 
 export const selectPostsAll = createSelector(
   selectPosts,
@@ -9,7 +11,19 @@ export const selectPostsAll = createSelector(
 );
 export const selectPostsAllLatestFirst = createSelector(
   selectPostsAll,
-  (posts: any[]) => _.orderBy(posts, 'date', 'desc')
+  (posts: any[]) => {
+    /*
+      TODO: Write own sort function to get rid of lodash
+    */
+    return orderBy(posts, 'date', 'desc').map((post: Post) => ({
+      id: post.id,
+      date: fromUnixTime(post.date)
+        .toString()
+        .slice(0, 21),
+      author: post.author,
+      body: post.body
+    }));
+  }
 );
 export const selectPostEntities = createSelector(
   selectPosts,
