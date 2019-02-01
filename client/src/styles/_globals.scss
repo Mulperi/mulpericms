@@ -5,7 +5,7 @@
 }
 
 html {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: sans-serif;
   height: 100%;
   line-height: 1.5;
 }
@@ -24,24 +24,28 @@ app-core {
 }
 
 main {
-  // margin: auto;
-  // padding: 1rem;
-  // max-width: 640px;
   flex: 1;
 }
 
-app-footer {
-  // margin-top: 2rem;
-}
-
-div.feature-container {
-  margin: auto;
-  max-width: 640px;
+.feature-container {
   padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 100%;
 }
 
 a {
   color: $grey-dark;
+  font-weight: bold;
+}
+
+a:hover {
+  color: black;
+}
+
+a:focus {
+  color: black;
 }
 
 img {

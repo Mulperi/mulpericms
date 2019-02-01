@@ -1,9 +1,8 @@
+<app-header
+  title="Profile"
+  subtitle="Your personal information and other cool stuff"
+></app-header>
 <div class="feature-container">
-  <app-header
-    title="Profile"
-    subtitle="Your personal information and other cool stuff"
-  ></app-header>
-
   <app-mulpericard *ngIf="!(authenticated$ | async); else authenticated">
     <app-mulpericard-subtitle *ngIf="(error$ | async) as error">
       <p class="warn">{{ error }}</p>
@@ -21,7 +20,7 @@
                   type="text"
                   name="username"
                   id="username"
-                  placeholder="username or email"
+                  placeholder="Username"
                   #usernameField
                 />
               </td>
@@ -33,33 +32,12 @@
                   type="password"
                   name="password"
                   id="password"
-                  placeholder="password"
+                  placeholder="Password"
                   #passwordField
                 />
               </td>
             </tr>
           </table>
-
-          <!-- <form class="signin-form">
-            <mat-form-field class="example-full-width" color="accent">
-              <input
-                matInput
-                placeholder="Username or email"
-                value=""
-                #usernameField
-              />
-            </mat-form-field>
-            <br />
-            <mat-form-field class="example-full-width" color="accent">
-              <input
-                matInput
-                type="password"
-                placeholder="Password"
-                value=""
-                #passwordField
-              />
-            </mat-form-field>
-          </form> -->
         </div>
 
         <button
@@ -73,7 +51,6 @@
         <ng-template #authenticating> <app-spinner></app-spinner> </ng-template>
       </div>
     </app-mulpericard-body>
-    <app-mulpericard-actions> </app-mulpericard-actions>
   </app-mulpericard>
 
   <ng-template #authenticated>
@@ -88,7 +65,7 @@
       <app-mulpericard-body>
         <p>You are succesfully authenticated, {{ username$ | async }}.</p>
       </app-mulpericard-body>
-      <app-mulpericard-actions>
+      <app-mulpericard-actions fxLayoutAlign="end">
         <button mat-flat-button color="accent" (click)="onClickSignOut()">
           Sign out
         </button>

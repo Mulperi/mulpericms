@@ -67,6 +67,13 @@ Also under Permissions, paste following JSON to the Bucket Policy:
         ]
     }
 
+### Using webpack bundle analyzer
+
+- `npm i -D webpack-bundle-analyzer`
+- To build and export statistics json run `ng build --prod --stats-json`
+- Add npm script `"bundle-report": "webpack-bundle-analyzer dist/project/stats.json"`
+- Open report in browser via `npm run bundle-report`
+
 # Helpful links
 
 ### Verifying Cognito JWT
@@ -80,3 +87,8 @@ https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cogn
 ## CloudFormation: Cognito user pool
 
 https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cognito-userpool.html#cfn-cognito-userpool-emailverificationmessage
+
+## Importing Lodash, the correct way
+
+- https://medium.com/@armno/til-importing-lodash-into-angular-the-better-way-aacbeaa40473
+- https://www.blazemeter.com/blog/the-correct-way-to-import-lodash-libraries-a-benchmark

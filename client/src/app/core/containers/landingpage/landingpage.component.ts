@@ -11,31 +11,6 @@ import { Observable } from 'rxjs';
   styleUrls: ['./landingpage.component.scss']
 })
 export class LandingPageComponent implements OnInit {
-  signUpError$: Observable<string> = this.store.select(
-    fromAuth.selectAuthSignUpError
-  );
-  signingUp$: Observable<boolean> = this.store.select(
-    fromAuth.selectAuthSigningUp
-  );
-  authenticated$: Observable<boolean> = this.store.select(
-    fromAuth.selectAuthenticated
-  );
-
   constructor(private store: Store<fromStore.State>) {}
   ngOnInit() {}
-
-  onClickRegister(preferred_username: string, email: string, password: string) {
-    this.store.dispatch(
-      new authAction.SignUp({
-        username: preferred_username,
-        password: password,
-        attributes: [
-          {
-            Name: 'email',
-            Value: email
-          }
-        ]
-      })
-    );
-  }
 }

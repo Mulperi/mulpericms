@@ -24,6 +24,7 @@ import { effects } from './store/effects/index';
 import { SharedModule } from '../shared/shared.module';
 
 import { containers } from './containers';
+import { components } from './components';
 
 @NgModule({
   imports: [
@@ -43,7 +44,7 @@ import { containers } from './containers';
     }),
     StoreRouterConnectingModule.forRoot({})
   ],
-  declarations: [...containers],
+  declarations: [...containers, ...components],
   bootstrap: [CoreComponent]
 })
 export class CoreModule {}

@@ -1,5 +1,5 @@
 import { CognitoService } from '../../../auth/services/cognito.service';
-import { PostService } from '../../services/post.service';
+import { PostService } from '../../../posts/services/post.service';
 import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs';
 import { map, concatMap, switchMap, catchError } from 'rxjs/operators';

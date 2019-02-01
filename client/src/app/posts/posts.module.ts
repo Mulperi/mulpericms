@@ -3,12 +3,11 @@ import { MarkdownModule } from 'ngx-markdown';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PostsRoutingModule } from './posts-routing.module';
-import { PostsFeatureComponent } from './containers/posts-feature/posts-feature.component';
-import { AllComponent } from './containers/all/all.component';
-import { PostComponent } from './containers/post/post.component';
+import { components } from './components';
+import { containers } from './containers';
 
 @NgModule({
-  declarations: [PostsFeatureComponent, AllComponent, PostComponent],
+  declarations: [...containers, ...components],
   imports: [
     CommonModule,
     PostsRoutingModule,
