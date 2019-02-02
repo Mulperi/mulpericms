@@ -23,6 +23,10 @@ app-core {
   flex-direction: column;
 }
 
+app-toolbar {
+  z-index: 2;
+}
+
 main {
   flex: 1;
 }
@@ -41,10 +45,14 @@ a {
 }
 
 a:hover {
-  color: black;
+  color: $primary;
 }
 
 a:focus {
+  color: $primary;
+}
+
+a:active {
   color: black;
 }
 

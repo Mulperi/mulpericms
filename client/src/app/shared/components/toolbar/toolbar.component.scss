@@ -7,7 +7,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 0 10px $grey-darker;
+  // box-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
   font-size: 1rem;
   padding-left: 2rem;
 }
@@ -43,9 +43,6 @@ a:hover {
   background: $grey-lighter;
   color: $grey-darker;
   box-sizing: border-box;
-}
-
-section.logo {
 }
 
 .logo__row > div {

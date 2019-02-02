@@ -1,15 +1,18 @@
 $grey-darker: rgb(40, 40, 40);
 $grey-dark: rgb(90, 90, 90);
-$grey-light: rgb(220, 220, 220);
-$grey-lighter: whitesmoke;
+$grey-light: rgb(220, 220, 220); // gainsboro
+$grey-lighter: rgb(245, 245, 245); // whitesmoke
 
 $border-radius-card: 4px;
 
 $pop: aquamarine;
 
+$primary: royalblue;
+$accent: hotpink;
+
 $warn-bg: rgb(255, 91, 91);
-$warn-text: white;
-$primary-bg: rgb(82, 66, 255);
-$primary-text: white;
+$warn-text: whitesmoke;
+$primary-bg: royalblue;
+$primary-text: whitesmoke;
 $success-bg: rgb(127, 255, 127);
 $success-text: black;
