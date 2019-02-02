@@ -8,6 +8,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import * as postAction from '../actions/post.actions';
 import * as uiAction from '../actions/ui.actions';
 import { Router } from '@angular/router';
+import { PostDTO } from '../../../shared/models/post.model';
 
 @Injectable()
 export class PostEffects {
@@ -38,8 +39,8 @@ export class PostEffects {
     ofType(postAction.ActionTypes.SavePost),
     switchMap((action: any) =>
       this.postService.savePost(action.payload).pipe(
-        map((result: any) => {
-          return new postAction.SavePostSuccess(result);
+        map((item: PostDTO) => {
+          return new postAction.SavePostSuccess(item);
         }),
         catchError(error => of(new postAction.SavePostFailed(error)))
       )

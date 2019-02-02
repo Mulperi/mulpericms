@@ -28,19 +28,10 @@ export default class PostService {
     return from(this.docClient.get(params).promise());
   }
 
-  savePost(
-    username: string,
-    post: { body: string; tags: string[] }
-  ): Observable<any> {
+  savePost(item: any): Observable<any> {
     const params = {
       TableName: CONSTANTS.DYNAMODB_TABLE_POSTS,
-      Item: {
-        id: uuid(),
-        author: username,
-        date: moment().unix(),
-        body: post.body,
-        tags: post.tags
-      }
+      Item: item
     };
     return from(this.docClient.put(params).promise());
   }

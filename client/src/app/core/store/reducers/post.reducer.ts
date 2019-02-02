@@ -54,10 +54,11 @@ export function reducer(
       };
     }
     case fromPostActions.ActionTypes.SavePostSuccess: {
-      return {
+      return adapter.addOne(action.payload, {
         ...state,
+        posts: [...state.posts, action.payload],
         saving: false
-      };
+      });
     }
     case fromPostActions.ActionTypes.SavePostFailed: {
       return {

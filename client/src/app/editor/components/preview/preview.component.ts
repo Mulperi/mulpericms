@@ -39,7 +39,7 @@ export class PreviewComponent {
 
   tagInputKeyUp(event) {
     if (event.target.value.length > 2) {
-      if (event.key === ',') {
+      if (event.key === ',' || event.code === 'Space') {
         const tag = event.target.value.slice(0, event.target.value.length - 1);
         if (
           !this.tags.includes(tag) &&
