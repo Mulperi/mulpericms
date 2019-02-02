@@ -3,8 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const rxjs_1 = require("rxjs");
 const AWS = require("aws-sdk");
 const CONSTANTS = require("../constants");
-const uuid = require("uuid/v4");
-const moment = require("moment");
 class PostService {
     constructor() {
         this.docClient = new AWS.DynamoDB.DocumentClient({
@@ -27,16 +25,10 @@ class PostService {
         };
         return rxjs_1.from(this.docClient.get(params).promise());
     }
-    savePost(username, post) {
+    savePost(item) {
         const params = {
             TableName: CONSTANTS.DYNAMODB_TABLE_POSTS,
-            Item: {
-                id: uuid(),
-                author: username,
-                date: moment().unix(),
-                body: post.body,
-                tags: post.tags
-            }
+            Item: item
         };
         return rxjs_1.from(this.docClient.put(params).promise());
     }

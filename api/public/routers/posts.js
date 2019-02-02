@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const jwt_decode = require("jwt-decode");
+const uuid = require("uuid/v4");
+const moment = require("moment");
 const jwt_verify_middleware_1 = require("./../middleware/jwt-verify.middleware");
 const post_service_1 = require("../services/post.service");
 const postService = new post_service_1.default();
@@ -18,10 +20,16 @@ posts.get('/:id', (req, res) => {
 });
 posts.post('/', jwt_verify_middleware_1.jwtVerify, (req, res) => {
     const post = req.body.post;
-    const username = jwt_decode(req.headers.authorization)['cognito:username'];
+    const item = {
+        id: uuid(),
+        author: jwt_decode(req.headers.authorization)['cognito:username'],
+        date: moment().unix(),
+        body: post.body,
+        tags: post.tags
+    };
     postService
-        .savePost(username, post)
-        .subscribe(data => res.json(data), error => res.json({ error: error.message }));
+        .savePost(item)
+        .subscribe(data => res.json(item), error => res.json({ error: error.message }));
 });
 exports.default = posts;
 //# sourceMappingURL=posts.js.map
