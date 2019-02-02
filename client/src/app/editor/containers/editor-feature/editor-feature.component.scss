@@ -1,0 +1,18 @@
+.editor-feature-container {
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem;
+}
+
+.editor-feature-container > div {
+  flex: 1 1 40%;
+}
+
+app-editor {
+  height: 100%;
+}
+
+app-preview {
+  height: 100%;
+}

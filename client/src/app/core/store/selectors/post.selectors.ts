@@ -1,9 +1,9 @@
-import { Post } from './../../../shared/models/post.model';
 import { createSelector } from '@ngrx/store';
 import { selectPosts } from '../reducers';
 import { State } from '../reducers/post.reducer';
 import orderBy from 'lodash/orderBy';
-import { format, fromUnixTime } from 'date-fns';
+import { fromUnixTime } from 'date-fns';
+import { PostDTO, PostVO } from '../../../shared/models/post.model';
 
 export const selectPostsAll = createSelector(
   selectPosts,
@@ -11,18 +11,19 @@ export const selectPostsAll = createSelector(
 );
 export const selectPostsAllLatestFirst = createSelector(
   selectPostsAll,
-  (posts: any[]) => {
+  (posts: PostDTO[]) => {
     /*
       TODO: Write own sort function to get rid of lodash
     */
-    return orderBy(posts, 'date', 'desc').map((post: Post) => ({
+    return orderBy(posts, 'date', 'desc').map((post: PostDTO) => ({
       id: post.id,
       date: fromUnixTime(post.date)
         .toString()
         .slice(0, 21),
       author: post.author,
-      body: post.body
-    }));
+      body: post.body,
+      tags: post.tags
+    })) as PostVO[];
   }
 );
 export const selectPostEntities = createSelector(
@@ -36,7 +37,12 @@ export const selectCurrentPostId = createSelector(
 export const selectCurrentPost = createSelector(
   selectPostEntities,
   selectCurrentPostId,
-  (postEntities, currentPostId) => postEntities[currentPostId]
+  (postEntities, currentPostId) => ({
+    ...postEntities[currentPostId],
+    date: fromUnixTime(postEntities[currentPostId].date)
+      .toString()
+      .slice(0, 21)
+  })
 );
 export const selectPostsLoading = createSelector(
   selectPosts,

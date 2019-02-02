@@ -1,19 +1,4 @@
-<app-header
-  *ngIf="(authenticated$ | async); else signedOutHeader"
-  title="Editor"
-  subtitle="Write something beautiful"
-></app-header>
-<ng-template #signedOutHeader>
-  <app-header
-    title="Editor (Preview)"
-    subtitle="You are not authenticated and cannot save."
-  ></app-header>
-</ng-template>
-
-<div class="feature-container">
-  <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="16px">
-    <app-editor (editorKeyUp)="onEditorKeyUp($event)"></app-editor>
-
-    <app-preview [data]="editorValue"></app-preview>
-  </div>
+<div class="editor-feature-container">
+  <div><app-editor (editorKeyUp)="onEditorKeyUp($event)"></app-editor></div>
+  <div><app-preview [data]="editorValue"></app-preview></div>
 </div>

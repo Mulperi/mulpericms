@@ -1,11 +1,11 @@
-import { Post } from './../../../shared/models/post.model';
 import * as fromPostActions from '../actions/post.actions';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { PostDTO } from '../../../shared/models/post.model';
 
-export const adapter: EntityAdapter<Post> = createEntityAdapter<Post>();
+export const adapter: EntityAdapter<PostDTO> = createEntityAdapter<PostDTO>();
 
-export interface State extends EntityState<Post> {
-  posts: any[];
+export interface State extends EntityState<PostDTO> {
+  posts: PostDTO[];
   loading: boolean;
   saving: boolean;
   errorMessage: string;
