@@ -37,12 +37,15 @@ export const selectCurrentPostId = createSelector(
 export const selectCurrentPost = createSelector(
   selectPostEntities,
   selectCurrentPostId,
-  (postEntities, currentPostId) => ({
-    ...postEntities[currentPostId],
-    date: fromUnixTime(postEntities[currentPostId].date)
-      .toString()
-      .slice(0, 21)
-  })
+  (postEntities, currentPostId) =>
+    postEntities[currentPostId]
+      ? {
+          ...postEntities[currentPostId],
+          date: fromUnixTime(postEntities[currentPostId].date)
+            .toString()
+            .slice(0, 21)
+        }
+      : false
 );
 export const selectPostsLoading = createSelector(
   selectPosts,

@@ -1,3 +1,4 @@
+import { MulpericardInfoBarComponent } from './components/mulpericard-infobar/mulpericard-infobar.component';
 import { NgModule } from '@angular/core';
 import { MulpericardComponent } from './components/mulpericard/mulpericard.component';
 import { MulpericardTitleComponent } from './components/mulpericard-title/mulpericard-title.component';
@@ -12,14 +13,16 @@ import { MulpericardActionsComponent } from './components/mulpericard-actions/mu
     MulpericardTitleComponent,
     MulpericardSubtitleComponent,
     MulpericardBodyComponent,
-    MulpericardActionsComponent
+    MulpericardActionsComponent,
+    MulpericardInfoBarComponent
   ],
   exports: [
     MulpericardComponent,
     MulpericardTitleComponent,
     MulpericardSubtitleComponent,
     MulpericardBodyComponent,
-    MulpericardActionsComponent
+    MulpericardActionsComponent,
+    MulpericardInfoBarComponent
   ]
 })
 export class MulpericardModule {}

@@ -23,7 +23,10 @@
       </div></section
   ></a>
   <nav>
-    <a routerLink="/posts" routerLinkActive="active"
+    <a
+      routerLink="/posts"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
       ><div class="nav__button flex align-center">
         <i class="material-icons">subject</i>
       </div></a
