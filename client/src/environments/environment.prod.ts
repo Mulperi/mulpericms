@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  API: 'https://mulpericms-api.herokuapp.com'
 };

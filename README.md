@@ -48,6 +48,10 @@ Add this to polyfills.ts
 
 (window as any).global = window;
 
+### Heroku ssh connection
+
+heroku ps:exec
+
 ### S3 bucket policy for static website
 
 From bucket properties, activate `Static website hosting` and use `index.html` as both Index and Error document.

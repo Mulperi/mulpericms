@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   region: 'eu-west-1',
   userPoolId: 'eu-west-1_5WDBScXot',
-  clientId: '2jfpqar71f103868ru79kbrg8s'
+  clientId: '2jfpqar71f103868ru79kbrg8s',
+  API: 'http://localhost:3000'
 };
 
 /*

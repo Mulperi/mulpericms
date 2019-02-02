@@ -27,14 +27,15 @@ class PostService {
         };
         return rxjs_1.from(this.docClient.get(params).promise());
     }
-    savePost(username, markdown) {
+    savePost(username, post) {
         const params = {
             TableName: CONSTANTS.DYNAMODB_TABLE_POSTS,
             Item: {
                 id: uuid(),
                 author: username,
                 date: moment().unix(),
-                body: markdown
+                body: post.body,
+                tags: post.tags
             }
         };
         return rxjs_1.from(this.docClient.put(params).promise());

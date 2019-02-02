@@ -3,26 +3,9 @@
     let post of (posts
       | slice: page * itemsPerPage:page * itemsPerPage + itemsPerPage)
   "
+  class="item-container"
 >
-  <app-mulpericard>
-    <app-mulpericard-subtitle>
-      <div fxLayout="row wrap" fxLayoutAlign="space-between center">
-        <div>
-          <h4>{{ post.author }}</h4>
-        </div>
-        <div>{{ post.date }}</div>
-      </div>
-    </app-mulpericard-subtitle>
-    <app-mulpericard-subtitle> </app-mulpericard-subtitle>
-
-    <app-mulpericard-body>
-      <markdown> {{ post.body }} </markdown>
-    </app-mulpericard-body>
-
-    <app-mulpericard-actions fxLayoutAlign="end">
-      <a routerLink="/posts/{{ post.id }}">Read more</a>
-    </app-mulpericard-actions>
-  </app-mulpericard>
+  <app-post-listitem [post]="post"></app-post-listitem>
 </div>
 
 <app-error-message

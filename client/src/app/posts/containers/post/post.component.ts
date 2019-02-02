@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import * as fromStore from '../../../core/store/reducers';
 import * as postAction from '../../../core/store/actions/post.actions';
 import * as fromPost from '../../../core/store/selectors/post.selectors';
-import { Post } from './../../../shared/models/post.model';
+import { PostVO } from './../../../shared/models/post.model';
 
 @Component({
   selector: 'app-post',
@@ -13,7 +13,7 @@ import { Post } from './../../../shared/models/post.model';
   styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit, OnDestroy {
-  post: Post;
+  post: PostVO;
   postSub: Subscription;
 
   idSub: Subscription;
@@ -29,7 +29,7 @@ export class PostComponent implements OnInit, OnDestroy {
     );
     this.postSub = this.store
       .select(fromPost.selectCurrentPost)
-      .subscribe((post: Post) => (this.post = post));
+      .subscribe((post: PostVO) => (this.post = post));
   }
 
   ngOnDestroy() {

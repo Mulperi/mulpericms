@@ -17,10 +17,10 @@ posts.get('/:id', (req, res) => {
     }, error => res.json(error));
 });
 posts.post('/', jwt_verify_middleware_1.jwtVerify, (req, res) => {
-    const markdown = req.body.post;
+    const post = req.body.post;
     const username = jwt_decode(req.headers.authorization)['cognito:username'];
     postService
-        .savePost(username, markdown)
+        .savePost(username, post)
         .subscribe(data => res.json(data), error => res.json({ error: error.message }));
 });
 exports.default = posts;

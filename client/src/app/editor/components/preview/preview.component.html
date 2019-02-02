@@ -1,6 +1,49 @@
-<app-mulpericard>
-  <app-mulpericard-subtitle>PREVIEW</app-mulpericard-subtitle>
-  <app-mulpericard-body>
+<div class="preview-container" fxLayout="column" fxLayoutAlign="space-between">
+  <div fxFlex="50%">
+    <app-mulpericard-subtitle
+      ><div>{{ username$ | async }}</div>
+      <div>{{ date }}</div></app-mulpericard-subtitle
+    >
     <markdown ngPreserveWhitespaces [data]="data"></markdown>
-  </app-mulpericard-body>
-</app-mulpericard>
+  </div>
+
+  <app-mulpericard *ngIf="(authenticated$ | async)">
+    <div fxLayoutAlign="center center">
+      <app-chip
+        *ngFor="let tag of tags"
+        [name]="tag"
+        (click)="removeTag(tag)"
+      ></app-chip>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+      <div>
+        <label for="tags">Add tags</label>
+        <input
+          (keyup)="tagInputKeyUp($event)"
+          type="text"
+          id="tags"
+          placeholder="dogs, cats, amiga"
+          #tagInputField
+        />
+      </div>
+      <div>
+        <button
+          mat-flat-button
+          color="accent"
+          (click)="onSave()"
+          *ngIf="!(saving$ | async); else saving"
+        >
+          Save post
+        </button>
+      </div>
+      <ng-template #saving>
+        <div class="text-container centered">
+          <div>
+            <h4>Saving post...</h4>
+            <app-spinner></app-spinner>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </app-mulpericard>
+</div>

@@ -25,10 +25,10 @@ posts.get('/:id', (req: express.Request, res: express.Response) => {
 });
 
 posts.post('/', jwtVerify, (req: express.Request, res: express.Response) => {
-  const markdown = req.body.post;
+  const post = req.body.post;
   const username = jwt_decode(req.headers.authorization)['cognito:username'];
   postService
-    .savePost(username, markdown)
+    .savePost(username, post)
     .subscribe(
       data => res.json(data),
       error => res.json({ error: error.message })

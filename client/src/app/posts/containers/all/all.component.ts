@@ -3,6 +3,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as fromStore from '../../../core/store/reducers';
 import * as fromPosts from '../../../core/store/selectors/post.selectors';
+import { PostVO } from '../../../shared/models/post.model';
 
 @Component({
   selector: 'app-all',
@@ -10,8 +11,8 @@ import * as fromPosts from '../../../core/store/selectors/post.selectors';
   styleUrls: ['./all.component.scss']
 })
 export class AllComponent implements OnInit, OnDestroy {
-  posts: any[];
-  postsLoading$: Observable<any> = this.store.select(
+  posts: PostVO[];
+  postsLoading$: Observable<boolean> = this.store.select(
     fromPosts.selectPostsLoading
   );
 

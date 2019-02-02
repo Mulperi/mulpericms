@@ -3,7 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { map, concatMap, catchError } from 'rxjs/operators';
-import { Post } from '../../shared/models/post.model';
+
+import { environment } from './../../../environments/environment';
+import { PostDTO } from './../../shared/models/post.model';
 
 @Injectable({ providedIn: 'root' })
 export class PostService {
@@ -12,28 +14,18 @@ export class PostService {
     private cognitoService: CognitoService
   ) {}
 
-  public getPosts(): Observable<Post[]> {
+  public getPosts(): Observable<PostDTO[]> {
     return this.http
-      .get<Post[]>('https://mulpericms-api.herokuapp.com/posts')
-      .pipe(
-        map((array: any[]) => {
-          return array.map(post => ({
-            id: post.id,
-            date: post.date,
-            author: post.author,
-            body: post.body
-          }));
-        }),
-        catchError(error => throwError(error))
-      );
+      .get<PostDTO[]>(`${environment.API}/posts`)
+      .pipe(catchError(error => throwError(error)));
   }
 
-  public savePost(post: string): Observable<any> {
+  public savePost(payload: { body: string; tags: string[] }): Observable<any> {
     return this.cognitoService.getIdToken().pipe(
       concatMap(token => {
         return this.http.post(
-          'https://mulpericms-api.herokuapp.com/posts',
-          { post },
+          `${environment.API}/posts`,
+          { post: payload },
           {
             headers: {
               Authorization: token.getJwtToken()
