@@ -1,4 +1,14 @@
 <div class="editor-feature-container">
-  <div><app-editor (editorKeyUp)="onEditorKeyUp($event)"></app-editor></div>
-  <div><app-preview [data]="editorValue"></app-preview></div>
+  <div>
+    <app-editor
+      (titleKeyUp)="onTitleKeyUp($event)"
+      (editorKeyUp)="onEditorKeyUp($event)"
+    ></app-editor>
+  </div>
+  <div>
+    <app-preview
+      [titleValue]="titleValue"
+      [editorValue]="editorValue"
+    ></app-preview>
+  </div>
 </div>

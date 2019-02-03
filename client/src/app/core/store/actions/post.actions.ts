@@ -27,7 +27,9 @@ export class LoadAllFailed implements Action {
 }
 export class Save implements Action {
   readonly type = ActionTypes.Save;
-  constructor(public payload: { body: string; tags: string[] }) {}
+  constructor(
+    public payload: { title: string; body: string; tags: string[] }
+  ) {}
 }
 export class SaveSuccess implements Action {
   readonly type = ActionTypes.SavePostSuccess;

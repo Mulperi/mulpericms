@@ -1,9 +1,5 @@
 @import './style-variables';
 
-* {
-  box-sizing: border-box;
-}
-
 html {
   font-family: sans-serif;
   height: 100%;
@@ -33,10 +29,8 @@ main {
 
 .feature-container {
   padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 100%;
+  max-width: 800px;
+  margin: auto;
 }
 
 a {

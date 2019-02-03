@@ -14,13 +14,17 @@ export class EditorFeatureComponent implements OnInit {
     fromAuth.selectAuthenticated
   );
 
-  editorValue;
+  editorValue: string;
+  titleValue: string;
 
   constructor(private store: Store<fromStore.State>) {}
 
   ngOnInit() {}
 
-  onEditorKeyUp(event) {
+  onEditorKeyUp(event: string) {
     this.editorValue = event;
+  }
+  onTitleKeyUp(event: string) {
+    this.titleValue = event;
   }
 }

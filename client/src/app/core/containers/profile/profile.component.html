@@ -24,8 +24,23 @@
     </app-mulpericard>
   </section>
 
-  <section>
-    <h4>Your posts</h4>
-    <app-own-postlist></app-own-postlist>
-  </section>
+  <app-mulpericard>
+    <app-mulpericard-actions>
+      <div
+        fxLayoutAlign="space-between center"
+        class="accordion-header"
+        (click)="toggleOwnPostListVisible()"
+      >
+        <div><h4>Your posts</h4></div>
+        <div *ngIf="!ownPostListVisible; else hide">
+          <mat-icon>arrow_drop_up</mat-icon>
+        </div>
+        <ng-template #hide
+          ><div><mat-icon>arrow_drop_down</mat-icon></div></ng-template
+        >
+      </div>
+    </app-mulpericard-actions>
+    <ng-template [cdkPortalOutlet]="ownPostListVisible && ownPostListPortal">
+    </ng-template>
+  </app-mulpericard>
 </div>

@@ -95,7 +95,7 @@ export class AuthEffects {
   signInSuccess$: Observable<any> = this.actions$.pipe(
     ofType(authAction.ActionTypes.SignInSuccess),
     map(() => {
-      this.router.navigate(['/profile']);
+      this.router.navigate(['/posts']);
       return new uiAction.SnackbarShow({
         message: 'Welcome back!',
         color: 'neutral'

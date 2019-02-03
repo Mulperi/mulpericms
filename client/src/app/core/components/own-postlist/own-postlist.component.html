@@ -16,7 +16,10 @@
     </div></app-mulpericard-actions
   >
   <app-mulpericard-actions></app-mulpericard-actions>
-  <app-mulpericard-body
-    ><markdown>{{ post.body | truncate: 50 }}</markdown></app-mulpericard-body
-  >
+  <app-mulpericard-body>
+    <markdown>{{ post.body | truncate: 80 }}</markdown>
+  </app-mulpericard-body>
+  <app-mulpericard-actions fxLayoutAlign="end center">
+    <a routerLink="/posts/{{ post.id }}">Go to post</a>
+  </app-mulpericard-actions>
 </app-mulpericard>

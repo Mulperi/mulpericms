@@ -18,13 +18,10 @@ export const selectPostsAllLatestFirst = createSelector(
       TODO: Write own sort function to get rid of lodash
     */
     return orderBy(posts, 'date', 'desc').map((post: PostDTO) => ({
-      id: post.id,
+      ...post,
       date: fromUnixTime(post.date)
         .toString()
-        .slice(0, 21),
-      author: post.author,
-      body: post.body,
-      tags: post.tags
+        .slice(0, 21)
     })) as PostVO[];
   }
 );

@@ -4,7 +4,8 @@
       ><div>{{ username$ | async }}</div>
       <div>{{ date }}</div></app-mulpericard-subtitle
     >
-    <markdown ngPreserveWhitespaces [data]="data"></markdown>
+    <h1>{{ titleValue }}</h1>
+    <markdown ngPreserveWhitespaces [data]="editorValue"></markdown>
   </div>
 
   <app-mulpericard *ngIf="(authenticated$ | async)">
@@ -15,18 +16,17 @@
         (click)="removeTag(tag)"
       ></app-chip>
     </div>
-    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
-      <div>
-        <label for="tags">Add tags</label>
+    <div fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="16px">
+      <app-mulpericard-actions>
+        <label for="tags">Add tags:</label>
         <input
           (keyup)="tagInputKeyUp($event)"
           type="text"
           id="tags"
           placeholder="dogs, cats, amiga"
           #tagInputField
-        />
-      </div>
-      <div>
+      /></app-mulpericard-actions>
+      <div fxLayoutAlign="end center">
         <button
           mat-flat-button
           color="accent"
@@ -35,15 +35,15 @@
         >
           Save post
         </button>
-      </div>
-      <ng-template #saving>
-        <div class="text-container centered">
-          <div>
-            <h4>Saving post...</h4>
-            <app-spinner></app-spinner>
+        <ng-template #saving>
+          <div class="text-container centered">
+            <div>
+              <h4>Saving post...</h4>
+              <app-spinner></app-spinner>
+            </div>
           </div>
-        </div>
-      </ng-template>
+        </ng-template>
+      </div>
     </div>
   </app-mulpericard>
 </div>

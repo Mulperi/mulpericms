@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as fromStore from '../../../core/store/reducers';
 import * as postAction from '../../../core/store/actions/post.actions';
 import * as fromPost from '../../../core/store/selectors/post.selectors';
 import { PostVO } from './../../../shared/models/post.model';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-post',
@@ -20,7 +21,8 @@ export class PostComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<fromStore.State>,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location
   ) {}
 
   ngOnInit() {
@@ -35,5 +37,9 @@ export class PostComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.idSub.unsubscribe();
     this.postSub.unsubscribe();
+  }
+
+  onClickBack() {
+    this.location.back();
   }
 }

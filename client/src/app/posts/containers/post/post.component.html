@@ -1,24 +1,26 @@
-<section *ngIf="post">
-  <app-mulpericard-infobar>
-    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
-      <div>{{ post?.author }}</div>
-      <div>{{ post?.date }}</div>
-    </div>
-  </app-mulpericard-infobar>
+<app-mulpericard *ngIf="post">
+  <app-mulpericard-body>
+    <app-mulpericard-title>{{ post?.title }}</app-mulpericard-title>
+    <app-mulpericard-infobar>
+      <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+        <div>{{ post?.author }}</div>
+        <div>{{ post?.date }}</div>
+      </div>
+    </app-mulpericard-infobar>
+    <markdown>{{ post?.body }}</markdown>
 
-  <app-mulpericard>
-    <app-mulpericard-body
-      ><markdown>{{ post?.body }}</markdown>
-    </app-mulpericard-body>
-
-    <app-mulpericard-actions fxLayoutAlign="center center">
+    <app-mulpericard-actions fxLayoutAlign="end center">
       <app-chip *ngFor="let tag of post.tags" [name]="tag"></app-chip>
     </app-mulpericard-actions>
 
     <app-mulpericard-actions>
       <div fxLayout="row wrap" fxLayoutAlign="start center">
-        <div><a routerLink="/posts/all">Back</a></div>
+        <div>
+          <button mat-flat-button color="accent" (click)="onClickBack()">
+            Back
+          </button>
+        </div>
       </div>
-    </app-mulpericard-actions>
-  </app-mulpericard>
-</section>
+    </app-mulpericard-actions></app-mulpericard-body
+  >
+</app-mulpericard>

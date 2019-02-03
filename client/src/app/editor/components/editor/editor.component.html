@@ -1,6 +1,12 @@
 <div class="textarea-container">
+  <input
+    type="text"
+    placeholder="Post Title"
+    value="Post Title"
+    (keyup)="onTitleKeyUp($event)"
+    #titleInput
+  />
   <textarea (keyup)="onEditorKeyUp($event)" #markdownEditor>
-                      # Blog Title
                       #### Meaningful subtitle for your story
                     
                       Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam, facere autem. Modi magnam tempore voluptas alias corporis officiis nihil iusto libero! Sequi optio fugit, consequuntur esse deleniti maxime rem nihil?

@@ -15,7 +15,9 @@ export class PreviewComponent {
   tagInputField: ElementRef;
 
   @Input()
-  data;
+  editorValue: string;
+  @Input()
+  titleValue: string;
 
   date = new Date().toString().slice(0, 21);
 
@@ -33,7 +35,11 @@ export class PreviewComponent {
 
   onSave() {
     this.store.dispatch(
-      new postAction.Save({ body: this.data, tags: this.tags })
+      new postAction.Save({
+        title: this.titleValue,
+        body: this.editorValue,
+        tags: this.tags
+      })
     );
   }
 

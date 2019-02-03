@@ -24,7 +24,8 @@ import { effects } from './store/effects/index';
 import { SharedModule } from '../shared/shared.module';
 
 import { containers } from './containers';
-import { components } from './components';
+import { components, entryComponents } from './components';
+import { PortalModule } from '@angular/cdk/portal';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { components } from './components';
     AppRoutingModule,
     AuthModule,
     SharedModule,
+    PortalModule,
     MarkdownModule.forRoot(),
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot(effects),
@@ -45,6 +47,7 @@ import { components } from './components';
     StoreRouterConnectingModule.forRoot({})
   ],
   declarations: [...containers, ...components],
-  bootstrap: [CoreComponent]
+  bootstrap: [CoreComponent],
+  entryComponents: [...entryComponents]
 })
 export class CoreModule {}

@@ -33,6 +33,7 @@ posts.post('/', jwtVerify, (req: express.Request, res: express.Response) => {
     id: uuid(),
     author: jwt_decode(req.headers.authorization)['cognito:username'],
     date: moment().unix(),
+    title: post.title,
     body: post.body,
     tags: post.tags
   };

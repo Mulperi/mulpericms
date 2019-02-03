@@ -24,6 +24,7 @@ posts.post('/', jwt_verify_middleware_1.jwtVerify, (req, res) => {
         id: uuid(),
         author: jwt_decode(req.headers.authorization)['cognito:username'],
         date: moment().unix(),
+        title: post.title,
         body: post.body,
         tags: post.tags
     };
