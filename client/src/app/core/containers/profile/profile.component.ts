@@ -20,4 +20,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(private store: Store<fromStore.State>) {}
   ngOnInit() {}
+
+  onClickSignOut() {
+    this.store.dispatch(new authAction.SignOut());
+  }
 }

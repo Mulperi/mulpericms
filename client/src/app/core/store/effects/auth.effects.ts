@@ -83,8 +83,9 @@ export class AuthEffects {
   signOutSuccess$: Observable<any> = this.actions$.pipe(
     ofType(authAction.ActionTypes.SignOutSuccess),
     map(() => {
+      this.router.navigate(['/']);
       return new uiAction.SnackbarShow({
-        message: 'You signed out. Bye bye!',
+        message: 'Bye bye!',
         color: 'neutral'
       });
     })
@@ -94,8 +95,9 @@ export class AuthEffects {
   signInSuccess$: Observable<any> = this.actions$.pipe(
     ofType(authAction.ActionTypes.SignInSuccess),
     map(() => {
+      this.router.navigate(['/profile']);
       return new uiAction.SnackbarShow({
-        message: 'Signed in. Welcome back!',
+        message: 'Welcome back!',
         color: 'neutral'
       });
     })
