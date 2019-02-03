@@ -4,10 +4,13 @@ export enum ActionTypes {
   LoadAll = '[Posts] Load All',
   LoadAllSuccess = '[Posts] Load All Success',
   LoadAllFailed = '[Posts] Load All Failed',
-  SavePost = '[Posts] Save Post',
-  SavePostSuccess = '[Posts] Save Post Success',
-  SavePostFailed = '[Posts] Save Post Failed',
-  SelectPost = '[Posts] Select'
+  Save = '[Posts] Save',
+  SavePostSuccess = '[Posts] Save Success',
+  SavePostFailed = '[Posts] Save Failed',
+  Select = '[Posts] Select',
+  Delete = '[Posts] Delete',
+  DeleteSuccess = '[Posts] Delete Success',
+  DeleteFailed = '[Posts] Delete Failed'
 }
 
 export class LoadAll implements Action {
@@ -22,20 +25,32 @@ export class LoadAllFailed implements Action {
   readonly type = ActionTypes.LoadAllFailed;
   constructor(public payload: any) {}
 }
-export class SavePost implements Action {
-  readonly type = ActionTypes.SavePost;
+export class Save implements Action {
+  readonly type = ActionTypes.Save;
   constructor(public payload: { body: string; tags: string[] }) {}
 }
-export class SavePostSuccess implements Action {
+export class SaveSuccess implements Action {
   readonly type = ActionTypes.SavePostSuccess;
   constructor(public payload: any) {}
 }
-export class SavePostFailed implements Action {
+export class SaveFailed implements Action {
   readonly type = ActionTypes.SavePostFailed;
   constructor(public payload: string) {}
 }
-export class SelectPost implements Action {
-  readonly type = ActionTypes.SelectPost;
+export class Select implements Action {
+  readonly type = ActionTypes.Select;
+  constructor(public payload: string) {}
+}
+export class Delete implements Action {
+  readonly type = ActionTypes.Delete;
+  constructor(public payload: string) {}
+}
+export class DeleteSuccess implements Action {
+  readonly type = ActionTypes.DeleteSuccess;
+  constructor(public payload: string) {}
+}
+export class DeleteFailed implements Action {
+  readonly type = ActionTypes.DeleteFailed;
   constructor(public payload: string) {}
 }
 
@@ -43,7 +58,10 @@ export type ActionsUnion =
   | LoadAll
   | LoadAllSuccess
   | LoadAllFailed
-  | SavePost
-  | SavePostSuccess
-  | SavePostFailed
-  | SelectPost;
+  | Save
+  | SaveSuccess
+  | SaveFailed
+  | Select
+  | Delete
+  | DeleteSuccess
+  | DeleteFailed;

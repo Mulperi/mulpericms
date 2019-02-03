@@ -35,4 +35,14 @@ export default class PostService {
     };
     return from(this.docClient.put(params).promise());
   }
+
+  deletePost(id: string): Observable<any> {
+    const params = {
+      TableName: CONSTANTS.DYNAMODB_TABLE_POSTS,
+      Key: {
+        id
+      }
+    };
+    return from(this.docClient.delete(params).promise());
+  }
 }

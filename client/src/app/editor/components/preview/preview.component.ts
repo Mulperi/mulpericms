@@ -33,7 +33,7 @@ export class PreviewComponent {
 
   onSave() {
     this.store.dispatch(
-      new postAction.SavePost({ body: this.data, tags: this.tags })
+      new postAction.Save({ body: this.data, tags: this.tags })
     );
   }
 

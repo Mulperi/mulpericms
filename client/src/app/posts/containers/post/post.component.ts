@@ -25,7 +25,7 @@ export class PostComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.idSub = this.route.params.subscribe(params =>
-      this.store.dispatch(new postAction.SelectPost(params.id))
+      this.store.dispatch(new postAction.Select(params.id))
     );
     this.postSub = this.store
       .select(fromPost.selectCurrentPost)

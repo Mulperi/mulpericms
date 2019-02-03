@@ -6,8 +6,9 @@ import { RouterModule } from '@angular/router';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { components } from './components';
+import { pipes } from './pipes';
 @NgModule({
-  declarations: [...components],
+  declarations: [...components, ...pipes],
   imports: [
     CommonModule,
     RouterModule,
@@ -15,6 +16,12 @@ import { components } from './components';
     MaterialModule,
     FlexLayoutModule
   ],
-  exports: [...components, MulpericardModule, MaterialModule, FlexLayoutModule]
+  exports: [
+    ...components,
+    ...pipes,
+    MulpericardModule,
+    MaterialModule,
+    FlexLayoutModule
+  ]
 })
 export class SharedModule {}

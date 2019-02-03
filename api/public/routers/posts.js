@@ -31,5 +31,10 @@ posts.post('/', jwt_verify_middleware_1.jwtVerify, (req, res) => {
         .savePost(item)
         .subscribe(data => res.json(item), error => res.json({ error: error.message }));
 });
+posts.delete('/:id', jwt_verify_middleware_1.jwtVerify, (req, res) => {
+    postService
+        .deletePost(req.params.id)
+        .subscribe(data => res.json(req.params.id), error => res.json({ error: error.message }));
+});
 exports.default = posts;
 //# sourceMappingURL=posts.js.map

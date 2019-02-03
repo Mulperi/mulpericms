@@ -35,37 +35,61 @@ export class PostEffects {
   );
 
   @Effect()
-  savePost$: Observable<Action> = this.actions$.pipe(
-    ofType(postAction.ActionTypes.SavePost),
+  save$: Observable<Action> = this.actions$.pipe(
+    ofType(postAction.ActionTypes.Save),
     switchMap((action: any) =>
       this.postService.savePost(action.payload).pipe(
         map((item: PostDTO) => {
-          return new postAction.SavePostSuccess(item);
+          return new postAction.SaveSuccess(item);
         }),
-        catchError(error => of(new postAction.SavePostFailed(error)))
+        catchError(error => of(new postAction.SaveFailed(error)))
       )
     )
   );
 
   @Effect()
-  savePostSuccess$: Observable<any> = this.actions$.pipe(
+  saveSuccess$: Observable<any> = this.actions$.pipe(
     ofType(postAction.ActionTypes.SavePostSuccess),
     map((action: any) => {
       this.router.navigate(['/posts']);
       return new uiAction.SnackbarShow({
         message: 'Saved succesfully.',
-        color: 'success'
+        color: 'neutral'
       });
     })
   );
 
   @Effect()
-  savePostFailed$: Observable<any> = this.actions$.pipe(
+  saveFailed$: Observable<any> = this.actions$.pipe(
     ofType(postAction.ActionTypes.SavePostFailed),
     map((action: any) => {
       return new uiAction.SnackbarShow({
         message: 'Saving failed!',
         color: 'warn'
+      });
+    })
+  );
+
+  @Effect()
+  delete$: Observable<Action> = this.actions$.pipe(
+    ofType(postAction.ActionTypes.Delete),
+    switchMap((action: any) =>
+      this.postService.deletePost(action.payload).pipe(
+        map((id: string) => {
+          return new postAction.DeleteSuccess(id);
+        }),
+        catchError(error => of(new postAction.DeleteFailed(error)))
+      )
+    )
+  );
+
+  @Effect()
+  deleteSuccess$: Observable<any> = this.actions$.pipe(
+    ofType(postAction.ActionTypes.DeleteSuccess),
+    map((action: any) => {
+      return new uiAction.SnackbarShow({
+        message: 'Post deleted.',
+        color: 'neutral'
       });
     })
   );

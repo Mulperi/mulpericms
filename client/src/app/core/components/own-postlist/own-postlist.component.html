@@ -1,0 +1,22 @@
+<app-mulpericard *ngFor="let post of (ownPosts$ | async)">
+  <app-mulpericard-actions
+    ><div fxLayoutAlign="space-between center">
+      <div>{{ post.date }}</div>
+      <div>
+        <button
+          *ngIf="!(deleting$ | async); else deleting"
+          (click)="onDeletePost(post)"
+          mat-flat-button
+          color="warn"
+        >
+          Delete
+        </button>
+        <ng-template #deleting>Deleting...</ng-template>
+      </div>
+    </div></app-mulpericard-actions
+  >
+  <app-mulpericard-actions></app-mulpericard-actions>
+  <app-mulpericard-body
+    ><markdown>{{ post.body | truncate: 50 }}</markdown></app-mulpericard-body
+  >
+</app-mulpericard>

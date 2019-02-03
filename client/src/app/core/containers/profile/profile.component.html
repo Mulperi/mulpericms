@@ -1,0 +1,31 @@
+<app-header
+  title="Profile"
+  subtitle="Your personal information and other cool stuff"
+></app-header>
+
+<div class="feature-container">
+  <section *ngIf="(authenticated$ | async)">
+    <app-mulpericard>
+      <app-mulpericard-title>
+        <div fxLayoutAlign="space-between center">
+          <div>Authenticated</div>
+          <div><i class="material-icons">check_circle</i></div>
+        </div>
+        <!-->i class="material-icons">check_circle</i-->
+      </app-mulpericard-title>
+      <app-mulpericard-body>
+        <p>You are succesfully authenticated, {{ username$ | async }}.</p>
+      </app-mulpericard-body>
+      <app-mulpericard-actions fxLayoutAlign="end">
+        <button mat-flat-button color="accent" (click)="onClickSignOut()">
+          Sign out
+        </button>
+      </app-mulpericard-actions>
+    </app-mulpericard>
+  </section>
+
+  <section>
+    <h4>Your posts</h4>
+    <app-own-postlist></app-own-postlist>
+  </section>
+</div>

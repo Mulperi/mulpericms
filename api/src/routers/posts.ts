@@ -44,4 +44,17 @@ posts.post('/', jwtVerify, (req: express.Request, res: express.Response) => {
     );
 });
 
+posts.delete(
+  '/:id',
+  jwtVerify,
+  (req: express.Request, res: express.Response) => {
+    postService
+      .deletePost(req.params.id)
+      .subscribe(
+        data => res.json(req.params.id),
+        error => res.json({ error: error.message })
+      );
+  }
+);
+
 export default posts;

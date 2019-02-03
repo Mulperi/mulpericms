@@ -7,13 +7,18 @@ import * as fromCore from './containers';
 
 const routes = [
   {
+    path: 'posts',
+    loadChildren: '../posts/posts.module#PostsModule'
+  },
+  {
     path: 'editor',
     loadChildren: '../editor/editor.module#EditorModule'
     // canActivate: [AuthGuardService]
   },
   {
-    path: 'posts',
-    loadChildren: '../posts/posts.module#PostsModule'
+    path: 'profile',
+    component: fromCore.ProfileComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'signin',

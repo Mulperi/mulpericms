@@ -1,13 +1,15 @@
 import { createSelector } from '@ngrx/store';
 import { selectPosts } from '../reducers';
-import { State } from '../reducers/post.reducer';
+import { selectAuth } from '../reducers';
+import * as fromPost from '../reducers/post.reducer';
+import * as fromAuth from '../reducers/auth.reducer';
 import orderBy from 'lodash/orderBy';
 import { fromUnixTime } from 'date-fns';
 import { PostDTO, PostVO } from '../../../shared/models/post.model';
 
 export const selectPostsAll = createSelector(
   selectPosts,
-  (state: State) => state.posts
+  (state: fromPost.State) => state.posts
 );
 export const selectPostsAllLatestFirst = createSelector(
   selectPostsAll,
@@ -28,11 +30,11 @@ export const selectPostsAllLatestFirst = createSelector(
 );
 export const selectPostEntities = createSelector(
   selectPosts,
-  (state: State) => state.entities
+  (state: fromPost.State) => state.entities
 );
 export const selectCurrentPostId = createSelector(
   selectPosts,
-  (state: State) => state.currentPostId
+  (state: fromPost.State) => state.currentPostId
 );
 export const selectCurrentPost = createSelector(
   selectPostEntities,
@@ -47,15 +49,25 @@ export const selectCurrentPost = createSelector(
         }
       : false
 );
+export const selectOwnPosts = createSelector(
+  selectAuth,
+  selectPostsAllLatestFirst,
+  (authState: fromAuth.State, posts: PostVO[]) =>
+    posts.filter((post: PostVO) => post.author === authState.username)
+);
 export const selectPostsLoading = createSelector(
   selectPosts,
-  (state: State) => state.loading
+  (state: fromPost.State) => state.loading
 );
 export const selectPostSaving = createSelector(
   selectPosts,
-  (state: State) => state.saving
+  (state: fromPost.State) => state.saving
 );
 export const selectPostErrorMessage = createSelector(
   selectPosts,
-  (state: State) => state.errorMessage
+  (state: fromPost.State) => state.errorMessage
+);
+export const selectPostsDeleting = createSelector(
+  selectPosts,
+  (state: fromPost.State) => state.deleting
 );

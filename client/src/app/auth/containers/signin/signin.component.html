@@ -1,9 +1,6 @@
-<app-header
-  title="Profile"
-  subtitle="Your personal information and other cool stuff"
-></app-header>
+<app-header title="Sign in" subtitle=""></app-header>
 <div class="feature-container">
-  <app-mulpericard *ngIf="!(authenticated$ | async); else authenticated">
+  <app-mulpericard>
     <app-mulpericard-subtitle *ngIf="(error$ | async) as error">
       <p class="warn">{{ error }}</p>
     </app-mulpericard-subtitle>
@@ -52,24 +49,4 @@
       </div>
     </app-mulpericard-body>
   </app-mulpericard>
-
-  <ng-template #authenticated>
-    <app-mulpericard>
-      <app-mulpericard-title>
-        <div fxLayoutAlign="space-between center">
-          <div>Authenticated</div>
-          <div><i class="material-icons">check_circle</i></div>
-        </div>
-        <!-->i class="material-icons">check_circle</i-->
-      </app-mulpericard-title>
-      <app-mulpericard-body>
-        <p>You are succesfully authenticated, {{ username$ | async }}.</p>
-      </app-mulpericard-body>
-      <app-mulpericard-actions fxLayoutAlign="end">
-        <button mat-flat-button color="accent" (click)="onClickSignOut()">
-          Sign out
-        </button>
-      </app-mulpericard-actions>
-    </app-mulpericard>
-  </ng-template>
 </div>

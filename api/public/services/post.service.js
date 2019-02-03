@@ -32,6 +32,15 @@ class PostService {
         };
         return rxjs_1.from(this.docClient.put(params).promise());
     }
+    deletePost(id) {
+        const params = {
+            TableName: CONSTANTS.DYNAMODB_TABLE_POSTS,
+            Key: {
+                id
+            }
+        };
+        return rxjs_1.from(this.docClient.delete(params).promise());
+    }
 }
 exports.default = PostService;
 //# sourceMappingURL=post.service.js.map

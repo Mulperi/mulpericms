@@ -10,6 +10,7 @@ export interface State extends EntityState<PostDTO> {
   saving: boolean;
   errorMessage: string;
   currentPostId: string;
+  deleting: boolean;
 }
 
 export const initialState: State = adapter.getInitialState({
@@ -19,7 +20,8 @@ export const initialState: State = adapter.getInitialState({
   loading: false,
   saving: false,
   errorMessage: null,
-  currentPostId: null
+  currentPostId: null,
+  deleting: false
 });
 
 export function reducer(
@@ -47,7 +49,7 @@ export function reducer(
         loading: false
       });
     }
-    case fromPostActions.ActionTypes.SavePost: {
+    case fromPostActions.ActionTypes.Save: {
       return {
         ...state,
         saving: true
@@ -66,11 +68,34 @@ export function reducer(
         saving: false
       };
     }
-    case fromPostActions.ActionTypes.SelectPost: {
+    case fromPostActions.ActionTypes.Select: {
       return {
         ...state,
         currentPostId: action.payload
       };
+    }
+    case fromPostActions.ActionTypes.Delete: {
+      return {
+        ...state,
+        deleting: true
+      };
+    }
+    case fromPostActions.ActionTypes.DeleteFailed: {
+      return {
+        ...state,
+        deleting: false
+      };
+    }
+    case fromPostActions.ActionTypes.DeleteSuccess: {
+      const updatedPosts = state.posts.filter(
+        post => post.id !== action.payload
+      );
+
+      return adapter.removeOne(action.payload, {
+        ...state,
+        posts: updatedPosts,
+        deleting: false
+      });
     }
 
     default: {

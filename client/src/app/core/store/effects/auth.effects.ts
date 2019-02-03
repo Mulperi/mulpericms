@@ -96,7 +96,7 @@ export class AuthEffects {
     map(() => {
       return new uiAction.SnackbarShow({
         message: 'Signed in. Welcome back!',
-        color: 'success'
+        color: 'neutral'
       });
     })
   );

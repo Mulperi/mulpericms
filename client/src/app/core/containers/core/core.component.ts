@@ -15,7 +15,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
     trigger('fade', [
       transition(':enter', [
         style({ opacity: 0, bottom: 0 }),
-        animate(300, style({ opacity: 1, bottom: '5%' }))
+        animate(300, style({ opacity: 1, bottom: '0%' }))
       ]),
       transition(':leave', [animate(300, style({ opacity: 0, bottom: 0 }))])
     ])

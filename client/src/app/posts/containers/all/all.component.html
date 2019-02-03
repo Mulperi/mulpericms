@@ -1,12 +1,10 @@
-<div
+<app-post-listitem
+  [post]="post"
   *ngFor="
     let post of (posts
       | slice: page * itemsPerPage:page * itemsPerPage + itemsPerPage)
   "
-  class="item-container"
->
-  <app-post-listitem [post]="post"></app-post-listitem>
-</div>
+></app-post-listitem>
 
 <app-error-message
   *ngIf="errorMessage"

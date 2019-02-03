@@ -36,6 +36,18 @@ export class PostService {
     );
   }
 
+  public deletePost(id: string): Observable<any> {
+    return this.cognitoService.getIdToken().pipe(
+      concatMap(token => {
+        return this.http.delete(`${environment.API}/posts/${id}`, {
+          headers: {
+            Authorization: token.getJwtToken()
+          }
+        });
+      })
+    );
+  }
+
   // private createAuthorizationHeader(): HttpHeaders {
   //   const headers = new HttpHeaders();
   //   headers.append('Authorization', 'Basic ' + 'kakka');
