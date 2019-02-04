@@ -6,6 +6,10 @@ export const selectUsername = createSelector(
   selectAuth,
   (state: State) => state.username
 );
+export const selectEmail = createSelector(
+  selectAuth,
+  (state: State) => state.email
+);
 export const selectAuthenticating = createSelector(
   selectAuth,
   (state: State) => state.authenticating

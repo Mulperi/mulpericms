@@ -25,7 +25,7 @@ export class SignIn implements Action {
 
 export class SignInSuccess implements Action {
   readonly type = ActionTypes.SignInSuccess;
-  constructor(public payload: any) {}
+  constructor(public payload: { username: string; email: string }) {}
 }
 
 export class SignInFailed implements Action {

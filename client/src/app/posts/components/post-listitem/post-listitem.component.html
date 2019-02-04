@@ -1,20 +1,16 @@
 <app-mulpericard>
   <app-mulpericard-body>
-    <app-mulpericard-title>{{ post.title }}</app-mulpericard-title>
-    <app-mulpericard-infobar>
+    <a routerLink="/posts/{{ post.id }}"
+      ><app-mulpericard-title>{{ post.title }}</app-mulpericard-title></a
+    >
+    <app-mulpericard-actions>
       <div fxLayout="row wrap" fxLayoutAlign="space-between center">
         <div>{{ post.author }}</div>
         <div>{{ post.date }}</div>
       </div>
-    </app-mulpericard-infobar>
-    <markdown>{{ post.body }}</markdown>
+    </app-mulpericard-actions>
+    <app-mulpericard-actions fxLayoutAlign="start center">
+      <app-chip *ngFor="let tag of post.tags" [name]="tag"></app-chip>
+    </app-mulpericard-actions>
   </app-mulpericard-body>
-
-  <app-mulpericard-actions fxLayoutAlign="end center">
-    <app-chip *ngFor="let tag of post.tags" [name]="tag"></app-chip>
-  </app-mulpericard-actions>
-
-  <app-mulpericard-actions fxLayoutAlign="end">
-    <a routerLink="/posts/{{ post.id }}">Read more</a>
-  </app-mulpericard-actions>
 </app-mulpericard>

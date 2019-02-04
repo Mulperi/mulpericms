@@ -1,0 +1,15 @@
+<table>
+  <tr>
+    <td>Username:</td>
+    <td>{{ username$ | async }}</td>
+    <td>
+      <button mat-stroked-button (click)="onClickSignOut()">
+        Sign out
+      </button>
+    </td>
+  </tr>
+  <tr>
+    <td>Email:</td>
+    <td>{{ email$ | async }}</td>
+  </tr>
+</table>

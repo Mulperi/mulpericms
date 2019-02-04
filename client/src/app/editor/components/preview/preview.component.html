@@ -28,8 +28,7 @@
       /></app-mulpericard-actions>
       <div fxLayoutAlign="end center">
         <button
-          mat-flat-button
-          color="accent"
+          mat-stroked-button
           (click)="onSave()"
           *ngIf="!(saving$ | async); else saving"
         >

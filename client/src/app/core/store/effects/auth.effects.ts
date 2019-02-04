@@ -20,9 +20,10 @@ export class AuthEffects {
           map((session: any) => {
             // console.log(session);
             // if (user.challengeName === 'NEW_PASSWORD_REQUIRED')) {}
-            return new authAction.SignInSuccess(
-              session.accessToken.payload.username
-            );
+            return new authAction.SignInSuccess({
+              username: session.getIdToken().payload['cognito:username'],
+              email: session.getIdToken().payload.email
+            });
           }),
           catchError((error: any) =>
             of(new authAction.SignInFailed(error.message))
@@ -58,9 +59,10 @@ export class AuthEffects {
       return this.cognitoService.getSession().pipe(
         map(result => {
           // console.log('auth effect: Session exists: ', result);
-          return new authAction.SignInSuccess(
-            result.getIdToken().payload['cognito:username']
-          );
+          return new authAction.SignInSuccess({
+            username: result.getIdToken().payload['cognito:username'],
+            email: result.getIdToken().payload.email
+          });
         }),
         catchError(error => {
           // console.log('auth effect: Session not exist');

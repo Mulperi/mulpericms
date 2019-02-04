@@ -1,12 +1,12 @@
 <app-mulpericard *ngIf="post">
   <app-mulpericard-body>
     <app-mulpericard-title>{{ post?.title }}</app-mulpericard-title>
-    <app-mulpericard-infobar>
+    <app-mulpericard-actions>
       <div fxLayout="row wrap" fxLayoutAlign="space-between center">
         <div>{{ post?.author }}</div>
         <div>{{ post?.date }}</div>
       </div>
-    </app-mulpericard-infobar>
+    </app-mulpericard-actions>
     <markdown>{{ post?.body }}</markdown>
 
     <app-mulpericard-actions fxLayoutAlign="end center">
@@ -16,7 +16,7 @@
     <app-mulpericard-actions>
       <div fxLayout="row wrap" fxLayoutAlign="start center">
         <div>
-          <button mat-flat-button color="accent" (click)="onClickBack()">
+          <button mat-stroked-button (click)="onClickBack()">
             Back
           </button>
         </div>

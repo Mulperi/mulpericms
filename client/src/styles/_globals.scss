@@ -1,14 +1,14 @@
 @import './style-variables';
 
 html {
-  font-family: sans-serif;
+  font-family: serif;
   height: 100%;
-  line-height: 1.5;
+  line-height: 1;
 }
 
 body {
   margin: 0;
-  background: $grey-light;
+  background: whitesmoke;
   color: $grey-dark;
   height: 100%;
 }
@@ -27,9 +27,13 @@ main {
   flex: 1;
 }
 
+p {
+  line-height: 1.5;
+}
+
 .feature-container {
   padding: 1rem;
-  max-width: 800px;
+  max-width: 640px;
   margin: auto;
 }
 
@@ -60,4 +64,8 @@ img {
 
 .margin-bottom {
   margin-bottom: 3rem;
+}
+
+.select-none {
+  user-select: none;
 }

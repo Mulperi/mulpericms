@@ -4,10 +4,11 @@ import { Component, OnInit } from '@angular/core';
 import * as fromStore from '../../../core/store';
 import * as fromAuth from '../../../core/store/selectors/auth.selectors';
 import * as fromPost from '../../../core/store/selectors/post.selectors';
-import * as authAction from '../../../core/store/actions/auth.actions';
+
 import { Observable } from 'rxjs';
 import { PostVO } from '../../../shared/models/post.model';
 import { ComponentPortal } from '@angular/cdk/portal';
+import { PersonalDetailsComponent } from '../../components';
 
 @Component({
   selector: 'app-profile',
@@ -24,16 +25,22 @@ export class ProfileComponent implements OnInit {
     OwnPostListComponent
   > = new ComponentPortal(OwnPostListComponent);
 
-  ownPostListVisible = false;
+  personalDetailsPortal: ComponentPortal<
+    PersonalDetailsComponent
+  > = new ComponentPortal(PersonalDetailsComponent);
+
+  ownPostListVisible = true;
+  personalDetailsVisible = true;
 
   constructor(private store: Store<fromStore.State>) {}
   ngOnInit() {}
 
-  onClickSignOut() {
-    this.store.dispatch(new authAction.SignOut());
-  }
+
 
   toggleOwnPostListVisible() {
     this.ownPostListVisible = !this.ownPostListVisible;
+  }
+  togglePersonalDetailsVisible() {
+    this.personalDetailsVisible = !this.personalDetailsVisible;
   }
 }

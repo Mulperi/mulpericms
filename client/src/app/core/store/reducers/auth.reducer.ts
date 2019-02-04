@@ -2,6 +2,7 @@ import * as Auth from '../actions/auth.actions';
 
 export interface State {
   username: string;
+  email: string;
   authenticating: boolean;
   authenticated: boolean;
   signInError: string;
@@ -17,6 +18,7 @@ export interface State {
 
 export const initialState: State = {
   username: null,
+  email: null,
   authenticating: false,
   authenticated: false,
   signInError: null,
@@ -45,7 +47,8 @@ export function reducer(
       return {
         ...initialState,
         authenticated: true,
-        username: action.payload
+        username: action.payload.username,
+        email: action.payload.email
       };
     }
 

@@ -4,25 +4,41 @@
 ></app-header>
 
 <div class="feature-container">
-  <section *ngIf="(authenticated$ | async)">
+  <!-- <section *ngIf="(authenticated$ | async)">
     <app-mulpericard>
       <app-mulpericard-title>
         <div fxLayoutAlign="space-between center">
           <div>Authenticated</div>
           <div><i class="material-icons">check_circle</i></div>
         </div>
-        <!-->i class="material-icons">check_circle</i-->
       </app-mulpericard-title>
-      <app-mulpericard-body>
-        <p>You are succesfully authenticated, {{ username$ | async }}.</p>
-      </app-mulpericard-body>
-      <app-mulpericard-actions fxLayoutAlign="end">
-        <button mat-flat-button color="accent" (click)="onClickSignOut()">
-          Sign out
-        </button>
-      </app-mulpericard-actions>
+      <app-mulpericard-actions fxLayoutAlign="end"> </app-mulpericard-actions>
     </app-mulpericard>
-  </section>
+  </section> -->
+
+  <app-mulpericard>
+    <app-mulpericard-actions>
+      <div
+        fxLayoutAlign="space-between center"
+        class="accordion-header"
+        (click)="togglePersonalDetailsVisible()"
+      >
+        <div><h4>Personal details</h4></div>
+        <div *ngIf="!personalDetailsVisible; else hide" class="select-none">
+          <mat-icon>arrow_drop_up</mat-icon>
+        </div>
+        <ng-template #hide
+          ><div class="select-none">
+            <mat-icon>arrow_drop_down</mat-icon>
+          </div></ng-template
+        >
+      </div>
+    </app-mulpericard-actions>
+    <ng-template
+      [cdkPortalOutlet]="personalDetailsVisible && personalDetailsPortal"
+    >
+    </ng-template>
+  </app-mulpericard>
 
   <app-mulpericard>
     <app-mulpericard-actions>
@@ -32,11 +48,13 @@
         (click)="toggleOwnPostListVisible()"
       >
         <div><h4>Your posts</h4></div>
-        <div *ngIf="!ownPostListVisible; else hide">
+        <div *ngIf="!ownPostListVisible; else hide" class="select-none">
           <mat-icon>arrow_drop_up</mat-icon>
         </div>
         <ng-template #hide
-          ><div><mat-icon>arrow_drop_down</mat-icon></div></ng-template
+          ><div class="select-none">
+            <mat-icon>arrow_drop_down</mat-icon>
+          </div></ng-template
         >
       </div>
     </app-mulpericard-actions>

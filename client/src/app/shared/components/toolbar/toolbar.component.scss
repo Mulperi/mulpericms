@@ -1,21 +1,12 @@
 @import '../../../../styles/style-variables';
 
 .toolbar-container {
-  background: $grey-darker;
-  color: $grey-lighter;
   z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // box-shadow: 0 0 8px rgba(0, 0, 0, 0.8);
   font-size: 1rem;
   padding-left: 2rem;
-}
-
-.logo {
-  font-family: 'Raleway', sans-serif;
-  font-weight: 100;
-  color: black;
 }
 
 nav {
@@ -30,7 +21,7 @@ a {
 }
 
 a:hover {
-  color: $grey-light;
+  color: $primary;
 }
 
 .nav__button {
@@ -39,14 +30,11 @@ a:hover {
 }
 
 .active .nav__button {
-  // border-top: 10px solid $light;
-  background: $grey-lighter;
-  color: $grey-darker;
+  color: $primary;
   box-sizing: border-box;
 }
 
 .logo__row > div {
-  border: 0px solid red;
   width: 10px;
   height: 10px;
   margin: 0px;
@@ -56,8 +44,7 @@ div.logo__row {
   display: flex;
 }
 .logo:hover .logo__fill {
-  // box-shadow: 0 0 4px $grey-dark;
-  background: $grey-light;
+  background: $primary;
   transition: 0.1s all;
 }
 

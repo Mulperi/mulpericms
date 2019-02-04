@@ -14,7 +14,7 @@
   <app-mulpericard *ngIf="!(confirmed$ | async)">
     <app-mulpericard-title> Email confirmation </app-mulpericard-title>
     <app-mulpericard-subtitle *ngIf="confirmationError">
-      <p class="warn">{{ confirmationError }}</p>
+      <p class="warning-container">{{ confirmationError }}</p>
     </app-mulpericard-subtitle>
     <app-mulpericard-body>
       <table>

@@ -1,7 +1,7 @@
 <div class="form-container" *ngIf="!(authenticated$ | async)">
   <app-mulpericard *ngIf="!(signingUp$ | async); else signingUp">
     <app-mulpericard-subtitle *ngIf="(signUpError$ | async) as signUpError">
-      <div class="warn">{{ signUpError }}</div>
+      <div class="warning-container">{{ signUpError }}</div>
     </app-mulpericard-subtitle>
     <app-mulpericard-body>
       <h4>Sign up as a new user or <a routerLink="/signin">Sign in</a></h4>

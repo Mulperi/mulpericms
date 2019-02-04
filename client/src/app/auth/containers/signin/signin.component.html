@@ -2,7 +2,7 @@
 <div class="feature-container">
   <app-mulpericard>
     <app-mulpericard-subtitle *ngIf="(error$ | async) as error">
-      <p class="warn">{{ error }}</p>
+      <p class="warning-container">{{ error }}</p>
     </app-mulpericard-subtitle>
     <app-mulpericard-body>
       <div fxLayout="column" fxLayoutAlign="center center">
