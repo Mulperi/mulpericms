@@ -32,9 +32,15 @@ p {
 }
 
 .feature-container {
-  padding: 1rem;
+  padding: 0.25rem;
   max-width: 640px;
   margin: auto;
+}
+
+@media only screen and (min-width: 600px) {
+  .feature-container {
+    padding: 1rem;
+  }
 }
 
 a {
@@ -68,4 +74,10 @@ img {
 
 .select-none {
   user-select: none;
+}
+
+pre {
+  word-break: break-all;
+  overflow-x: auto;
+  overflow-y: hidden;
 }

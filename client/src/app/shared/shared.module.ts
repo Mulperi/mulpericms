@@ -7,8 +7,9 @@ import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { components } from './components';
 import { pipes } from './pipes';
+import { directives } from './directives';
 @NgModule({
-  declarations: [...components, ...pipes],
+  declarations: [...components, ...pipes, ...directives],
   imports: [
     CommonModule,
     RouterModule,
@@ -19,6 +20,7 @@ import { pipes } from './pipes';
   exports: [
     ...components,
     ...pipes,
+    ...directives,
     MulpericardModule,
     MaterialModule,
     FlexLayoutModule

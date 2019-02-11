@@ -8,7 +8,7 @@
     <markdown ngPreserveWhitespaces [data]="editorValue"></markdown>
   </div>
 
-  <app-mulpericard *ngIf="(authenticated$ | async)">
+  <section *ngIf="(authenticated$ | async)">
     <div fxLayoutAlign="center center">
       <app-chip
         *ngFor="let tag of tags"
@@ -18,7 +18,7 @@
     </div>
     <div fxLayout="column" fxLayoutAlign="center stretch" fxLayoutGap="16px">
       <app-mulpericard-actions>
-        <label for="tags">Add tags:</label>
+        <label for="tags">Add tags (separate with comma or space):</label>
         <input
           (keyup)="tagInputKeyUp($event)"
           type="text"
@@ -28,7 +28,7 @@
       /></app-mulpericard-actions>
       <div fxLayoutAlign="end center">
         <button
-          mat-stroked-button
+          mat-button
           (click)="onSave()"
           *ngIf="!(saving$ | async); else saving"
         >
@@ -44,5 +44,5 @@
         </ng-template>
       </div>
     </div>
-  </app-mulpericard>
+  </section>
 </div>
