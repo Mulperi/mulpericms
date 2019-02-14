@@ -1,8 +1,6 @@
 import { Observable, from } from 'rxjs';
 import * as AWS from 'aws-sdk';
 import * as CONSTANTS from '../constants';
-import * as uuid from 'uuid/v4';
-import * as moment from 'moment';
 
 export default class PostService {
   docClient = new AWS.DynamoDB.DocumentClient({

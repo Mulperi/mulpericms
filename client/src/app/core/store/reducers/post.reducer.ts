@@ -5,7 +5,6 @@ import { PostDTO } from '../../../shared/models/post.model';
 export const adapter: EntityAdapter<PostDTO> = createEntityAdapter<PostDTO>();
 
 export interface State extends EntityState<PostDTO> {
-  posts: PostDTO[];
   loading: boolean;
   saving: boolean;
   errorMessage: string;
@@ -16,7 +15,6 @@ export interface State extends EntityState<PostDTO> {
 export const initialState: State = adapter.getInitialState({
   entities: {},
   ids: [],
-  posts: [],
   loading: false,
   saving: false,
   errorMessage: null,
@@ -58,7 +56,6 @@ export function reducer(
     case fromPostActions.ActionTypes.SavePostSuccess: {
       return adapter.addOne(action.payload, {
         ...state,
-        posts: [...state.posts, action.payload],
         saving: false
       });
     }
@@ -87,13 +84,8 @@ export function reducer(
       };
     }
     case fromPostActions.ActionTypes.DeleteSuccess: {
-      const updatedPosts = state.posts.filter(
-        post => post.id !== action.payload
-      );
-
       return adapter.removeOne(action.payload, {
         ...state,
-        posts: updatedPosts,
         deleting: false
       });
     }

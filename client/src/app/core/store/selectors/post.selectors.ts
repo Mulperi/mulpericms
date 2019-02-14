@@ -7,12 +7,16 @@ import orderBy from 'lodash/orderBy';
 import { fromUnixTime } from 'date-fns';
 import { PostDTO, PostVO } from '../../../shared/models/post.model';
 
-export const selectPostsAll = createSelector(
+export const selectPostEntities = createSelector(
   selectPosts,
-  (state: fromPost.State) => state.posts
+  (state: fromPost.State) => state.entities
+);
+export const selectPostsAllAsArray = createSelector(
+  selectPostEntities,
+  entities => Object.keys(entities).map(id => entities[id])
 );
 export const selectPostsAllLatestFirst = createSelector(
-  selectPostsAll,
+  selectPostsAllAsArray,
   (posts: PostDTO[]) => {
     /*
       TODO: Write own sort function to get rid of lodash
@@ -25,10 +29,7 @@ export const selectPostsAllLatestFirst = createSelector(
     })) as PostVO[];
   }
 );
-export const selectPostEntities = createSelector(
-  selectPosts,
-  (state: fromPost.State) => state.entities
-);
+
 export const selectCurrentPostId = createSelector(
   selectPosts,
   (state: fromPost.State) => state.currentPostId
