@@ -61,4 +61,19 @@
     <ng-template [cdkPortalOutlet]="ownPostListVisible && ownPostListPortal">
     </ng-template>
   </app-mulpericard>
+
+  <app-mulpericard>
+    <app-mulpericard-actions>
+      <div
+        fxLayoutAlign="space-between center"
+        class="accordion-header"
+        (click)="(false)"
+      >
+        <div><h4>Your comments (coming soon)</h4></div>
+        <div class="select-none">
+          <mat-icon>arrow_drop_up</mat-icon>
+        </div>
+      </div>
+    </app-mulpericard-actions>
+  </app-mulpericard>
 </div>

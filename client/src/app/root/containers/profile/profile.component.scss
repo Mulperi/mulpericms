@@ -1,6 +1,19 @@
 .accordion-header {
+  border-radius: 4px;
   cursor: pointer;
+  padding: 0.5rem;
+  transition: all 0.3s;
   width: 100%;
+}
+
+.accordion-header:hover {
+  background: rgba(0, 0, 0, 0.05);
+  transition: all 0.3s;
+}
+
+.accordion-header:active {
+  background: rgba(0, 0, 0, 0.1);
+  transition: all 0.1s;
 }
 
 section,
