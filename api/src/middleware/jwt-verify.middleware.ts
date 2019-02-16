@@ -1,6 +1,6 @@
 import * as express from 'express';
 var jwt = require('jsonwebtoken');
-import { pem } from '../app';
+import { pem } from '../index';
 
 export const jwtVerify = (
   req: express.Request,
@@ -18,7 +18,7 @@ export const jwtVerify = (
           next(err);
         } else {
           console.log('JWT verified.', decodedToken);
-            next();
+          next();
         }
       }
     );

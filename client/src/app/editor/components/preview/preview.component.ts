@@ -56,10 +56,8 @@ export class PreviewComponent {
         }
         this.tagInputField.nativeElement.value = '';
       }
-    } else {
-      if (event.key === ',') {
-        this.tagInputField.nativeElement.value = '';
-      }
+    } else if (event.key === ',' || event.code === 'Space') {
+      this.tagInputField.nativeElement.value = '';
     }
   }
 

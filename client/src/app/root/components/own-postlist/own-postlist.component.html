@@ -8,7 +8,7 @@
       <button
         *ngIf="!(deleting$ | async); else deleting"
         (click)="onDeletePost(post)"
-        mat-flat-button
+        mat-button
         color="warn"
       >
         Delete</button

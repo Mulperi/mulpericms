@@ -8,54 +8,58 @@ import PostService from '../services/post.service';
 const postService = new PostService();
 const posts: express.Router = express.Router();
 
-posts.get('/', (req: express.Request, res: express.Response) => {
-  postService.getAllPosts().subscribe(
-    data => {
-      res.json(data.Items);
-    },
-    error => res.json(error)
-  );
-});
-
-posts.get('/:id', (req: express.Request, res: express.Response) => {
-  postService.getPost(req.params.id).subscribe(
-    data => {
-      res.json(data.Item);
-    },
-    error => res.json(error)
-  );
-});
-
-posts.post('/', jwtVerify, (req: express.Request, res: express.Response) => {
-  const post = req.body.post;
-
-  const item = {
-    id: uuid(),
-    author: jwt_decode(req.headers.authorization)['cognito:username'],
-    date: moment().unix(),
-    title: post.title,
-    body: post.body,
-    tags: post.tags
-  };
-  postService
-    .savePost(item)
-    .subscribe(
-      data => res.json(item),
-      error => res.json({ error: error.message })
+/**
+ * Controllers object
+ * Routes point to these functions
+ */
+const controllers = {
+  getAll: (req: express.Request, res: express.Response) => {
+    postService.getAllPosts().subscribe(
+      data => {
+        res.status(200).json(data.Items);
+      },
+      error => res.json(error)
     );
-});
+  },
+  getPostWithId: (req: express.Request, res: express.Response) => {
+    postService.getPost(req.params.id).subscribe(
+      data => {
+        res.status(200).json(data.Item);
+      },
+      error => res.json(error)
+    );
+  },
+  savePost: (req: express.Request, res: express.Response) => {
+    const post = req.body.post;
 
-posts.delete(
-  '/:id',
-  jwtVerify,
-  (req: express.Request, res: express.Response) => {
+    const item = {
+      id: uuid(),
+      author: jwt_decode(req.headers.authorization)['cognito:username'],
+      date: moment().unix(),
+      title: post.title,
+      body: post.body,
+      tags: post.tags
+    };
+    postService
+      .savePost(item)
+      .subscribe(
+        data => res.status(200).json(item),
+        error => res.json({ error: error.message })
+      );
+  },
+  deletePostWithId: (req: express.Request, res: express.Response) => {
     postService
       .deletePost(req.params.id)
       .subscribe(
-        data => res.json(req.params.id),
+        data => res.status(200).json(req.params.id),
         error => res.json({ error: error.message })
       );
   }
-);
+};
+
+posts.get('/', controllers.getAll);
+posts.get('/:id', controllers.getPostWithId);
+posts.post('/', jwtVerify, controllers.savePost);
+posts.delete('/:id', jwtVerify, controllers.deletePostWithId);
 
 export default posts;

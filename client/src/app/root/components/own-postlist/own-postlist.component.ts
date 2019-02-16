@@ -21,6 +21,8 @@ export class OwnPostListComponent implements OnInit {
   ngOnInit() {}
 
   onDeletePost(post: PostVO) {
-    this.store.dispatch(new postAction.Delete(post.id));
+    if (confirm('Are you sure to delete post with title: ' + post.title)) {
+      this.store.dispatch(new postAction.Delete(post.id));
+    }
   }
 }
