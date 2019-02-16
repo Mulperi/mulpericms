@@ -4,7 +4,24 @@ Parameters:
   StackName:
     Type: String
 Resources:
+  DynamoDBCommentsTable:
+    DependsOn: DynamoDBPostsTable
+    Description: Table for comments, need postId for reference
+    Properties:
+      AttributeDefinitions:
+      - AttributeName: id
+        AttributeType: S
+      KeySchema:
+      - AttributeName: id
+        KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: '5'
+        WriteCapacityUnits: '5'
+      TableName:
+        Fn::Sub: ${StackName}-comments
+    Type: AWS::DynamoDB::Table
   DynamoDBPostsTable:
+    Description: Table for posts
     Properties:
       AttributeDefinitions:
       - AttributeName: id
@@ -26,8 +43,8 @@ Resources:
       - preferred_username
       AutoVerifiedAttributes:
       - email
-      EmailVerificationMessage: 'Your confirmation code: {####}'
-      EmailVerificationSubject: Confirmation code
+      EmailVerificationMessage: 'mulperiCMS confirmation code: {####}'
+      EmailVerificationSubject: mulperiCMS confirmation code
       Schema:
       - Mutable: false
         Name: email

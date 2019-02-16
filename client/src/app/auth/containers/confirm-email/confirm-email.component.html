@@ -1,44 +1,53 @@
+<app-header
+  title="Confirm your email address"
+  subtitle="Retrieve the confirmation code from your email"
+></app-header>
 <div class="feature-container">
-  <app-header
-    title="Confirm your email address"
-    subtitle="Retrieve the confirmation code from your email"
-  ></app-header>
-
   <app-mulpericard *ngIf="(confirmed$ | async)">
-    <app-mulpericard-title>Email confirmed!</app-mulpericard-title>
-    <app-mulpericard-body>
-      You can now <a routerLink="/signin">Sign in</a>
+    <app-mulpericard-body fxLayoutAlign="center center">
+      <h4>Email confirmed! You can now</h4>
+      <a routerLink="/signin">Sign in</a>
     </app-mulpericard-body>
   </app-mulpericard>
 
   <app-mulpericard *ngIf="!(confirmed$ | async)">
-    <app-mulpericard-title> Email confirmation </app-mulpericard-title>
     <app-mulpericard-subtitle *ngIf="confirmationError">
       <p class="warning-container">{{ confirmationError }}</p>
     </app-mulpericard-subtitle>
     <app-mulpericard-body>
-      <table>
-        <tr>
-          <td><label for="username">Username</label></td>
-          <td>
-            <input
-              type="text"
-              id="username"
-              placeholder="Username"
-              [value]="username$ | async"
-              #usernameField
-            />
-          </td>
-        </tr>
-        <tr>
-          <td><label for="code">Confirmation code</label></td>
-          <td><input type="text" id="code" placeholder="Code" #codeField /></td>
-        </tr>
-      </table>
+      <div fxLayout="column" fxLayoutAlign="center center">
+        <h4>Please confirm your email adderss.</h4>
+        <div class="margin-bottom" fxLayoutAlign="center center">
+          <table>
+            <tr>
+              <td><label for="username">Username</label></td>
+              <td>
+                <input
+                  type="text"
+                  id="username"
+                  placeholder="Username"
+                  [value]="username$ | async"
+                  #usernameField
+                />
+              </td>
+            </tr>
+            <tr>
+              <td><label for="code">Confirmation code</label></td>
+              <td>
+                <input type="text" id="code" placeholder="Code" #codeField />
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
     </app-mulpericard-body>
-    <app-mulpericard-actions *ngIf="!(confirming$ | async); else confirming">
+    <app-mulpericard-actions
+      fxLayoutAlign="center center"
+      *ngIf="!(confirming$ | async); else confirming"
+    >
       <button
-        class="primary btn-medium"
+        mat-flat-button
+        color="accent"
         (click)="onClickConfirm(usernameField.value, codeField.value)"
       >
         Confirm email
