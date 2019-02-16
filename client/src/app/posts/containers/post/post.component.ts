@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
-import * as fromStore from '../../../core/store/reducers';
-import * as postAction from '../../../core/store/actions/post.actions';
-import * as fromPost from '../../../core/store/selectors/post.selectors';
+import * as fromStore from '../../../root/store/reducers';
+import * as postAction from '../../../root/store/actions/post.actions';
+import * as fromPost from '../../../root/store/selectors/post.selectors';
 import { PostVO } from './../../../shared/models/post.model';
 import { Location } from '@angular/common';
 

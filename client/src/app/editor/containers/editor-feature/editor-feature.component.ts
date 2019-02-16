@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as fromStore from '../../../core/store';
-import * as fromAuth from '../../../core/store/selectors/auth.selectors';
+import * as fromStore from '../../../root/store';
+import * as fromAuth from '../../../root/store/selectors/auth.selectors';
 
 @Component({
   selector: 'app-editor-feature',

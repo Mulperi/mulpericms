@@ -1,8 +1,8 @@
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
-import * as fromStore from '../../../core/store';
-import * as fromAuth from '../../../core/store/selectors/auth.selectors';
-import * as authAction from '../../../core/store/actions/auth.actions';
+import * as fromStore from '../../../root/store';
+import * as fromAuth from '../../../root/store/selectors/auth.selectors';
+import * as authAction from '../../../root/store/actions/auth.actions';
 import { Observable } from 'rxjs';
 
 @Component({

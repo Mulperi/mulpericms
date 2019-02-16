@@ -1,9 +1,9 @@
 import { OwnPostListComponent } from './../../components/own-postlist/own-postlist.component';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
-import * as fromStore from '../../../core/store';
-import * as fromAuth from '../../../core/store/selectors/auth.selectors';
-import * as fromPost from '../../../core/store/selectors/post.selectors';
+import * as fromStore from '../../../root/store';
+import * as fromAuth from '../../../root/store/selectors/auth.selectors';
+import * as fromPost from '../../../root/store/selectors/post.selectors';
 
 import { Observable } from 'rxjs';
 import { PostVO } from '../../../shared/models/post.model';

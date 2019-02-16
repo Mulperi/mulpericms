@@ -1,23 +1,23 @@
-import { AuthGuardService } from '../auth/services/auth-guard.service';
+import { AuthGuardService } from './auth/services/auth-guard.service';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import * as fromAuth from '../auth/containers';
-import * as fromCore from './containers';
+import * as fromAuth from './auth/containers';
+import * as fromRoot from './root/containers';
 
 const routes = [
   {
     path: 'posts',
-    loadChildren: '../posts/posts.module#PostsModule'
+    loadChildren: './posts/posts.module#PostsModule'
   },
   {
     path: 'editor',
-    loadChildren: '../editor/editor.module#EditorModule'
+    loadChildren: './editor/editor.module#EditorModule'
     // canActivate: [AuthGuardService]
   },
   {
     path: 'profile',
-    component: fromCore.ProfileComponent,
+    component: fromRoot.ProfileComponent,
     canActivate: [AuthGuardService]
   },
   {
@@ -34,7 +34,7 @@ const routes = [
   },
   {
     path: '',
-    component: fromCore.LandingPageComponent,
+    component: fromRoot.LandingPageComponent,
     pathMatch: 'full'
   }
 

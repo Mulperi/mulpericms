@@ -8,9 +8,9 @@ import * as authAction from '../../store/actions/auth.actions';
 import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
-  selector: 'app-core',
-  templateUrl: './core.component.html',
-  styleUrls: ['./core.component.scss'],
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
   animations: [
     trigger('fade', [
       transition(':enter', [
@@ -21,7 +21,7 @@ import { trigger, transition, style, animate } from '@angular/animations';
     ])
   ]
 })
-export class CoreComponent implements OnInit {
+export class AppComponent implements OnInit {
   showSnackbar$: Observable<boolean> = this.store.select(
     fromUi.selectSnackbarVisible
   );

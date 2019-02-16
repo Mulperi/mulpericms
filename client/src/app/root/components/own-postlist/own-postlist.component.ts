@@ -4,7 +4,7 @@ import * as fromStore from '../../store';
 import * as postAction from '../../store/actions/post.actions';
 import { Observable } from 'rxjs';
 import { PostVO } from '../../../shared/models/post.model';
-import * as fromPost from '../../../core/store/selectors/post.selectors';
+import * as fromPost from '../../../root/store/selectors/post.selectors';
 
 @Component({
   selector: 'app-own-postlist',

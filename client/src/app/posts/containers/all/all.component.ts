@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
-import * as fromStore from '../../../core/store/reducers';
-import * as fromPosts from '../../../core/store/selectors/post.selectors';
+import * as fromStore from '../../../root/store/reducers';
+import * as fromPosts from '../../../root/store/selectors/post.selectors';
 import { PostVO } from '../../../shared/models/post.model';
 
 @Component({

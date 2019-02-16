@@ -1,8 +1,8 @@
 import { Store } from '@ngrx/store';
 import { Component } from '@angular/core';
 import * as fromStore from '../../store';
-import * as fromAuth from '../../../core/store/selectors/auth.selectors';
-import * as authAction from '../../../core/store/actions/auth.actions';
+import * as fromAuth from '../../../root/store/selectors/auth.selectors';
+import * as authAction from '../../../root/store/actions/auth.actions';
 @Component({
   selector: 'app-personal-details',
   templateUrl: './personal-details.component.html',

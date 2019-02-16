@@ -5,8 +5,8 @@ import { Router, CanActivate } from '@angular/router';
 import { of, Observable } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-import * as fromStore from '../../core/store';
-import * as uiAction from '../../core/store/actions/ui.actions';
+import * as fromStore from '../../root/store';
+import * as uiAction from '../../root/store/actions/ui.actions';
 
 @Injectable({
   providedIn: 'root'

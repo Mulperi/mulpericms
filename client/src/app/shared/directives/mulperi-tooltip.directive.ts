@@ -9,6 +9,7 @@ export class MulperiTooltipDirective implements OnInit {
   constructor(private el: ElementRef) {}
 
   ngOnInit() {
+    console.log(this.mulperiDescription);
     const para = document.createElement('p');
     const text = document.createTextNode(this.mulperiDescription);
 

@@ -1,10 +1,10 @@
 import { Store } from '@ngrx/store';
 import { Component, Input, ViewChild, ElementRef } from '@angular/core';
-import * as fromStore from '../../../core/store';
-import * as fromAuth from '../../../core/store/selectors/auth.selectors';
-import * as fromPost from '../../../core/store/selectors/post.selectors';
 import { Observable } from 'rxjs';
-import * as postAction from '../../../core/store/actions/post.actions';
+import * as fromStore from '../../../root/store';
+import * as fromAuth from '../../../root/store/selectors/auth.selectors';
+import * as fromPost from '../../../root/store/selectors/post.selectors';
+import * as postAction from '../../../root/store/actions/post.actions';
 @Component({
   selector: 'app-preview',
   templateUrl: './preview.component.html',
