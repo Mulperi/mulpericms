@@ -94,5 +94,7 @@ https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-cogn
 
 ## Importing Lodash, the correct way
 
+Add to tsconfig.json this line: `"esModuleInterop": true`
+
 - https://medium.com/@armno/til-importing-lodash-into-angular-the-better-way-aacbeaa40473
 - https://www.blazemeter.com/blog/the-correct-way-to-import-lodash-libraries-a-benchmark

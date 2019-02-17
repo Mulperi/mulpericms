@@ -23,7 +23,7 @@
     "moment": "^2.23.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
-    "rxjs": "^6.3.3",
+    "rxjs": "^6.4.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
