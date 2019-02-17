@@ -1,12 +1,13 @@
 import { Action } from '@ngrx/store';
+import { PostDTO } from '../../../shared/models/post.model';
 
 export enum ActionTypes {
   LoadAll = '[Posts] Load All',
   LoadAllSuccess = '[Posts] Load All Success',
   LoadAllFailed = '[Posts] Load All Failed',
   Save = '[Posts] Save',
-  SavePostSuccess = '[Posts] Save Success',
-  SavePostFailed = '[Posts] Save Failed',
+  SaveSuccess = '[Posts] Save Success',
+  SaveFailed = '[Posts] Save Failed',
   Select = '[Posts] Select',
   Delete = '[Posts] Delete',
   DeleteSuccess = '[Posts] Delete Success',
@@ -15,11 +16,10 @@ export enum ActionTypes {
 
 export class LoadAll implements Action {
   readonly type = ActionTypes.LoadAll;
-  constructor() {}
 }
 export class LoadAllSuccess implements Action {
   readonly type = ActionTypes.LoadAllSuccess;
-  constructor(public payload: any[]) {}
+  constructor(public payload: PostDTO[]) {}
 }
 export class LoadAllFailed implements Action {
   readonly type = ActionTypes.LoadAllFailed;
@@ -32,11 +32,11 @@ export class Save implements Action {
   ) {}
 }
 export class SaveSuccess implements Action {
-  readonly type = ActionTypes.SavePostSuccess;
-  constructor(public payload: any) {}
+  readonly type = ActionTypes.SaveSuccess;
+  constructor(public payload: PostDTO) {}
 }
 export class SaveFailed implements Action {
-  readonly type = ActionTypes.SavePostFailed;
+  readonly type = ActionTypes.SaveFailed;
   constructor(public payload: string) {}
 }
 export class Select implements Action {

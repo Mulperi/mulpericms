@@ -13,8 +13,6 @@ export interface State extends EntityState<PostDTO> {
 }
 
 export const initialState: State = adapter.getInitialState({
-  entities: {},
-  ids: [],
   loading: false,
   saving: false,
   errorMessage: null,
@@ -33,6 +31,12 @@ export function reducer(
         loading: true
       };
     }
+    case fromPostActions.ActionTypes.LoadAllSuccess: {
+      return adapter.addMany(action.payload, {
+        ...state,
+        loading: false
+      });
+    }
     case fromPostActions.ActionTypes.LoadAllFailed: {
       return {
         ...state,
@@ -40,26 +44,19 @@ export function reducer(
         errorMessage: action.payload
       };
     }
-    case fromPostActions.ActionTypes.LoadAllSuccess: {
-      return adapter.addMany(action.payload, {
-        ...state,
-        posts: action.payload,
-        loading: false
-      });
-    }
     case fromPostActions.ActionTypes.Save: {
       return {
         ...state,
         saving: true
       };
     }
-    case fromPostActions.ActionTypes.SavePostSuccess: {
+    case fromPostActions.ActionTypes.SaveSuccess: {
       return adapter.addOne(action.payload, {
         ...state,
         saving: false
       });
     }
-    case fromPostActions.ActionTypes.SavePostFailed: {
+    case fromPostActions.ActionTypes.SaveFailed: {
       return {
         ...state,
         saving: false
@@ -77,19 +74,18 @@ export function reducer(
         deleting: true
       };
     }
-    case fromPostActions.ActionTypes.DeleteFailed: {
-      return {
-        ...state,
-        deleting: false
-      };
-    }
     case fromPostActions.ActionTypes.DeleteSuccess: {
       return adapter.removeOne(action.payload, {
         ...state,
         deleting: false
       });
     }
-
+    case fromPostActions.ActionTypes.DeleteFailed: {
+      return {
+        ...state,
+        deleting: false
+      };
+    }
     default: {
       return state;
     }

@@ -1,4 +1,3 @@
-import { CognitoService } from '../../../auth/services/cognito.service';
 import { PostService } from '../../../posts/services/post.service';
 import { Injectable } from '@angular/core';
 import { of, Observable } from 'rxjs';
@@ -49,7 +48,7 @@ export class PostEffects {
 
   @Effect()
   saveSuccess$: Observable<any> = this.actions$.pipe(
-    ofType(postAction.ActionTypes.SavePostSuccess),
+    ofType(postAction.ActionTypes.SaveSuccess),
     map((action: any) => {
       this.router.navigate(['/posts']);
       return new uiAction.SnackbarShow({
@@ -61,7 +60,7 @@ export class PostEffects {
 
   @Effect()
   saveFailed$: Observable<any> = this.actions$.pipe(
-    ofType(postAction.ActionTypes.SavePostFailed),
+    ofType(postAction.ActionTypes.SaveFailed),
     map((action: any) => {
       return new uiAction.SnackbarShow({
         message: 'Saving failed!',
@@ -97,7 +96,6 @@ export class PostEffects {
   constructor(
     private router: Router,
     private actions$: Actions,
-    private postService: PostService,
-    private cognitoService: CognitoService
+    private postService: PostService
   ) {}
 }
