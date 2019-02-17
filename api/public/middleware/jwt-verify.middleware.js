@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var jwt = require('jsonwebtoken');
-const app_1 = require("../app");
+const index_1 = require("../index");
 exports.jwtVerify = (req, res, next) => {
     if (req.headers.authorization) {
-        jwt.verify(req.headers.authorization, app_1.pem, { algorithms: ['RS256'] }, function (err, decodedToken) {
+        jwt.verify(req.headers.authorization, index_1.pem, { algorithms: ['RS256'] }, function (err, decodedToken) {
             if (err) {
                 // console.log(err);
                 next(err);
