@@ -1,13 +1,15 @@
 import * as rp from 'request-promise';
-import app from './app';
-import posts from './routers/posts';
 import * as jwkToPem from 'jwk-to-pem';
 import * as CONSTANTS from './constants';
+import app from './app';
+import posts from './routers/posts';
+import comments from './routers/comments';
 
 /**
  * Routers
  */
 app.use('/posts', posts);
+app.use('/comments', comments);
 
 /**
  * Download Cognito user pool public keys for JWT verification

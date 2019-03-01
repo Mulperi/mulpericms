@@ -11,9 +11,22 @@ Resources:
       AttributeDefinitions:
       - AttributeName: id
         AttributeType: S
+      - AttributeName: postId
+        AttributeType: S
       KeySchema:
       - AttributeName: id
         KeyType: HASH
+      - AttributeName: postId
+        KeyType: RANGE
+      LocalSecondaryIndexes:
+      - IndexName: postId
+        KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+        - AttributeName: postId
+          KeyType: RANGE
+        Projection:
+          ProjectionType: ALL
       ProvisionedThroughput:
         ReadCapacityUnits: '5'
         WriteCapacityUnits: '5'

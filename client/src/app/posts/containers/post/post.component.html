@@ -7,10 +7,12 @@
         <div>{{ post?.date }}</div>
       </div>
     </app-mulpericard-actions>
-    <markdown>{{ post?.body }}</markdown>
-
+    <app-mulpericard-body>
+      <markdown>{{ post?.body }}</markdown>
+    </app-mulpericard-body>
     <app-mulpericard-actions fxLayoutAlign="end center">
       <app-chip *ngFor="let tag of post.tags" [name]="tag"></app-chip>
+      <p class="italic" *ngIf="post.tags.length < 1">untagged</p>
     </app-mulpericard-actions>
 
     <app-mulpericard-actions>
@@ -20,3 +22,17 @@
     </app-mulpericard-actions></app-mulpericard-body
   >
 </app-mulpericard>
+
+<app-mulpericard *ngIf="post">
+  <app-mulpericard-body>
+    <h4>Comment this post:</h4>
+    <textarea #commentTextarea></textarea>
+  </app-mulpericard-body>
+  <app-mulpericard-actions fxLayoutAlign="end center">
+    <button mat-button (click)="onClickSaveComment(commentTextarea.value)">
+      Save comment
+    </button>
+  </app-mulpericard-actions>
+</app-mulpericard>
+
+<h4>Comments</h4>
