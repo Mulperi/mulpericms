@@ -6,19 +6,35 @@ import orderBy from 'lodash/orderBy';
 import { fromUnixTime } from 'date-fns';
 import { CommentDTO, CommentVO } from '../../../shared/models/comment.model';
 
-export const selectCommentEntities = createSelector(
+export const selectAllComments = createSelector(
   selectComments,
-  (state: fromComment.State) => state.entities
+  (state: fromComment.State) => state.comments
 );
 export const selectCommentsForPost = createSelector(
-  selectCommentEntities,
+  selectAllComments,
   fromPost.selectCurrentPostId,
-  (entities, currentPostId) => {
-    if (currentPostId && entities[currentPostId]) {
-      return entities[currentPostId] as CommentDTO;
+  (comments, currentPostId) => {
+    if (currentPostId && comments[currentPostId]) {
+      return comments[currentPostId] as CommentDTO[];
     }
     return [];
   }
+);
+
+export const selectCommentVOsForPost = createSelector(
+  selectCommentsForPost,
+  comments =>
+    comments.map(comment => ({
+      ...comment,
+      date: fromUnixTime(comment.date)
+        .toString()
+        .slice(0, 21)
+    })) as CommentVO[]
+);
+
+export const selectCommentSaving = createSelector(
+  selectComments,
+  (state: fromComment.State) => state.saving
 );
 
 // export const selectCommentsAllAsArray = createSelector(

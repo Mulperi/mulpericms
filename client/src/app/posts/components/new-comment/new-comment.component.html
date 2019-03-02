@@ -1,0 +1,27 @@
+<app-mulpericard>
+  <app-mulpericard-subtitle>
+    <span *ngIf="amountOfComments > 0; else firstComment"
+      >Comment this post:</span
+    >
+    <ng-template #firstComment>
+      Be the first to comment this post:
+    </ng-template>
+  </app-mulpericard-subtitle>
+  <app-mulpericard-body>
+    <textarea #commentTextarea></textarea>
+  </app-mulpericard-body>
+  <app-mulpericard-actions fxLayoutAlign="end center">
+    <button
+      *ngIf="!(saving$ | async); else saving"
+      mat-button
+      (click)="onClickSaveComment(commentTextarea.value)"
+    >
+      Save comment
+    </button>
+    <ng-template #saving>
+      <button disabled mat-button>
+        Saving comment...
+      </button></ng-template
+    >
+  </app-mulpericard-actions>
+</app-mulpericard>

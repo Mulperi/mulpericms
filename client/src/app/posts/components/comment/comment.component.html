@@ -1,4 +1,7 @@
 <app-mulpericard>
-  <h4>{{ comment.author }}</h4>
-  <p>{{ comment.body }}</p>
+  <app-mulpericard-subtitle> {{ comment.date }}</app-mulpericard-subtitle>
+  <app-mulpericard-subtitle> {{ comment.author }}</app-mulpericard-subtitle>
+  <app-mulpericard-body>
+    {{ comment.body }}
+  </app-mulpericard-body>
 </app-mulpericard>

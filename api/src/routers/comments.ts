@@ -33,12 +33,9 @@ const controllers = {
     const comment = req.body.comment;
 
     const item = {
+      ...req.body.comment,
       id: uuid(),
-      author: jwt_decode(req.headers.authorization)['cognito:username'],
-      date: moment().unix(),
-      title: comment.title,
-      body: comment.body,
-      tags: comment.tags
+      date: moment().unix()
     };
     commentService
       .saveComment(item)

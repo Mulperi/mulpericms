@@ -4,6 +4,7 @@ import * as fromStore from '../../store';
 import * as fromUi from '../../store/selectors/ui.selectors';
 import { Observable, Subscription } from 'rxjs';
 import * as postAction from '../../store/actions/post.actions';
+import * as commentAction from '../../store/actions/comment.actions';
 import * as authAction from '../../store/actions/auth.actions';
 import { trigger, transition, style, animate } from '@angular/animations';
 
@@ -38,6 +39,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.store.dispatch(new postAction.LoadAll());
+    this.store.dispatch(new commentAction.LoadAll());
     this.store.dispatch(new authAction.SessionCheck());
     this.snackbarMessageSub = this.store
       .select(fromUi.selectSnackbarMessage)

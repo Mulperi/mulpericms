@@ -12,22 +12,24 @@ import { CommentDTO } from '../../../shared/models/comment.model';
 @Injectable()
 export class CommentEffects {
   @Effect()
-  load$: Observable<Action> = this.actions$.pipe(
-    ofType(commentAction.ActionTypes.Load),
-    concatMap((action: commentAction.Load) =>
+  loadAll$: Observable<Action> = this.actions$.pipe(
+    ofType(commentAction.ActionTypes.LoadAll),
+    concatMap((action: commentAction.LoadAll) =>
       this.commentService.getComments()
     ),
-    map((comments: any) => new commentAction.LoadSuccess(comments)),
+    map((comments: any) => new commentAction.LoadAllSuccess(comments)),
     catchError(error =>
       of(
-        new commentAction.LoadFailed('Could not load comments from the server.')
+        new commentAction.LoadAllFailed(
+          'Could not load comments from the server.'
+        )
       )
     )
   );
 
   @Effect()
-  loadSuccess$: Observable<any> = this.actions$.pipe(
-    ofType(commentAction.ActionTypes.LoadFailed),
+  loadAllSuccess$: Observable<any> = this.actions$.pipe(
+    ofType(commentAction.ActionTypes.LoadAllFailed),
     map(
       (action: any) =>
         new uiAction.SnackbarShow({
@@ -37,8 +39,8 @@ export class CommentEffects {
     )
   );
   @Effect()
-  loadFailed$: Observable<any> = this.actions$.pipe(
-    ofType(commentAction.ActionTypes.LoadFailed),
+  loadAllFailed$: Observable<any> = this.actions$.pipe(
+    ofType(commentAction.ActionTypes.LoadAllFailed),
     map(
       (action: any) =>
         new uiAction.SnackbarShow({
@@ -46,6 +48,31 @@ export class CommentEffects {
           color: 'warn'
         })
     )
+  );
+
+  @Effect()
+  save$: Observable<any> = this.actions$.pipe(
+    ofType(commentAction.ActionTypes.Save),
+    switchMap((action: any) =>
+      this.commentService.saveComment(action.payload).pipe(
+        map((item: CommentDTO) => {
+          return new commentAction.SaveSuccess(item);
+        }),
+        catchError(error => of(new commentAction.SaveFailed(error)))
+      )
+    )
+  );
+
+  @Effect()
+  saveSuccess$: Observable<any> = this.actions$.pipe(
+    ofType(commentAction.ActionTypes.SaveSuccess),
+    map((action: any) => {
+      this.router.navigate(['/posts']);
+      return new uiAction.SnackbarShow({
+        message: 'Commented succesfully.',
+        color: 'neutral'
+      });
+    })
   );
 
   constructor(
