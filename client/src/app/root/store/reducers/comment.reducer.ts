@@ -103,29 +103,32 @@ export function reducer(
         saving: false
       };
     }
-    // case fromCommentActions.ActionTypes.Delete:
-    //   {
-    //     return {
-    //       ...state,
-    //       deleting: true
-    //     };
-    //   }
-    // case
-    //   fromCommentActions.ActionTypes.DeleteSuccess:
-    //   {
-    //     return
-    //     adapter.removeOne(action.payload, {
-    //       ...state,
-    //       deleting: false
-    //     });
-    //   }
-    // case fromCommentActions.ActionTypes.DeleteFailed:
-    //   {
-    //     return {
-    //       ...state,
-    //       deleting: false
-    //     };
-    //   }
+    case fromCommentActions.ActionTypes.Delete: {
+      return {
+        ...state,
+        deleting: true
+      };
+    }
+    case fromCommentActions.ActionTypes.DeleteSuccess: {
+      console.log(action.payload);
+      const updatedComments = { ...state.comments };
+      console.log(updatedComments[action.payload.postId]);
+      updatedComments[action.payload.postId] = updatedComments[
+        action.payload.postId
+      ].filter((comment: CommentDTO) => comment.id !== action.payload.id);
+
+      return {
+        ...state,
+        comments: updatedComments,
+        deleting: false
+      };
+    }
+    case fromCommentActions.ActionTypes.DeleteFailed: {
+      return {
+        ...state,
+        deleting: false
+      };
+    }
     default: {
       return state;
     }

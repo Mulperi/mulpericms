@@ -34,10 +34,7 @@
         >
       </div>
     </app-mulpericard-actions>
-    <ng-template
-      [cdkPortalOutlet]="personalDetailsVisible && personalDetailsPortal"
-    >
-    </ng-template>
+    <app-personal-details *ngIf="personalDetailsVisible"></app-personal-details>
   </app-mulpericard>
 
   <app-mulpericard>
@@ -58,8 +55,7 @@
         >
       </div>
     </app-mulpericard-actions>
-    <ng-template [cdkPortalOutlet]="ownPostListVisible && ownPostListPortal">
-    </ng-template>
+    <app-own-postlist *ngIf="ownPostListVisible"></app-own-postlist>
   </app-mulpericard>
 
   <app-mulpericard>
@@ -75,5 +71,6 @@
         </div>
       </div>
     </app-mulpericard-actions>
+    <app-own-commentlist></app-own-commentlist>
   </app-mulpericard>
 </div>

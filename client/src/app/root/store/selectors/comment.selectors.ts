@@ -21,21 +21,33 @@ export const selectCommentsForPost = createSelector(
   }
 );
 
-export const selectCommentVOsForPost = createSelector(
+export const selectCommentVOsForPostOrdered = createSelector(
   selectCommentsForPost,
   comments =>
-    comments.map(comment => ({
-      ...comment,
-      date: fromUnixTime(comment.date)
-        .toString()
-        .slice(0, 21)
-    })) as CommentVO[]
+    orderBy(
+      comments.map(comment => ({
+        ...comment,
+        date: fromUnixTime(comment.date)
+          .toString()
+          .slice(0, 21)
+      })) as CommentVO[],
+      'date',
+      'desc'
+    )
 );
 
 export const selectCommentSaving = createSelector(
   selectComments,
   (state: fromComment.State) => state.saving
 );
+export const selectCommentDeleting = createSelector(
+  selectComments,
+  (state: fromComment.State) => state.deleting
+);
+
+// export const selectOwnComments = createSelector(
+//   selectAllComments,
+// );
 
 // export const selectCommentsAllAsArray = createSelector(
 //   selectCommentEntities,

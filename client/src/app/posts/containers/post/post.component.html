@@ -34,4 +34,6 @@
 <app-comment
   *ngFor="let comment of (comments$ | async)"
   [comment]="comment"
+  [currentUser]="currentUser"
+  (deleteComment)="onDeleteComment($event)"
 ></app-comment>

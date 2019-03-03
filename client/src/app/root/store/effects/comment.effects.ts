@@ -7,7 +7,10 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import * as commentAction from '../actions/comment.actions';
 import * as uiAction from '../actions/ui.actions';
 import { Router } from '@angular/router';
-import { CommentDTO } from '../../../shared/models/comment.model';
+import {
+  CommentDTO,
+  CommentDeleteSuccessResponse
+} from '../../../shared/models/comment.model';
 
 @Injectable()
 export class CommentEffects {
@@ -67,9 +70,32 @@ export class CommentEffects {
   saveSuccess$: Observable<any> = this.actions$.pipe(
     ofType(commentAction.ActionTypes.SaveSuccess),
     map((action: any) => {
-      this.router.navigate(['/posts']);
       return new uiAction.SnackbarShow({
-        message: 'Commented succesfully.',
+        message: 'Comment saved.',
+        color: 'neutral'
+      });
+    })
+  );
+
+  @Effect()
+  delete$: Observable<Action> = this.actions$.pipe(
+    ofType(commentAction.ActionTypes.Delete),
+    switchMap((action: any) =>
+      this.commentService.deleteComment(action.payload).pipe(
+        map((response: CommentDeleteSuccessResponse) => {
+          return new commentAction.DeleteSuccess(response);
+        }),
+        catchError(error => of(new commentAction.DeleteFailed(error)))
+      )
+    )
+  );
+
+  @Effect()
+  deleteSuccess$: Observable<any> = this.actions$.pipe(
+    ofType(commentAction.ActionTypes.DeleteSuccess),
+    map((action: any) => {
+      return new uiAction.SnackbarShow({
+        message: 'Comment deleted.',
         color: 'neutral'
       });
     })

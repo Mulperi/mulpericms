@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 import { concatMap, catchError } from 'rxjs/operators';
 
 import { environment } from './../../../environments/environment';
-import { CommentDTO } from './../../shared/models/comment.model';
+import { CommentDTO, CommentVO } from './../../shared/models/comment.model';
 
 @Injectable({ providedIn: 'root' })
 export class CommentService {
@@ -39,14 +39,17 @@ export class CommentService {
     );
   }
 
-  public deleteComment(id: string): Observable<any> {
+  public deleteComment(comment: CommentVO): Observable<any> {
     return this.cognitoService.getIdToken().pipe(
       concatMap(token => {
-        return this.http.delete(`${environment.API}/comments/${id}`, {
-          headers: {
-            Authorization: token.getJwtToken()
+        return this.http.delete(
+          `${environment.API}/comments/${comment.postId}$${comment.id}`,
+          {
+            headers: {
+              Authorization: token.getJwtToken()
+            }
           }
-        });
+        );
       })
     );
   }

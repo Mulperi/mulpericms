@@ -1,4 +1,5 @@
-import { Observable, from } from 'rxjs';
+import { Observable, from, throwError, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import * as AWS from 'aws-sdk';
 import * as CONSTANTS from '../constants';
 
@@ -40,13 +41,16 @@ export default class PostService {
     return from(this.docClient.put(params).promise());
   }
 
-  deleteComment(id: string): Observable<any> {
+  deleteComment(id: string, postId: string): Observable<any> {
     const params = {
       TableName: CONSTANTS.DYNAMODB_TABLE_COMMENTS,
       Key: {
-        id
+        id,
+        postId
       }
     };
-    return from(this.docClient.delete(params).promise());
+    return from(this.docClient.delete(params).promise()).pipe(
+      catchError(error => throwError(of(error)))
+    );
   }
 }

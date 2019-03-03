@@ -66,7 +66,7 @@ Resources:
       ProvisionedThroughput:
         ReadCapacityUnits: '5'
         WriteCapacityUnits: '5'
-      LocalSecondaryIndexes:
+      GlobalSecondaryIndexes:
         - IndexName: 'postId'
           KeySchema:
             - AttributeName: 'id'
@@ -74,5 +74,7 @@ Resources:
             - AttributeName: 'postId'
               KeyType: 'RANGE'
           Projection: 
-            ProjectionType: "ALL"                   
+            ProjectionType: "ALL"       
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
       TableName: !Sub '${StackName}-comments'

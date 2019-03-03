@@ -1,5 +1,9 @@
 import { Action } from '@ngrx/store';
-import { CommentDTO } from '../../../shared/models/comment.model';
+import {
+  CommentDTO,
+  CommentVO,
+  CommentDeleteSuccessResponse
+} from '../../../shared/models/comment.model';
 
 export enum ActionTypes {
   LoadAll = '[Comments] Load All',
@@ -7,7 +11,10 @@ export enum ActionTypes {
   LoadAllFailed = '[Comments] Load AllFailed',
   Save = '[Comments] Save',
   SaveSuccess = '[Comments] Save Success',
-  SaveFailed = '[Comments] Save Failed'
+  SaveFailed = '[Comments] Save Failed',
+  Delete = '[Comments] Delete',
+  DeleteSuccess = '[Comments] Delete Success',
+  DeleteFailed = '[Comments] Delete Failed'
 }
 
 export class LoadAll implements Action {
@@ -33,6 +40,18 @@ export class SaveFailed implements Action {
   readonly type = ActionTypes.SaveFailed;
   constructor(public payload: any) {}
 }
+export class Delete implements Action {
+  readonly type = ActionTypes.Delete;
+  constructor(public payload: CommentVO) {}
+}
+export class DeleteSuccess implements Action {
+  readonly type = ActionTypes.DeleteSuccess;
+  constructor(public payload: CommentDeleteSuccessResponse) {}
+}
+export class DeleteFailed implements Action {
+  readonly type = ActionTypes.DeleteFailed;
+  constructor(public payload: string) {}
+}
 
 export type ActionsUnion =
   | LoadAll
@@ -40,4 +59,7 @@ export type ActionsUnion =
   | LoadAllFailed
   | Save
   | SaveSuccess
-  | SaveFailed;
+  | SaveFailed
+  | Delete
+  | DeleteSuccess
+  | DeleteFailed;

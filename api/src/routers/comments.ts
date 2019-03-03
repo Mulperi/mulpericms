@@ -26,7 +26,7 @@ const controllers = {
       data => {
         res.status(200).json(data.Item);
       },
-      error => res.json(error)
+      error => res.status(500).json(error)
     );
   },
   saveComment: (req: express.Request, res: express.Response) => {
@@ -41,16 +41,19 @@ const controllers = {
       .saveComment(item)
       .subscribe(
         data => res.status(200).json(item),
-        error => res.json({ error: error.message })
+        error => res.status(500).json({ error: error.message })
       );
   },
   deleteCommentWithId: (req: express.Request, res: express.Response) => {
-    commentService
-      .deleteComment(req.params.id)
-      .subscribe(
-        data => res.status(200).json(req.params.id),
-        error => res.json({ error: error.message })
-      );
+    const postId = req.params.id.split('$')[0];
+    const id = req.params.id.split('$')[1];
+    commentService.deleteComment(id, postId).subscribe(
+      data => res.status(200).json({ id, postId }),
+      error => {
+        console.log(error);
+        res.status(500).json({ error: error.message });
+      }
+    );
   }
 };
 

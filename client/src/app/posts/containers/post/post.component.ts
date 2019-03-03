@@ -24,7 +24,7 @@ export class PostComponent implements OnInit, OnDestroy {
   idSub: Subscription;
   currentUserSub: Subscription;
   comments$: Observable<CommentVO[]> = this.store.select(
-    fromComment.selectCommentVOsForPost
+    fromComment.selectCommentVOsForPostOrdered
   );
 
   constructor(
@@ -53,6 +53,12 @@ export class PostComponent implements OnInit, OnDestroy {
         postId: this.post.id
       })
     );
+  }
+
+  onDeleteComment(comment: CommentVO) {
+    if (confirm('Delete comment? ' + comment.body)) {
+      this.store.dispatch(new commentAction.Delete(comment));
+    }
   }
 
   ngOnDestroy() {
