@@ -1,5 +1,4 @@
 import * as express from 'express';
-import * as jwt_decode from 'jwt-decode';
 import * as uuid from 'uuid/v4';
 import * as moment from 'moment';
 import { jwtVerify } from './../middleware/jwt-verify.middleware';
@@ -24,14 +23,12 @@ const controllers = {
   getCommentsWithPostId: (req: express.Request, res: express.Response) => {
     commentService.getCommentsWithPostId(req.params.id).subscribe(
       data => {
-        res.status(200).json(data.Item);
+        res.status(200).json(data.Items);
       },
       error => res.status(500).json(error)
     );
   },
   saveComment: (req: express.Request, res: express.Response) => {
-    const comment = req.body.comment;
-
     const item = {
       ...req.body.comment,
       id: uuid(),

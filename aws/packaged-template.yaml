@@ -20,8 +20,9 @@ Resources:
           KeyType: HASH
         Projection:
           ProjectionType: ALL
-        ReadCapacityUnits: '1'
-        WriteCapacityUnits: '1'
+        ProvisionedThroughput:
+          ReadCapacityUnits: '1'
+          WriteCapacityUnits: '1'
       KeySchema:
       - AttributeName: id
         KeyType: HASH

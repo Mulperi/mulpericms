@@ -14,9 +14,15 @@ export class CommentService {
     private cognitoService: CognitoService
   ) {}
 
-  public getComments(): Observable<CommentDTO[]> {
+  public getAllComments(): Observable<CommentDTO[]> {
     return this.http
       .get<CommentDTO[]>(`${environment.API}/comments`)
+      .pipe(catchError(error => throwError(error)));
+  }
+
+  public getCommentsForPost(postId: string): Observable<CommentDTO[]> {
+    return this.http
+      .get<CommentDTO[]>(`${environment.API}/comments/${postId}`)
       .pipe(catchError(error => throwError(error)));
   }
 

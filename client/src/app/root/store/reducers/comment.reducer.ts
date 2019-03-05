@@ -49,12 +49,14 @@ export function reducer(
   action: fromCommentActions.ActionsUnion
 ): State {
   switch (action.type) {
+    case fromCommentActions.ActionTypes.Load:
     case fromCommentActions.ActionTypes.LoadAll: {
       return {
         ...state,
         loading: true
       };
     }
+    case fromCommentActions.ActionTypes.LoadSuccess:
     case fromCommentActions.ActionTypes.LoadAllSuccess: {
       if (action.payload.length > 0) {
         return {
@@ -69,6 +71,7 @@ export function reducer(
         };
       }
     }
+    case fromCommentActions.ActionTypes.LoadFailed:
     case fromCommentActions.ActionTypes.LoadAllFailed: {
       return {
         ...state,

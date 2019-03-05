@@ -18,7 +18,7 @@ export class CommentEffects {
   loadAll$: Observable<Action> = this.actions$.pipe(
     ofType(commentAction.ActionTypes.LoadAll),
     concatMap((action: commentAction.LoadAll) =>
-      this.commentService.getComments()
+      this.commentService.getAllComments()
     ),
     map((comments: any) => new commentAction.LoadAllSuccess(comments)),
     catchError(error =>
@@ -32,6 +32,18 @@ export class CommentEffects {
 
   @Effect()
   loadAllSuccess$: Observable<any> = this.actions$.pipe(
+    ofType(commentAction.ActionTypes.LoadAllSuccess),
+    map(
+      (action: any) =>
+        new uiAction.SnackbarShow({
+          message: 'All comments loaded.',
+          color: 'neutral'
+        })
+    )
+  );
+
+  @Effect()
+  loadAllFailed$: Observable<any> = this.actions$.pipe(
     ofType(commentAction.ActionTypes.LoadAllFailed),
     map(
       (action: any) =>
@@ -42,8 +54,34 @@ export class CommentEffects {
     )
   );
   @Effect()
-  loadAllFailed$: Observable<any> = this.actions$.pipe(
-    ofType(commentAction.ActionTypes.LoadAllFailed),
+  load$: Observable<Action> = this.actions$.pipe(
+    ofType(commentAction.ActionTypes.Load),
+    concatMap((action: commentAction.Load) =>
+      this.commentService.getCommentsForPost(action.payload)
+    ),
+    map((comments: any) => new commentAction.LoadSuccess(comments)),
+    catchError(error =>
+      of(
+        new commentAction.LoadFailed('Could not load comments from the server.')
+      )
+    )
+  );
+
+  // @Effect()
+  // loadSuccess$: Observable<any> = this.actions$.pipe(
+  //   ofType(commentAction.ActionTypes.LoadSuccess),
+  //   map(
+  //     (action: any) =>
+  //       new uiAction.SnackbarShow({
+  //         message: 'Comments loaded.',
+  //         color: 'neutral'
+  //       })
+  //   )
+  // );
+
+  @Effect()
+  loadFailed$: Observable<any> = this.actions$.pipe(
+    ofType(commentAction.ActionTypes.LoadFailed),
     map(
       (action: any) =>
         new uiAction.SnackbarShow({

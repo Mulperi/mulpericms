@@ -11,8 +11,8 @@ import {
 import { Observable, Observer, of, throwError } from 'rxjs';
 
 const POOLDATA = {
-  UserPoolId: 'eu-west-1_Gh0FeaFY6',
-  ClientId: '20gig99judkhb4hibgissogurh'
+  UserPoolId: 'eu-west-1_8OJhBpZlu',
+  ClientId: '41pl79t5idfrsbg330u2p234n3'
 };
 
 @Injectable({

@@ -14,7 +14,10 @@ export enum ActionTypes {
   SaveFailed = '[Comments] Save Failed',
   Delete = '[Comments] Delete',
   DeleteSuccess = '[Comments] Delete Success',
-  DeleteFailed = '[Comments] Delete Failed'
+  DeleteFailed = '[Comments] Delete Failed',
+  Load = '[Comments] Load',
+  LoadSuccess = '[Comments] Load  Success',
+  LoadFailed = '[Comments] Load Failed'
 }
 
 export class LoadAll implements Action {
@@ -52,8 +55,23 @@ export class DeleteFailed implements Action {
   readonly type = ActionTypes.DeleteFailed;
   constructor(public payload: string) {}
 }
+export class Load implements Action {
+  readonly type = ActionTypes.Load;
+  constructor(public payload: string) {}
+}
+export class LoadSuccess implements Action {
+  readonly type = ActionTypes.LoadSuccess;
+  constructor(public payload: CommentDTO[]) {}
+}
+export class LoadFailed implements Action {
+  readonly type = ActionTypes.LoadFailed;
+  constructor(public payload: string) {}
+}
 
 export type ActionsUnion =
+  | Load
+  | LoadSuccess
+  | LoadFailed
   | LoadAll
   | LoadAllSuccess
   | LoadAllFailed

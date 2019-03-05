@@ -43,6 +43,8 @@ export class PostComponent implements OnInit, OnDestroy {
     this.currentUserSub = this.store
       .select(fromAuth.selectUsername)
       .subscribe((username: string) => (this.currentUser = username));
+
+    this.store.dispatch(new commentAction.Load(this.post.id));
   }
 
   onSaveComment(comment: string) {
