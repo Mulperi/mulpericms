@@ -69,12 +69,10 @@ Resources:
       GlobalSecondaryIndexes:
         - IndexName: 'postId'
           KeySchema:
-            - AttributeName: 'id'
-              KeyType: 'HASH'                       
             - AttributeName: 'postId'
-              KeyType: 'RANGE'
+              KeyType: 'HASH'                       
           Projection: 
-            ProjectionType: "ALL"       
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
+            ProjectionType: 'ALL'       
+          ReadCapacityUnits: '1'
+          WriteCapacityUnits: '1'
       TableName: !Sub '${StackName}-comments'

@@ -13,20 +13,20 @@ Resources:
         AttributeType: S
       - AttributeName: postId
         AttributeType: S
+      GlobalSecondaryIndexes:
+      - IndexName: postId
+        KeySchema:
+        - AttributeName: postId
+          KeyType: HASH
+        Projection:
+          ProjectionType: ALL
+        ReadCapacityUnits: '1'
+        WriteCapacityUnits: '1'
       KeySchema:
       - AttributeName: id
         KeyType: HASH
       - AttributeName: postId
         KeyType: RANGE
-      LocalSecondaryIndexes:
-      - IndexName: postId
-        KeySchema:
-        - AttributeName: id
-          KeyType: HASH
-        - AttributeName: postId
-          KeyType: RANGE
-        Projection:
-          ProjectionType: ALL
       ProvisionedThroughput:
         ReadCapacityUnits: '5'
         WriteCapacityUnits: '5'

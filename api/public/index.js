@@ -1,14 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const rp = require("request-promise");
-const app_1 = require("./app");
-const posts_1 = require("./routers/posts");
 const jwkToPem = require("jwk-to-pem");
 const CONSTANTS = require("./constants");
+const app_1 = require("./app");
+const posts_1 = require("./routers/posts");
+const comments_1 = require("./routers/comments");
 /**
  * Routers
  */
 app_1.default.use('/posts', posts_1.default);
+app_1.default.use('/comments', comments_1.default);
 /**
  * Download Cognito user pool public keys for JWT verification
  * keys[0] for IdTokens
