@@ -14,3 +14,13 @@
   $success-text,
   $grey-dark
 );
+
+$body: white;
+$card: whitesmoke;
+$primary: royalblue;
+$warn: #f84779;
+$text: #1c140d;
+/*
+bodybg, cardbg, text, primary, warn
+*/
+@include globals($body, $card, $text);

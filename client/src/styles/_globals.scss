@@ -1,83 +1,89 @@
 @import './style-variables';
 
-html {
-  font-family: sans-serif;
-  height: 100%;
-  line-height: 1;
-}
-
-body {
-  margin: 0;
-  background: whitesmoke;
-  color: $grey-dark;
-  height: 100%;
-}
-
-app-root {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-app-toolbar {
-  z-index: 2;
-}
-
-main {
-  flex: 1;
-}
-
-p {
-  line-height: 1.5;
-}
-
-.feature-container {
-  padding: 0.25rem;
-  max-width: 640px;
-  margin: auto;
-}
-
-@media only screen and (min-width: 600px) {
-  .feature-container {
-    padding: 1rem;
+@mixin globals($body, $card, $text) {
+  html {
+    font-family: sans-serif;
+    height: 100%;
+    line-height: 1;
   }
-}
 
-a {
-  color: $grey-dark;
-  font-weight: bold;
-}
+  body {
+    margin: 0;
+    background: $body;
+    color: $text;
+    height: 100%;
+  }
 
-a:hover {
-  color: $primary;
-}
+  app-root {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
 
-a:focus {
-  color: $primary;
-}
+  .mulpericard {
+    background: $card;
+  }
 
-a:active {
-  color: black;
-}
+  app-toolbar {
+    z-index: 2;
+  }
 
-img {
-  max-width: 100%;
-}
+  main {
+    flex: 1;
+  }
 
-.word-break {
-  word-break: break-all;
-}
+  p {
+    line-height: 1.5;
+  }
 
-.margin-bottom {
-  margin-bottom: 3rem;
-}
+  .feature-container {
+    padding: 0.25rem;
+    max-width: 640px;
+    margin: auto;
+  }
 
-.select-none {
-  user-select: none;
-}
+  @media only screen and (min-width: 600px) {
+    .feature-container {
+      padding: 1rem;
+    }
+  }
 
-pre {
-  word-break: break-all;
-  overflow-x: auto;
-  overflow-y: hidden;
+  a {
+    color: $text;
+    font-weight: bold;
+  }
+
+  a:hover {
+    color: $primary;
+  }
+
+  a:focus {
+    color: $primary;
+  }
+
+  a:active {
+    color: black;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  .word-break {
+    word-break: break-all;
+  }
+
+  .margin-bottom {
+    margin-bottom: 3rem;
+  }
+
+  .select-none {
+    user-select: none;
+  }
+
+  pre {
+    word-break: break-all;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
 }
