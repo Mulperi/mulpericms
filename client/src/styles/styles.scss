@@ -3,6 +3,7 @@
 // @import url('https://fonts.googleapis.com/css?family=Raleway:100,400');
 @import './globals';
 @import './mulperi-boilerplate';
+@import './mulpericard';
 @import './style-variables';
 
 @include mulperi-boilerplate(
@@ -20,7 +21,14 @@ $card: whitesmoke;
 $primary: royalblue;
 $warn: #f84779;
 $text: #1c140d;
-/*
-bodybg, cardbg, text, primary, warn
-*/
-@include globals($body, $card, $text);
+
+@include globals($body, $text);
+
+/* mulpericard: $containerbg, $containertext, $hrcolor */
+@include mulpericard(whitesmoke, $text, rgba(0, 0, 0, 0.1));
+
+.mulpericard {
+  div {
+    border: 0px solid black;
+  }
+}

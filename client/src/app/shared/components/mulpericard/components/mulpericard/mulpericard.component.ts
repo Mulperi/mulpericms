@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-mulpericard',
@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./mulpericard.component.scss']
 })
 export class MulpericardComponent {
-
+  @Input()
+  warn;
 }

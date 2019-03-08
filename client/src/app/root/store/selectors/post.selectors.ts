@@ -45,7 +45,7 @@ export const selectCurrentPost = createSelector(
             .toString()
             .slice(0, 21)
         }
-      : false
+      : null
 );
 export const selectOwnPosts = createSelector(
   selectAuth,

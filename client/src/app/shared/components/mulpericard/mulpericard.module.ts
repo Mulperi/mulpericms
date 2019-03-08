@@ -5,11 +5,13 @@ import { MulpericardTitleComponent } from './components/mulpericard-title/mulper
 import { MulpericardSubtitleComponent } from './components/mulpericard-subtitle/mulpericard-subtitle.component';
 import { MulpericardBodyComponent } from './components/mulpericard-body/mulpericard-body.component';
 import { MulpericardActionsComponent } from './components/mulpericard-actions/mulpericard-actions.component';
+import { MulpericardHeaderComponent } from './components/mulpericard-header/mulpericard-header.component';
 
 @NgModule({
   imports: [],
   declarations: [
     MulpericardComponent,
+    MulpericardHeaderComponent,
     MulpericardTitleComponent,
     MulpericardSubtitleComponent,
     MulpericardBodyComponent,
@@ -18,6 +20,7 @@ import { MulpericardActionsComponent } from './components/mulpericard-actions/mu
   ],
   exports: [
     MulpericardComponent,
+    MulpericardHeaderComponent,
     MulpericardTitleComponent,
     MulpericardSubtitleComponent,
     MulpericardBodyComponent,

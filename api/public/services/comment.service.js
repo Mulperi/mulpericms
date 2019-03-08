@@ -24,10 +24,9 @@ class PostService {
         var params = {
             TableName: CONSTANTS.DYNAMODB_TABLE_COMMENTS,
             IndexName: CONSTANTS.DYNAMODB_TABLE_COMMENTS_POSTINDEX,
-            KeyConditionExpression: 'HashKey = :hkey and RangeKey = :rkey',
+            KeyConditionExpression: 'postId = :hkey',
             ExpressionAttributeValues: {
-                ':rkey': postId,
-                ':hkey': 'id'
+                ':hkey': postId
             }
         };
         return rxjs_1.from(this.docClient.query(params).promise());

@@ -1,4 +1,4 @@
-<p *ngIf="posts.length < 1">No posts yet.</p>
+<p *ngIf="posts.length < 1 && !errorMessage">No posts yet.</p>
 
 <app-post-listitem
   [post]="post"

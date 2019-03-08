@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
+
 import * as fromStore from '../../../root/store/reducers';
 import * as postAction from '../../../root/store/actions/post.actions';
 import * as commentAction from '../../../root/store/actions/comment.actions';
@@ -18,13 +19,17 @@ import { CommentVO } from 'src/app/shared/models/comment.model';
   styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit, OnDestroy {
-  post: PostVO;
+  post: PostVO | null;
   currentUser: string;
   postSub: Subscription;
   idSub: Subscription;
   currentUserSub: Subscription;
   comments$: Observable<CommentVO[]> = this.store.select(
     fromComment.selectCommentVOsForPostOrdered
+  );
+
+  loadingComments$: Observable<boolean> = this.store.select(
+    fromComment.selectCommentLoading
   );
 
   constructor(
@@ -39,12 +44,21 @@ export class PostComponent implements OnInit, OnDestroy {
     );
     this.postSub = this.store
       .select(fromPost.selectCurrentPost)
-      .subscribe((post: PostVO) => (this.post = post));
+      .subscribe((post: PostVO) => {
+        if (post) {
+          this.post = post;
+          this.store.dispatch(new commentAction.Load(this.post.id));
+        }
+      });
     this.currentUserSub = this.store
       .select(fromAuth.selectUsername)
       .subscribe((username: string) => (this.currentUser = username));
+  }
 
-    this.store.dispatch(new commentAction.Load(this.post.id));
+  ngOnDestroy() {
+    this.idSub.unsubscribe();
+    this.postSub.unsubscribe();
+    this.currentUserSub.unsubscribe();
   }
 
   onSaveComment(comment: string) {
@@ -61,12 +75,6 @@ export class PostComponent implements OnInit, OnDestroy {
     if (confirm('Delete comment? ' + comment.body)) {
       this.store.dispatch(new commentAction.Delete(comment));
     }
-  }
-
-  ngOnDestroy() {
-    this.idSub.unsubscribe();
-    this.postSub.unsubscribe();
-    this.currentUserSub.unsubscribe();
   }
 
   onClickBack() {

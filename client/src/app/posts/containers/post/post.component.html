@@ -1,5 +1,5 @@
 <app-mulpericard *ngIf="post">
-  <app-mulpericard-body>
+  <app-mulpericard-header>
     <app-mulpericard-title>{{ post?.title }}</app-mulpericard-title>
     <app-mulpericard-actions>
       <div fxLayout="row wrap" fxLayoutAlign="space-between center">
@@ -7,9 +7,9 @@
         <div>{{ post?.date }}</div>
       </div>
     </app-mulpericard-actions>
-    <app-mulpericard-body>
-      <markdown>{{ post?.body }}</markdown>
-    </app-mulpericard-body>
+  </app-mulpericard-header>
+  <app-mulpericard-body>
+    <markdown>{{ post?.body }}</markdown>
     <app-mulpericard-actions fxLayoutAlign="end center">
       <app-chip *ngFor="let tag of post.tags" [name]="tag"></app-chip>
       <p class="italic" *ngIf="post.tags.length < 1">untagged</p>
@@ -30,6 +30,8 @@
 ></app-new-comment>
 
 <!-- <h4 *ngIf="(comments$ | async).length > 0">Comments</h4> -->
+
+<p *ngIf="(loadingComments$ | async)">Loading comments...</p>
 
 <app-comment
   *ngFor="let comment of (comments$ | async)"

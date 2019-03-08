@@ -44,6 +44,10 @@ export const selectCommentDeleting = createSelector(
   selectComments,
   (state: fromComment.State) => state.deleting
 );
+export const selectCommentLoading = createSelector(
+  selectComments,
+  (state: fromComment.State) => state.loading
+);
 
 // export const selectOwnComments = createSelector(
 //   selectAllComments,

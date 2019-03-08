@@ -4,6 +4,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ChipComponent } from './chip/chip.component';
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { ErrorMessageComponent } from './error-message/error-message.component';
 
 export const components = [
   ChipComponent,
@@ -11,7 +12,8 @@ export const components = [
   HeaderComponent,
   SnackbarComponent,
   SpinnerComponent,
-  ToolbarComponent
+  ToolbarComponent,
+  ErrorMessageComponent
 ];
 
 export * from './spinner/spinner.component';
@@ -20,3 +22,4 @@ export * from './footer/footer.component';
 export * from './chip/chip.component';
 export * from './snackbar/snackbar.component';
 export * from './toolbar/toolbar.component';
+export * from './error-message/error-message.component';

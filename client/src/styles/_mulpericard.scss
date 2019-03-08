@@ -1,0 +1,17 @@
+@mixin mulpericard($containerbg, $containertext, $hrcolor) {
+  .mulpericard {
+    background: $containerbg;
+    color: $containertext;
+    p {
+      line-height: 1.5;
+    }
+    hr {
+      border: 1px solid $hrcolor;
+    }
+  }
+
+  .mulpericard.card-warn {
+    background: rgb(255, 91, 91);
+    color: rgb(244, 217, 217);
+  }
+}

@@ -1,6 +1,6 @@
 @import './style-variables';
 
-@mixin globals($body, $card, $text) {
+@mixin globals($bodybg, $bodytext) {
   html {
     font-family: sans-serif;
     height: 100%;
@@ -9,8 +9,8 @@
 
   body {
     margin: 0;
-    background: $body;
-    color: $text;
+    background: $bodybg;
+    color: $bodytext;
     height: 100%;
   }
 
@@ -18,10 +18,6 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-  }
-
-  .mulpericard {
-    background: $card;
   }
 
   app-toolbar {
@@ -49,7 +45,7 @@
   }
 
   a {
-    color: $text;
+    color: $bodytext;
     font-weight: bold;
   }
 

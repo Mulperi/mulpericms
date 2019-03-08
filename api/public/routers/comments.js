@@ -19,11 +19,10 @@ const controllers = {
     },
     getCommentsWithPostId: (req, res) => {
         commentService.getCommentsWithPostId(req.params.id).subscribe(data => {
-            res.status(200).json(data.Item);
+            res.status(200).json(data.Items);
         }, error => res.status(500).json(error));
     },
     saveComment: (req, res) => {
-        const comment = req.body.comment;
         const item = Object.assign({}, req.body.comment, { id: uuid(), date: moment().unix() });
         commentService
             .saveComment(item)
