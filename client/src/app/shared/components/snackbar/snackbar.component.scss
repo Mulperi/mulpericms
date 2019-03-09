@@ -7,10 +7,6 @@
   right: 5%;
   width: 200px;
   height: 100px;
-  // transform: translate(-50%, -50%);
-  // display: flex;
-  // align-items: center;
-  // justify-content: center;
   z-index: 10;
 }
 
@@ -19,16 +15,16 @@ div {
 }
 
 .warn {
-  background: $warn-bg;
+  background: $warn;
   color: $warn-text;
 }
 
 .success {
-  background: $success-bg;
+  background: $success;
   color: $success-text;
 }
 
 .neutral {
-  background: $primary-bg;
+  background: $primary;
   color: $primary-text;
 }

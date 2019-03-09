@@ -1,25 +1,28 @@
 <app-mulpericard>
   <app-mulpericard-subtitle>
-    <div fxFlex="row wrap" fxLayoutAlign="space-between center">
-      <div>{{ comment.date }}</div>
-      <div *ngIf="currentUser === comment.author">
-        <button
-          *ngIf="!(deleting$ | async); else deleting"
-          mat-button
-          color="warn"
-          (click)="onDeleteComment()"
-        >
-          Delete
+    <div class="absolute" *ngIf="currentUser === comment.author">
+      <button
+        *ngIf="!(deleting$ | async); else deleting"
+        class="warn"
+        (click)="onDeleteComment()"
+      >
+        Delete
+      </button>
+      <ng-template #deleting>
+        <button class="warn" disabled>
+          Deleting...
         </button>
-        <ng-template #deleting>
-          <button mat-button color="warn" disabled>
-            Deleting...
-          </button>
-        </ng-template>
+      </ng-template>
+    </div>
+    <div fxFlex="row wrap" fxLayoutAlign="space-between center">
+      <div>
+        <h4>{{ comment.author }}</h4>
+      </div>
+      <div>
+        <h4>{{ comment.date }}</h4>
       </div>
     </div>
   </app-mulpericard-subtitle>
-  <app-mulpericard-subtitle> {{ comment.author }}</app-mulpericard-subtitle>
   <app-mulpericard-body>
     {{ comment.body }}
   </app-mulpericard-body>

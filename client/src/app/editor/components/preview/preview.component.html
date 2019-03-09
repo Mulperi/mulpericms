@@ -28,19 +28,16 @@
       /></app-mulpericard-actions>
       <div fxLayoutAlign="end center">
         <button
-          mat-button
+          class="primary"
           (click)="onSave()"
           *ngIf="!(saving$ | async); else saving"
         >
           Save post
         </button>
         <ng-template #saving>
-          <div class="text-container centered">
-            <div>
-              <h4>Saving post...</h4>
-              <app-spinner></app-spinner>
-            </div>
-          </div>
+          <button disabled class="primary">
+            Saving...
+          </button>
         </ng-template>
       </div>
     </div>

@@ -7,20 +7,13 @@
 @import './style-variables';
 
 @include mulperi-boilerplate(
-  $primary-bg,
+  $primary,
   $primary-text,
-  $warn-bg,
+  $warn,
   $warn-text,
-  $success-bg,
-  $success-text,
-  $grey-dark
+  $success,
+  $success-text
 );
-
-$body: white;
-$card: whitesmoke;
-$primary: royalblue;
-$warn: #f84779;
-$text: #1c140d;
 
 @include globals($body, $text);
 

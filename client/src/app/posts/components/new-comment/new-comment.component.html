@@ -13,14 +13,14 @@
   <app-mulpericard-actions fxLayoutAlign="end center">
     <button
       *ngIf="!(saving$ | async); else saving"
-      mat-button
+      class="primary"
       (click)="onClickSaveComment(commentTextarea.value)"
     >
-      Save comment
+      Save
     </button>
     <ng-template #saving>
-      <button disabled mat-button>
-        Saving comment...
+      <button disabled class="primary">
+        Saving...
       </button></ng-template
     >
   </app-mulpericard-actions>

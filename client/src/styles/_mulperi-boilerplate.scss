@@ -1,11 +1,10 @@
 @mixin mulperi-boilerplate(
-  $primary-bg,
+  $primary,
   $primary-text,
-  $warn-bg,
+  $warn,
   $warn-text,
-  $success-bg,
-  $success-text,
-  $border-dark
+  $success,
+  $success-text
 ) {
   * {
     box-sizing: border-box;
@@ -27,59 +26,61 @@
   //   color: rgba(255, 255, 255, 0.4);
   // }
 
-  // button {
-  //   background: none;
-  //   border: 0;
-  //   padding: 0.25rem 0.5rem;
-  //   border-radius: 4px;
-  //   cursor: pointer;
-  // }
-
-  // button:hover {
-  // }
-
-  // button:focus {
-  // }
-
-  .success {
-    background: $success-bg;
-    color: $success-text;
-  }
-
-  // .primary {
-  //   background: $primary-bg;
-  //   color: $primary-text;
-  // }
-
-  // button.primary:active {
-  //   background: darkblue;
-  // }
-
-  .primary:disabled {
-    background: grey;
-  }
-
-  .warning-container {
-    background: $warn-bg;
-    color: $warn-text;
-  }
-
-  // button.warn:active {
-  //   background: darkred;
-  // }
-
-  // .warn:disabled {
-  //   background: lightpink;
-  // }
-
-  .btn-medium {
+  button {
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
     padding: 0.5rem 1rem;
     font-size: 1rem;
+    transition: all 0.3s;
+    &.success {
+      background: $success;
+      // box-shadow: 0 2px 1px 1px rgba(0, 0, 0, 0.2);
+      color: $success-text;
+    }
+    &.primary {
+      background: $primary;
+      // box-shadow: 0 2px 1px 1px rgba(0, 0, 0, 0.2);
+      color: $primary-text;
+      &:enabled:hover {
+        background: $primary/1.2;
+      }
+      &:enabled:active {
+        background: $primary/1.75;
+        // box-shadow: 0 0px 1px 1px rgba(0, 0, 0, 0.2);
+      }
+      &:disabled {
+        background: $primary * 2;
+      }
+    }
+    &.warn {
+      background: $warn;
+      // box-shadow: 0 2px 1px 1px rgba(0, 0, 0, 0.2);
+      color: $warn-text;
+      &:enabled:hover {
+        background: $warn/1.2;
+      }
+      &:enabled:active {
+        background: $warn/1.75;
+        // box-shadow: 0 0px 1px 1px rgba(0, 0, 0, 0.2);
+      }
+      &:disabled {
+        background: $warn * 2;
+      }
+    }
+    &.transparent {
+      background: none;
+    }
   }
 
-  .btn-large {
-    padding: 0.75rem 1.5rem;
-    font-size: 1.5rem;
+  button:enabled:active {
+    transform: scale(0.95);
+  }
+
+  button:focus {
+  }
+
+  button:disabled {
   }
 
   .flex {
@@ -120,7 +121,7 @@
 
   input {
     border-radius: 2px;
-    border: 1px solid $border-dark;
+    border: 1px solid rgb(40, 40, 40);
     font-size: 1rem;
     padding: 0.25rem;
   }

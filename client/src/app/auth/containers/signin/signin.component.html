@@ -1,10 +1,11 @@
 <app-header title="Sign in" subtitle=""></app-header>
 <div class="feature-container">
-  
+  <app-error-message
+    *ngIf="(error$ | async) as error"
+    [errorMessage]="error"
+  ></app-error-message>
+
   <app-mulpericard>
-    <app-mulpericard-subtitle *ngIf="(error$ | async) as error">
-      <p class="warning-container">{{ error }}</p>
-    </app-mulpericard-subtitle>
     <app-mulpericard-body>
       <div fxLayout="column" fxLayoutAlign="center center">
         <h4 class="margin-bottom">Please sign in to use the editor.</h4>
@@ -39,8 +40,7 @@
         </div>
 
         <button
-          mat-flat-button
-          color="accent"
+          class="primary"
           *ngIf="!(authenticating$ | async); else authenticating"
           (click)="onClickSignIn(usernameField.value, passwordField.value)"
         >

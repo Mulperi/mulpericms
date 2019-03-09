@@ -16,7 +16,7 @@ export class AllComponent implements OnInit, OnDestroy {
     fromPosts.selectPostsLoading
   );
 
-  itemsPerPage = 10;
+  itemsPerPage = 2;
   page = 0;
 
   errorMessageSub: Subscription;

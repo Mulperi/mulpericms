@@ -19,13 +19,17 @@
   fxLayoutAlign="space-evenly"
   class="controls-container"
 >
-  <button mat-button [disabled]="page == 0" (click)="onPreviousClick()">
+  <button
+    class="primary"
+    [disabled]="page == 0"
+    (click)="onPreviousClick()"
+  >
     <mat-icon>chevron_left</mat-icon>
   </button>
   <div fxLayoutAlign="center center" class="page-count">
     <p>Page {{ page + 1 }} of {{ getPages() }}</p>
   </div>
-  <button mat-button [disabled]="isLastPage()" (click)="onNextClick()">
+  <button class="primary" [disabled]="isLastPage()" (click)="onNextClick()">
     <mat-icon>chevron_right</mat-icon>
   </button>
 </div>

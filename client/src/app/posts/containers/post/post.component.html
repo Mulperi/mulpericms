@@ -15,12 +15,13 @@
       <p class="italic" *ngIf="post.tags.length < 1">untagged</p>
     </app-mulpericard-actions>
   </app-mulpericard-body>
-  <app-mulpericard-actions>
-    <div fxLayout="row wrap" fxLayoutAlign="start center">
-      <div><button mat-button (click)="onClickBack()">Back</button></div>
-    </div>
-  </app-mulpericard-actions>
 </app-mulpericard>
+
+<div>
+  <button class="primary" (click)="onClickBack()">Back</button>
+</div>
+
+<br />
 
 <app-new-comment
   *ngIf="post && currentUser"
@@ -28,8 +29,6 @@
   (saveComment)="onSaveComment($event)"
   [amountOfComments]="(comments$ | async).length"
 ></app-new-comment>
-
-<!-- <h4 *ngIf="(comments$ | async).length > 0">Comments</h4> -->
 
 <p *ngIf="(loadingComments$ | async)">Loading comments...</p>
 

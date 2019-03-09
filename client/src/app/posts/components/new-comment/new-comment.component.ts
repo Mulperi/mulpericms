@@ -1,4 +1,11 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild,
+  ElementRef
+} from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as fromStore from '../../../root/store/reducers';
@@ -10,6 +17,9 @@ import * as fromComment from '../../../root/store/selectors/comment.selectors';
   styleUrls: ['./new-comment.component.scss']
 })
 export class NewCommentComponent {
+  @ViewChild('commentTextarea')
+  commentTextarea: ElementRef;
+
   @Input()
   username: string;
 
@@ -27,5 +37,6 @@ export class NewCommentComponent {
 
   onClickSaveComment(comment: string) {
     this.saveComment.emit(comment);
+    this.commentTextarea.nativeElement.value = '';
   }
 }
