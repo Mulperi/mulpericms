@@ -8,7 +8,7 @@ import { CommentDTO, CommentVO } from '../../../shared/models/comment.model';
 
 export const selectAllComments = createSelector(
   selectComments,
-  (state: fromComment.State) => state.comments
+  (state: fromComment.State) => state.entities
 );
 export const selectCommentsForPost = createSelector(
   selectAllComments,
@@ -25,7 +25,7 @@ export const selectCommentsForPost = createSelector(
 
 export const selectCommentVOsForPostOrdered = createSelector(
   selectCommentsForPost,
-  comments =>
+  (comments: CommentDTO[]) =>
     orderBy(
       comments.map(comment => ({
         ...comment,

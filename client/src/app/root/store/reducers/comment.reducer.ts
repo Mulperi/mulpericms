@@ -2,7 +2,7 @@ import * as fromCommentActions from '../actions/comment.actions';
 import { CommentDTO } from '../../../shared/models/comment.model';
 import cloneDeep from 'lodash/cloneDeep';
 export interface State {
-  comments: {
+  entities: {
     [key: string]: { [key: string]: CommentDTO };
   };
   loading: boolean;
@@ -12,7 +12,7 @@ export interface State {
 }
 
 export const initialState: State = {
-  comments: {},
+  entities: {},
   loading: false,
   saving: false,
   errorMessage: null,
@@ -57,7 +57,7 @@ export function reducer(
         return {
           ...state,
           loading: false,
-          comments: updateCommentEntities(action.payload, { ...state.comments })
+          entities: updateCommentEntities(action.payload, { ...state.entities })
         };
       }
       return {
@@ -83,7 +83,7 @@ export function reducer(
       return {
         ...state,
         saving: false,
-        comments: updateCommentEntities([action.payload], { ...state.comments })
+        entities: updateCommentEntities([action.payload], { ...state.entities })
       };
     }
     case fromCommentActions.ActionTypes.SaveFailed: {
@@ -99,12 +99,12 @@ export function reducer(
       };
     }
     case fromCommentActions.ActionTypes.DeleteSuccess: {
-      const updatedComments = cloneDeep(state.comments);
-      delete updatedComments[action.payload.postId][action.payload.id];
+      const updatedEntities = cloneDeep(state.entities);
+      delete updatedEntities[action.payload.postId][action.payload.id];
 
       return {
         ...state,
-        comments: updatedComments,
+        entities: updatedEntities,
         deleting: false
       };
     }
