@@ -13,9 +13,11 @@ export const selectAllComments = createSelector(
 export const selectCommentsForPost = createSelector(
   selectAllComments,
   fromPost.selectCurrentPostId,
-  (comments, currentPostId) => {
-    if (currentPostId && comments[currentPostId]) {
-      return comments[currentPostId] as CommentDTO[];
+  (entities, currentPostId) => {
+    if (currentPostId && entities[currentPostId]) {
+      return Object.keys(entities[currentPostId]).map(
+        id => entities[currentPostId][id]
+      ) as CommentDTO[];
     }
     return [];
   }

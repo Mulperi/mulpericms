@@ -6,12 +6,14 @@
 //     justify-content: center;
 //   }
 // }
-
+.controls-container {
+  user-select: none;
+}
 .page-count {
   padding: 0 1rem;
 }
 
-app-post-listitem {
-  margin: 1rem;
-  flex: 1 0 auto;
-}
+// app-post-listitem {
+//   margin: 1rem;
+//   flex: 1 0 auto;
+// }

@@ -3,7 +3,7 @@ import { CommentDTO } from '../../../shared/models/comment.model';
 import cloneDeep from 'lodash/cloneDeep';
 export interface State {
   comments: {
-    [key: string]: CommentDTO[];
+    [key: string]: { [key: string]: CommentDTO };
   };
   loading: boolean;
   saving: boolean;
@@ -19,29 +19,24 @@ export const initialState: State = {
   deleting: false
 };
 
-/**
- * Helper function to udpate the comments-oject
- * This will go through an array of comments
- * and id-map the indexes to the comments-object
- *
- * Also notice that the commentsObject that comes in
- * needs to be deepCloned, shallow-cloning leads to
- * store-freeze error since it's referencing to the
- * frozen object in the state
- */
-function updateComments(commentsArray, commentsObject) {
-  return commentsArray.reduce((result, item, index, array) => {
-    if (!result[item.postId]) {
-      result[item.postId] = [];
-      result[item.postId].push(item);
-    } else {
-      const ids = commentsObject[item.postId].map(comment => comment.id);
-      if (!ids.includes(item.id)) {
-        result[item.postId].push(item);
-      }
+function updateCommentEntities(comments, previousEntities) {
+  return comments.reduce(
+    (
+      entities: { [key: string]: { [key: string]: CommentDTO } },
+      comment: CommentDTO
+    ) => {
+      return {
+        ...entities,
+        [comment.postId]: {
+          ...entities[comment.postId],
+          [comment.id]: comment
+        }
+      };
+    },
+    {
+      ...previousEntities
     }
-    return result;
-  }, commentsObject);
+  );
 }
 
 export function reducer(
@@ -62,14 +57,13 @@ export function reducer(
         return {
           ...state,
           loading: false,
-          comments: updateComments(action.payload, cloneDeep(state.comments))
-        };
-      } else {
-        return {
-          ...state,
-          loading: false
+          comments: updateCommentEntities(action.payload, { ...state.comments })
         };
       }
+      return {
+        ...state,
+        loading: false
+      };
     }
     case fromCommentActions.ActionTypes.LoadFailed:
     case fromCommentActions.ActionTypes.LoadAllFailed: {
@@ -86,18 +80,10 @@ export function reducer(
       };
     }
     case fromCommentActions.ActionTypes.SaveSuccess: {
-      const updatedComments = cloneDeep(state.comments);
-
-      if (!updatedComments[action.payload.postId]) {
-        updatedComments[action.payload.postId] = [];
-      }
-
-      updatedComments[action.payload.postId].push(action.payload);
-
       return {
         ...state,
         saving: false,
-        comments: updatedComments
+        comments: updateCommentEntities([action.payload], { ...state.comments })
       };
     }
     case fromCommentActions.ActionTypes.SaveFailed: {
@@ -113,12 +99,8 @@ export function reducer(
       };
     }
     case fromCommentActions.ActionTypes.DeleteSuccess: {
-      console.log(action.payload);
-      const updatedComments = { ...state.comments };
-      console.log(updatedComments[action.payload.postId]);
-      updatedComments[action.payload.postId] = updatedComments[
-        action.payload.postId
-      ].filter((comment: CommentDTO) => comment.id !== action.payload.id);
+      const updatedComments = cloneDeep(state.comments);
+      delete updatedComments[action.payload.postId][action.payload.id];
 
       return {
         ...state,
