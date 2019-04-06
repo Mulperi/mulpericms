@@ -2,7 +2,7 @@
 
 @mixin globals($bodybg, $bodytext) {
   html {
-    font-family: sans-serif;
+    font-family: 'Playfair Display', serif;
     height: 100%;
     line-height: 1;
   }
@@ -30,6 +30,9 @@
 
   p {
     line-height: 1.5;
+    li {
+      margin-bottom: 4px;
+    }
   }
 
   .feature-container {

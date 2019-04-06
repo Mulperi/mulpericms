@@ -1,3 +1,8 @@
+
+<div>
+  <button class="primary" (click)="onClickBack()">Back</button>
+</div>
+
 <app-mulpericard *ngIf="post">
   <app-mulpericard-header>
     <app-mulpericard-title>{{ post?.title }}</app-mulpericard-title>
@@ -16,10 +21,6 @@
     </app-mulpericard-actions>
   </app-mulpericard-body>
 </app-mulpericard>
-
-<div>
-  <button class="primary" (click)="onClickBack()">Back</button>
-</div>
 
 <br />
 

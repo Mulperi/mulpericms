@@ -70,6 +70,9 @@
     }
     &.transparent {
       background: none;
+      &:disabled {
+        color: rgb(165, 165, 165);
+      }
     }
   }
 

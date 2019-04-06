@@ -20,7 +20,7 @@
   class="controls-container"
 >
   <button
-    class="primary"
+    class="transparent"
     [disabled]="page == 0"
     (click)="onPreviousClick()"
   >
@@ -29,7 +29,7 @@
   <div fxLayoutAlign="center center" class="page-count">
     <p>Page {{ page + 1 }} of {{ getPages() }}</p>
   </div>
-  <button class="primary" [disabled]="isLastPage()" (click)="onNextClick()">
+  <button class="transparent" [disabled]="isLastPage()" (click)="onNextClick()">
     <mat-icon>chevron_right</mat-icon>
   </button>
 </div>
