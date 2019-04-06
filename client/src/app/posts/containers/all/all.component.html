@@ -34,7 +34,4 @@
   </button>
 </div>
 
-<div *ngIf="(postsLoading$ | async)">
-  <div fxLayoutAlign="center center"><h4>Loading posts...</h4></div>
-  <app-spinner></app-spinner>
-</div>
+<app-spinner-with-text *ngIf="(postsLoading$ | async)" message="Loading posts..."></app-spinner-with-text>

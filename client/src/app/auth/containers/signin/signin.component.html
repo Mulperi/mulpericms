@@ -46,7 +46,9 @@
         >
           Sign in
         </button>
-        <ng-template #authenticating> <app-spinner></app-spinner> </ng-template>
+        <ng-template #authenticating>
+          <app-spinner-with-text message="Signing in..."></app-spinner-with-text>
+        </ng-template>
       </div>
     </app-mulpericard-body>
   </app-mulpericard>
