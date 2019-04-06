@@ -31,7 +31,7 @@
   [amountOfComments]="(comments$ | async).length"
 ></app-new-comment>
 
-<p *ngIf="(loadingComments$ | async)">Loading comments...</p>
+<app-spinner-with-text *ngIf="(loadingComments$ | async)" message="Loading comments..."></app-spinner-with-text>
 
 <app-comment
   *ngFor="let comment of (comments$ | async)"
